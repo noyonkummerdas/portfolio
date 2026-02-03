@@ -11,7 +11,7 @@
     margin: 0;
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
-    background-color: #0F0F0F;
+    /* background-color: #0F0F0F; */
     color: #F9FAFB;
     overflow-x: hidden;
   }
@@ -24,6 +24,14 @@
 
   .animate-fade-in {
     animation: fadeIn 1.2s ease-out forwards;
+  }
+
+  .animation-delay-2000 {
+    animation-delay: 2s;
+  }
+
+  .animation-delay-4000 {
+    animation-delay: 4s;
   }
 }
 

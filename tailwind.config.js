@@ -9,6 +9,30 @@ module.exports = {
                 poppins: ["Poppins", "sans-serif"],
                 inter: ["Inter", "sans-serif"],
             },
+            colors: {
+                primary: "#0F0F0F",
+                secondary: "#1A1A1A",
+                accent: "#6366f1",
+            },
+            animation: {
+                "blob": "blob 7s infinite",
+            },
+            keyframes: {
+                blob: {
+                    "0%": {
+                        transform: "translate(0px, 0px) scale(1)",
+                    },
+                    "33%": {
+                        transform: "translate(30px, -50px) scale(1.1)",
+                    },
+                    "66%": {
+                        transform: "translate(-20px, 20px) scale(0.9)",
+                    },
+                    "100%": {
+                        transform: "translate(0px, 0px) scale(1)",
+                    },
+                },
+            },
         },
     },
     plugins: [],

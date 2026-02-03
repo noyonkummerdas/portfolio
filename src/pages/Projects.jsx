@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import ProjectCard from '../components/ProjectCard';
+import Card from '../components/Card';
 import projects from '../data/projects';
 
 const Projects = () => {
@@ -27,8 +27,8 @@ const Projects = () => {
                             key={tech}
                             onClick={() => setFilter(tech)}
                             className={`px-6 py-2 rounded-full border text-[10px] font-black uppercase tracking-widest transition-all ${filter === tech
-                                    ? 'bg-indigo-600 border-indigo-600 text-white'
-                                    : 'bg-white/5 border-white/10 text-gray-400 hover:border-white/30'
+                                ? 'bg-indigo-600 border-indigo-600 text-white'
+                                : 'bg-white/5 border-white/10 text-gray-400 hover:border-white/30'
                                 }`}
                         >
                             {tech}
@@ -38,7 +38,7 @@ const Projects = () => {
 
                 <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
                     {filteredProjects.map((project, index) => (
-                        <ProjectCard key={index} project={project} />
+                        <Card key={index} project={project} />
                     ))}
                 </div>
             </section>

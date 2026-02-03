@@ -1,42 +1,144 @@
-import React from 'react';
-import reviews from '../data/reviews';
+
+import React, { useState, useEffect } from 'react';
+import staticReviews from '../data/reviews';
 
 const Reviews = () => {
+    const [reviews, setReviews] = useState([]);
+    const [isFormOpen, setIsFormOpen] = useState(false);
+    const [newReview, setNewReview] = useState({
+        clientName: '',
+        position: '',
+        project: '',
+        rating: 5,
+        content: ''
+    });
+
+    useEffect(() => {
+        const localReviews = JSON.parse(localStorage.getItem('user_reviews') || '[]');
+        setReviews([...localReviews, ...staticReviews]);
+    }, []);
+
+    const handleSubmit = (e) => {
+        e.preventDefault();
+        const reviewToAdd = {
+            id: Date.now(),
+            ...newReview
+        };
+
+        const updatedLocalReviews = [reviewToAdd, ...JSON.parse(localStorage.getItem('user_reviews') || '[]')];
+        localStorage.setItem('user_reviews', JSON.stringify(updatedLocalReviews));
+
+        setReviews([reviewToAdd, ...reviews]);
+        setIsFormOpen(false);
+        setNewReview({ clientName: '', position: '', project: '', rating: 5, content: '' });
+        alert("Thank you! Your review has been added.");
+    };
+
     return (
-        <div className="pt-32 min-h-screen bg-[#0F0F0F] text-white">
-            <section className="px-6 max-w-7xl mx-auto mb-20 text-center">
-                <div className="inline-block px-4 py-1.5 mb-8 rounded-full border border-indigo-500/30 bg-indigo-500/10 text-indigo-400 text-[10px] font-black uppercase tracking-[0.3em]">
+        <div className="pt-32 min-h-screen pb-20">
+            <section className="px-6 max-w-7xl mx-auto mb-16 text-center">
+                <div className="inline-block px-4 py-1.5 mb-8 rounded-full border border-indigo-500/30 bg-indigo-500/10 text-indigo-400 text-[10px] font-black uppercase tracking-[0.3em] animate-fade-in">
                     Social Proof
                 </div>
-                <h1 className="text-6xl md:text-9xl font-black font-poppins mb-12 tracking-tighter">
+                <h1 className="text-6xl md:text-8xl font-black font-poppins mb-8 tracking-tighter text-white">
                     Client Trust<span className="text-indigo-500">.</span>
                 </h1>
 
-                <div className="grid grid-cols-1 md:grid-cols-2 gap-8 max-w-5xl mx-auto">
-                    {reviews.map((review) => (
-                        <div key={review.id} className="p-10 bg-white/5 border border-white/10 rounded-3xl text-left backdrop-blur-xl relative group">
-                            <div className="text-indigo-500 mb-6">
-                                {[...Array(review.rating)].map((_, i) => (
-                                    <span key={i} className="text-2xl">★</span>
-                                ))}
+                <button
+                    onClick={() => setIsFormOpen(!isFormOpen)}
+                    className="px-8 py-3 bg-white text-black font-bold rounded-full hover:bg-indigo-400 hover:text-white transition-all shadow-lg hover:shadow-indigo-500/20 active:scale-95 text-xs uppercase tracking-widest"
+                >
+                    {isFormOpen ? 'Close Form' : '+ Write a Review'}
+                </button>
+            </section>
+
+            {/* Review Form */}
+            {isFormOpen && (
+                <div className="max-w-2xl mx-auto px-6 mb-20 animate-fade-in">
+                    <div className="bg-secondary/60 backdrop-blur-xl border border-indigo-500/30 p-8 rounded-3xl shadow-2xl">
+                        <h3 className="text-2xl font-bold font-poppins text-white mb-6">Share your experience</h3>
+                        <form onSubmit={handleSubmit} className="space-y-4">
+                            <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                                <input
+                                    type="text"
+                                    placeholder="Your Name"
+                                    className="w-full bg-black/20 border border-white/10 rounded-xl px-4 py-3 text-white focus:border-indigo-500 focus:outline-none"
+                                    value={newReview.clientName}
+                                    onChange={e => setNewReview({ ...newReview, clientName: e.target.value })}
+                                    required
+                                />
+                                <input
+                                    type="text"
+                                    placeholder="Role / Company"
+                                    className="w-full bg-black/20 border border-white/10 rounded-xl px-4 py-3 text-white focus:border-indigo-500 focus:outline-none"
+                                    value={newReview.position}
+                                    onChange={e => setNewReview({ ...newReview, position: e.target.value })}
+                                    required
+                                />
                             </div>
-                            <p className="text-xl text-gray-300 font-medium mb-10 leading-relaxed italic">
-                                "{review.content}"
-                            </p>
-                            <div>
-                                <h4 className="text-white font-bold font-poppins text-lg">{review.clientName}</h4>
-                                <p className="text-indigo-400 text-xs font-black uppercase tracking-widest">{review.position}</p>
-                                <div className="mt-4 pt-4 border-t border-white/5 text-[10px] text-gray-500 font-inter uppercase tracking-widest">
-                                    Verified for: {review.project}
+                            <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                                <input
+                                    type="text"
+                                    placeholder="Project Name (e.g. E-commerce App)"
+                                    className="w-full bg-black/20 border border-white/10 rounded-xl px-4 py-3 text-white focus:border-indigo-500 focus:outline-none"
+                                    value={newReview.project}
+                                    onChange={e => setNewReview({ ...newReview, project: e.target.value })}
+                                    required
+                                />
+                                <div className="flex gap-2 items-center bg-black/20 border border-white/10 rounded-xl px-4 py-3">
+                                    <span className="text-gray-400 text-sm mr-2 font-bold uppercase tracking-wide">Rating:</span>
+                                    {[1, 2, 3, 4, 5].map((star) => (
+                                        <button
+                                            key={star}
+                                            type="button"
+                                            onClick={() => setNewReview({ ...newReview, rating: star })}
+                                            className={`text-2xl transition-all ${star <= newReview.rating ? 'text-yellow-400 scale-110' : 'text-gray-600 hover:text-yellow-400/50'}`}
+                                        >
+                                            ★
+                                        </button>
+                                    ))}
                                 </div>
                             </div>
-                            <div className="absolute top-10 right-10 opacity-10 group-hover:opacity-25 transition-opacity">
-                                <svg className="w-12 h-12" fill="currentColor" viewBox="0 0 24 24"><path d="M14.017 21L14.017 18C14.017 16.8954 14.9124 16 16.017 16H19.017C19.5694 16 20.017 15.5523 20.017 15V9C20.017 8.44772 19.5694 8 19.017 8H15.017C14.4647 8 14.017 8.44772 14.017 9V12C14.017 12.5523 13.5694 13 13.017 13H12.017V21H14.017ZM6.017 21L6.017 18C6.017 16.8954 6.91241 16 8.017 16H11.017C11.5694 16 12.017 15.5523 12.017 15V9C12.017 8.44772 11.5694 8 11.017 8H7.01701C6.46473 8 6.01701 8.44772 6.01701 9V12C6.01701 12.5523 5.5694 13 5.01701 13H4.01701V21H6.017Z" /></svg>
+                            <textarea
+                                placeholder="Your feedback..."
+                                rows="4"
+                                className="w-full bg-black/20 border border-white/10 rounded-xl px-4 py-3 text-white focus:border-indigo-500 focus:outline-none resize-none"
+                                value={newReview.content}
+                                onChange={e => setNewReview({ ...newReview, content: e.target.value })}
+                                required
+                            ></textarea>
+                            <button type="submit" className="w-full py-4 bg-indigo-600 hover:bg-indigo-500 text-white font-bold rounded-xl transition-all">
+                                Submit Review
+                            </button>
+                        </form>
+                    </div>
+                </div>
+            )}
+
+            {/* Reviews Grid */}
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-8 max-w-6xl mx-auto px-6">
+                {reviews.map((review) => (
+                    <div key={review.id} className="p-10 bg-secondary/40 border border-white/5 rounded-[2rem] text-left backdrop-blur-md relative group hover:border-indigo-500/30 transition-all duration-300 hover:-translate-y-1">
+                        <div className="text-yellow-400 mb-6 text-xl tracking-widest">
+                            {[...Array(review.rating)].map((_, i) => (
+                                <span key={i}>★</span>
+                            ))}
+                        </div>
+                        <p className="text-lg text-gray-200 font-medium mb-8 leading-relaxed font-inter">
+                            "{review.content}"
+                        </p>
+                        <div className="flex items-center gap-4">
+                            <div className="w-10 h-10 rounded-full bg-gradient-to-tr from-indigo-500 to-purple-500 flex items-center justify-center text-white font-bold text-sm">
+                                {review.clientName.charAt(0)}
+                            </div>
+                            <div>
+                                <h4 className="text-white font-bold font-poppins text-lg leading-none">{review.clientName}</h4>
+                                <p className="text-indigo-400 text-[10px] font-black uppercase tracking-widest mt-1">{review.position}</p>
                             </div>
                         </div>
-                    ))}
-                </div>
-            </section>
+                    </div>
+                ))}
+            </div>
         </div>
     );
 };

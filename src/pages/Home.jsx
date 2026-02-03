@@ -1,5 +1,5 @@
 import React from 'react';
-import ProjectCard from '../components/ProjectCard';
+import Card from '../components/Card';
 import projects from '../data/projects';
 import { Link } from 'react-router-dom';
 
@@ -12,9 +12,9 @@ const Home = () => {
                     <img
                         src="/hero_bg.png"
                         alt="Abstract Background"
-                        className="w-full h-full object-cover opacity-40 scale-105"
+                        className="w-full h-full object-cover opacity-10 scale-105"
                     />
-                    <div className="absolute inset-0 bg-gradient-to-b from-[#0F0F0F]/80 via-[#0F0F0F]/40 to-[#0F0F0F]" />
+                    {/* <div className="absolute inset-0 bg-gradient-to-b from-[#0F0F0F]/80 via-[#0F0F0F]/40 to-[#0F0F0F]" /> */}
                 </div>
 
                 <div className="relative z-10 max-w-7xl mx-auto text-center">
@@ -57,7 +57,7 @@ const Home = () => {
 
                 <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
                     {projects.slice(0, 3).map((project, index) => (
-                        <ProjectCard key={index} project={project} />
+                        <Card key={index} project={project} />
                     ))}
                 </div>
             </section>

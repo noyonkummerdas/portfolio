@@ -6,7 +6,7 @@ import { Link } from 'react-router-dom';
  * 2026-Standard Portfolio Project Card
  * Designed for visual impact, high scannability, and premium feel.
  */
-const ProjectCard = ({ project }) => { // 2026-Standard
+const Card = ({ project }) => {
     return (
         <div className="group relative bg-secondary/40 backdrop-blur-xl border border-white/5 rounded-3xl overflow-hidden transition-all duration-700 hover:-translate-y-3 hover:shadow-[0_40px_80px_rgba(99,102,241,0.15)]">
             {/* Visual Accent Gradient */}
@@ -72,4 +72,4 @@ const ProjectCard = ({ project }) => { // 2026-Standard
     );
 };
 
-export default ProjectCard;
+export default Card;
