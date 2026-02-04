@@ -32,9 +32,9 @@ const Home = () => {
                         <Link to="/projects" className="px-10 py-5 bg-indigo-600 hover:bg-indigo-500 text-white font-bold rounded-2xl transition-all duration-300 transform hover:scale-105 shadow-2xl shadow-indigo-600/30">
                             Explore Portfolio
                         </Link>
-                        <button className="px-10 py-5 bg-white/5 hover:bg-white/10 text-white font-bold rounded-2xl border border-white/10 backdrop-blur-md transition-all duration-300">
-                            Download CV
-                        </button>
+                        <Link to="/cv" className="px-10 py-5 bg-white/5 hover:bg-white/10 text-white font-bold rounded-2xl border border-white/10 backdrop-blur-md transition-all duration-300">
+                            View CV
+                        </Link>
                     </div>
                 </div>
             </section>

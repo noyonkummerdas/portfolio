@@ -12,6 +12,9 @@ import HireMe from './pages/HireMe';
 import AdminDashboard from './pages/AdminDashboard';
 import InquiryDetails from './pages/InquiryDetails';
 import HelloDeveloper from './pages/HelloDeveloper';
+import CV from './pages/CV';
+import AdminCVForm from './pages/AdminCVForm';
+import AdminCVDetails from './pages/AdminCVDetails';
 
 // Routes Configuration
 function App() {
@@ -32,6 +35,9 @@ function App() {
             <Route path="/admin" element={<AdminDashboard />} />
             <Route path="/admin/inquiries/:id" element={<InquiryDetails />} />
             <Route path="/hello-developer" element={<HelloDeveloper />} />
+            <Route path="/cv" element={<CV />} />
+            <Route path="/admin/cv" element={<AdminCVForm />} />
+            <Route path="/admin/cv/:id" element={<AdminCVDetails />} />
           </Routes>
         </main>
 
