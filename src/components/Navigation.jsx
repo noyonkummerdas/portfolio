@@ -14,7 +14,7 @@ const Navigation = () => {
                     <Link to="/" className={`hover:text-white transition-colors ${location.pathname === '/' ? 'text-white border-b-2 border-indigo-500 pb-1' : ''}`}>Home</Link>
                     <Link to="/projects" className={`hover:text-white transition-colors ${location.pathname === '/projects' ? 'text-white border-b-2 border-indigo-500 pb-1' : ''}`}>Projects</Link>
                     <Link to="/reviews" className={`hover:text-white transition-colors ${location.pathname === '/reviews' ? 'text-white border-b-2 border-indigo-500 pb-1' : ''}`}>Reviews</Link>
-                    <Link to="/hello-developer" className={`hover:text-white transition-colors ${location.pathname === '/hello-developer' ? 'text-white border-b-2 border-indigo-500 pb-1' : ''}`}>Hello Developer</Link>
+                    {/* <Link to="/hello-developer" className={`hover:text-white transition-colors ${location.pathname === '/hello-developer' ? 'text-white border-b-2 border-indigo-500 pb-1' : ''}`}>Hello Developer</Link> */}
                     <Link to="/admin" className={`hover:text-white transition-colors ${location.pathname.startsWith('/admin') ? 'text-white border-b-2 border-indigo-500 pb-1' : ''}`}>Dashboard</Link>
                     <a href="#contact" className="hover:text-white transition-colors">Contact</a>
                 </div>

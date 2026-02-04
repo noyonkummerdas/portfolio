@@ -92,15 +92,19 @@ const CvFrom = () => {
     const handleSubmit = (e) => {
         e.preventDefault();
 
+        // Get existing CVs from localStorage
+        const existingCVs = JSON.parse(localStorage.getItem('cvData') || '[]');
+
+        // Generate version number based on existing CVs count
+        const versionNumber = String(existingCVs.length + 1).padStart(2, '0');
+
         const cvData = {
             id: Date.now().toString(),
-            version: `v${new Date().getTime()}`,
+            version: `CV-v-${versionNumber}`,
             date: new Date().toISOString().split('T')[0],
             ...formData
         };
 
-        // Get existing CVs from localStorage
-        const existingCVs = JSON.parse(localStorage.getItem('cvData') || '[]');
         existingCVs.push(cvData);
         localStorage.setItem('cvData', JSON.stringify(existingCVs));
 
