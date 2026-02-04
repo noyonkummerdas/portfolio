@@ -11,6 +11,7 @@ import Reviews from './pages/Reviews';
 import HireMe from './pages/HireMe';
 import AdminDashboard from './pages/AdminDashboard';
 import InquiryDetails from './pages/InquiryDetails';
+import HelloDeveloper from './pages/HelloDeveloper';
 
 // Routes Configuration
 function App() {
@@ -30,6 +31,7 @@ function App() {
             <Route path="/hire-me" element={<HireMe />} />
             <Route path="/admin" element={<AdminDashboard />} />
             <Route path="/admin/inquiries/:id" element={<InquiryDetails />} />
+            <Route path="/hello-developer" element={<HelloDeveloper />} />
           </Routes>
         </main>
 
