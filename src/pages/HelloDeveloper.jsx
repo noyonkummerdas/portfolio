@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { FaGithub, FaLinkedin, FaEnvelope, FaGlobe, FaCheckCircle } from 'react-icons/fa';
+import { FaGithub, FaLinkedin, FaEnvelope, FaCheckCircle } from 'react-icons/fa';
 import { motion } from 'framer-motion';
 
 const HelloDeveloper = () => {

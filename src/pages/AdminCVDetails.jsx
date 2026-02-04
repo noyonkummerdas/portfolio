@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { useParams, useNavigate, Link } from 'react-router-dom';
-import { FaEdit, FaTrash, FaDownload } from 'react-icons/fa';
+import { FaTrash, FaDownload } from 'react-icons/fa';
 
 const AdminCVDetails = () => {
     const { id } = useParams();
@@ -54,8 +54,8 @@ const AdminCVDetails = () => {
                                         key={cv.id}
                                         to={`/admin/cv/${cv.id}`}
                                         className={`block p-3 rounded-lg transition-all ${cv.id === id
-                                                ? 'bg-indigo-600 text-white'
-                                                : 'bg-white/5 hover:bg-white/10 text-gray-300'
+                                            ? 'bg-indigo-600 text-white'
+                                            : 'bg-white/5 hover:bg-white/10 text-gray-300'
                                             }`}
                                     >
                                         <div className="text-sm font-bold">{cv.version}</div>
