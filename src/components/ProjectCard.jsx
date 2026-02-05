@@ -68,7 +68,7 @@ const ProjectCard = ({ project }) => { // 2026-Standard
                     <div className="absolute inset-0 bg-indigo-600 translate-y-[101%] group-hover/btn:translate-y-0 transition-transform duration-300 rounded-2xl" />
                 </Link>
             </div>
-            <Footer />
+
         </div>
 
     );
