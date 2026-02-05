@@ -61,6 +61,27 @@ const Home = () => {
                     ))}
                 </div>
             </section>
+            <section className="py-24 px-6 max-w-7xl mx-auto">
+                <div className="flex flex-col md:flex-row md:justify-between md:items-end gap-6 mb-20">
+                    <div>
+                        <h2 className="text-4xl md:text-6xl font-black font-poppins text-white mb-4 tracking-tighter">
+                            Featured Impact<span className="text-indigo-500">.</span>
+                        </h2>
+                        <p className="text-gray-500 max-w-md font-inter">
+                            A selection of high-stakes projects delivering real business value through modular architecture.
+                        </p>
+                    </div>
+                    <Link to="/projects" className="text-sm font-bold text-indigo-400 hover:text-indigo-300 transition-colors uppercase tracking-widest flex items-center gap-2 group">
+                        View All Projects <span className="group-hover:translate-x-2 transition-transform">→</span>
+                    </Link>
+                </div>
+
+                <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+                    {projects.slice(0, 3).map((project, index) => (
+                        <Card key={index} project={project} />
+                    ))}
+                </div>
+            </section>
 
             {/* Expertise & Other Sections would go here as well, kept brief for Home */}
         </div>
