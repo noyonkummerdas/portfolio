@@ -225,6 +225,35 @@ const HelloDeveloper = () => {
                 </div>
             </section>
 
+
+            {/* Why Hire Me Section */}
+            <section className="py-24 px-6">
+                <div className="max-w-7xl mx-auto">
+                    <div className="text-center mb-20">
+                        <h2 className="text-xs font-black text-primary uppercase tracking-[0.4em] mb-6 font-inter">The Value</h2>
+                        <h3 className="text-4xl md:text-6xl font-black text-white tracking-tighter">Why Hire Me<span className="text-primary">.</span></h3>
+                    </div>
+
+                    <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+                        {hireMePoints.map((point, idx) => (
+                            <motion.div
+                                key={idx}
+                                initial={{ opacity: 0, scale: 0.95 }}
+                                whileInView={{ opacity: 1, scale: 1 }}
+                                transition={{ delay: idx * 0.1 }}
+                                viewport={{ once: true }}
+                                className="p-10 rounded-2xl bg-surface/50 border border-white/5 hover:border-primary/30 transition-all group"
+                            >
+                                <div className="w-12 h-12 rounded-xl bg-primary/10 flex items-center justify-center mb-6 group-hover:bg-primary group-hover:text-secondary transition-all">
+                                    <span className="text-xl font-black">0{idx + 1}</span>
+                                </div>
+                                <h4 className="text-xl font-bold text-white mb-4">{point.title}</h4>
+                                <p className="text-textMain/50 text-sm leading-relaxed">{point.desc}</p>
+                            </motion.div>
+                        ))}
+                    </div>
+                </div>
+            </section>
             {/* Work Completed Section */}
             <section id="projects" className="py-32 px-6">
                 <div className="max-w-7xl mx-auto">
@@ -298,35 +327,6 @@ const HelloDeveloper = () => {
                                     </div>
                                 </motion.div>
                             </div>
-                        ))}
-                    </div>
-                </div>
-            </section>
-
-            {/* Why Hire Me Section */}
-            <section className="py-24 px-6">
-                <div className="max-w-7xl mx-auto">
-                    <div className="text-center mb-20">
-                        <h2 className="text-xs font-black text-primary uppercase tracking-[0.4em] mb-6 font-inter">The Value</h2>
-                        <h3 className="text-4xl md:text-6xl font-black text-white tracking-tighter">Why Hire Me<span className="text-primary">.</span></h3>
-                    </div>
-
-                    <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-                        {hireMePoints.map((point, idx) => (
-                            <motion.div
-                                key={idx}
-                                initial={{ opacity: 0, scale: 0.95 }}
-                                whileInView={{ opacity: 1, scale: 1 }}
-                                transition={{ delay: idx * 0.1 }}
-                                viewport={{ once: true }}
-                                className="p-10 rounded-2xl bg-surface/50 border border-white/5 hover:border-primary/30 transition-all group"
-                            >
-                                <div className="w-12 h-12 rounded-xl bg-primary/10 flex items-center justify-center mb-6 group-hover:bg-primary group-hover:text-secondary transition-all">
-                                    <span className="text-xl font-black">0{idx + 1}</span>
-                                </div>
-                                <h4 className="text-xl font-bold text-white mb-4">{point.title}</h4>
-                                <p className="text-textMain/50 text-sm leading-relaxed">{point.desc}</p>
-                            </motion.div>
                         ))}
                     </div>
                 </div>
