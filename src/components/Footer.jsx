@@ -23,6 +23,7 @@ const Footer = () => {
                     <button className="hover:text-white transition-colors">LinkedIn</button>
                     <button className="hover:text-white transition-colors">GitHub</button>
                     <button className="hover:text-white transition-colors">Twitter</button>
+                    <button className="hover:text-white transition-colors">WhatsApp</button>
                 </div>
             </div>
         </footer>
