@@ -8,8 +8,58 @@ import {
     SiFirebase, SiTypescript
 } from 'react-icons/si';
 import { Link } from 'react-router-dom';
+import Slider from "react-slick";
+import "slick-carousel/slick/slick.css";
+import "slick-carousel/slick/slick-theme.css";
 
 const HelloDeveloper = () => {
+    // Sample Projects with multiple images
+    const projects = [
+        {
+            name: "Eco-Commerce Platform",
+            description: "A sustainable shopping experience with high-performance product discovery and seamless checkout flow.",
+            techStack: "React, Redux Toolkit, Tailwind CSS, Stripe API",
+            images: [
+                "https://images.unsplash.com/photo-1460925895917-afdab827c52f?q=80&w=2426&auto=format&fit=crop",
+                "https://images.unsplash.com/photo-1557821552-17105176677c?q=80&w=2089&auto=format&fit=crop",
+                "https://images.unsplash.com/photo-1547658719-da2b51169166?q=80&w=2064&auto=format&fit=crop"
+            ],
+            link: "https://github.com/noyonkummerdas"
+        },
+        {
+            name: "Smart Inventory Manager",
+            description: "Enterprise-grade dashboard for real-time stock tracking and predictive supply chain analytics.",
+            techStack: "React Native, Node.js, MongoDB, Chart.js",
+            images: [
+                "https://images.unsplash.com/photo-1551288049-bebda4e38f71?q=80&w=2670&auto=format&fit=crop",
+                "https://images.unsplash.com/photo-1460925895917-afdab827c52f?q=80&w=2426&auto=format&fit=crop",
+                "https://images.unsplash.com/photo-1542744173-8e7e53415bb0?q=80&w=2070&auto=format&fit=crop"
+            ],
+            link: "https://github.com/noyonkummerdas"
+        }
+    ];
+
+    const sliderSettings = {
+        dots: true,
+        infinite: true,
+        speed: 500,
+        slidesToShow: 1,
+        slidesToScroll: 1,
+        autoplay: true,
+        autoplaySpeed: 3000,
+        pauseOnHover: true,
+        fade: true,
+        arrows: false,
+        appendDots: dots => (
+            <div style={{ bottom: "20px" }}>
+                <ul className="slick-dots flex justify-center gap-2"> {dots} </ul>
+            </div>
+        ),
+        customPaging: i => (
+            <div className="w-3 h-3 rounded-full bg-white/20 hover:bg-primary transition-all duration-300"></div>
+        )
+    };
+
     const skills = [
         { name: 'React', level: 95, icon: <SiReact />, color: 'primary' },
         { name: 'React Native', level: 90, icon: <FaReact />, color: 'primary' },
@@ -48,7 +98,13 @@ const HelloDeveloper = () => {
     };
 
     return (
-        <div className="bg-secondary min-h-screen text-textMain font-poppins selection:bg-primary/30">
+        <div className="bg-secondary min-h-screen text-textMain font-poppins selection:bg-primary/30 overflow-x-hidden">
+            <style dangerouslySetInnerHTML={{
+                __html: `
+                .slick-dots li button:before { display: none; }
+                .slick-dots li.slick-active div { background-color: #38BDF8 !important; width: 24px; }
+            `}} />
+
             {/* Hero / Header Section */}
             <section className="relative h-[80vh] flex flex-col items-center justify-center overflow-hidden">
                 {/* Cover Background */}
@@ -95,9 +151,9 @@ const HelloDeveloper = () => {
                         transition={{ delay: 0.4, duration: 0.5 }}
                         className="flex flex-col md:flex-row gap-4 justify-center items-center"
                     >
-                        <Link to="/projects" className="px-8 py-4 bg-primary text-secondary font-black rounded-xl transition-all duration-300 transform hover:scale-105 shadow-xl shadow-primary/20 hover:bg-white min-w-[180px]">
+                        <a href="#projects" className="px-8 py-4 bg-primary text-secondary font-black rounded-xl transition-all duration-300 transform hover:scale-105 shadow-xl shadow-primary/20 hover:bg-white min-w-[180px]">
                             View Projects
-                        </Link>
+                        </a>
                         <a href="#contact" className="px-8 py-4 bg-white/5 hover:bg-white/10 text-white font-bold rounded-xl border border-white/10 backdrop-blur-md transition-all duration-300 min-w-[180px]">
                             Contact Me
                         </a>
@@ -166,6 +222,84 @@ const HelloDeveloper = () => {
                             </motion.div>
                         ))}
                     </motion.div>
+                </div>
+            </section>
+
+            {/* Work Completed Section */}
+            <section id="projects" className="py-32 px-6">
+                <div className="max-w-7xl mx-auto">
+                    <div className="text-center mb-20">
+                        <motion.h2
+                            initial={{ opacity: 0 }}
+                            whileInView={{ opacity: 1 }}
+                            className="text-4xl md:text-7xl font-black text-white mb-6 tracking-tighter"
+                        >
+                            🏆 Work <span className="text-primary">Completed</span>
+                        </motion.h2>
+                        <p className="text-xl text-textMain/60 max-w-2xl mx-auto font-inter">
+                            Explore a selection of high-impact products I've engineered from concept to production.
+                        </p>
+                    </div>
+
+                    <div className="space-y-32">
+                        {projects.map((project, idx) => (
+                            <div key={idx} className={`flex flex-col ${idx % 2 === 0 ? 'lg:flex-row' : 'lg:flex-row-reverse'} gap-12 lg:gap-20 items-center`}>
+                                {/* Project Image Slider */}
+                                <div className="w-full lg:w-1/2">
+                                    <motion.div
+                                        initial={{ opacity: 0, x: idx % 2 === 0 ? -50 : 50 }}
+                                        whileInView={{ opacity: 1, x: 0 }}
+                                        viewport={{ once: true }}
+                                        className="relative rounded-3xl overflow-hidden shadow-2xl shadow-primary/10 group cursor-grab active:cursor-grabbing"
+                                    >
+                                        <Slider {...sliderSettings}>
+                                            {project.images.map((img, imgIdx) => (
+                                                <div key={imgIdx} className="outline-none">
+                                                    <img
+                                                        src={img}
+                                                        alt={`${project.name} screenshot ${imgIdx + 1}`}
+                                                        className="w-full aspect-video object-cover"
+                                                    />
+                                                </div>
+                                            ))}
+                                        </Slider>
+                                        <div className="absolute inset-0 border-2 border-white/5 pointer-events-none rounded-3xl"></div>
+                                    </motion.div>
+                                </div>
+
+                                {/* Project Info */}
+                                <motion.div
+                                    initial={{ opacity: 0, x: idx % 2 === 0 ? 50 : -50 }}
+                                    whileInView={{ opacity: 1, x: 0 }}
+                                    viewport={{ once: true }}
+                                    className="w-full lg:w-1/2 space-y-8"
+                                >
+                                    <div className="space-y-4">
+                                        <h3 className="text-3xl md:text-5xl font-black text-white tracking-tight">{project.name}</h3>
+                                        <p className="text-xl text-textMain/70 leading-relaxed font-inter">{project.description}</p>
+                                    </div>
+
+                                    <div className="space-y-4 pt-4">
+                                        <p className="text-sm font-black text-primary uppercase tracking-[0.2em]">Tech Stack</p>
+                                        <p className="text-lg font-bold text-white bg-white/5 px-6 py-3 rounded-xl border border-white/10 inline-block">
+                                            {project.techStack}
+                                        </p>
+                                    </div>
+
+                                    <div className="pt-8">
+                                        <a
+                                            href={project.link}
+                                            target="_blank"
+                                            rel="noopener noreferrer"
+                                            className="inline-flex items-center gap-3 px-8 py-4 bg-primary text-secondary font-black rounded-xl hover:bg-white hover:scale-105 transition-all duration-300 shadow-xl shadow-primary/20"
+                                        >
+                                            View Project <FaGithub className="text-xl" />
+                                        </a>
+                                    </div>
+                                </motion.div>
+                            </div>
+                        ))}
+                    </div>
                 </div>
             </section>
 
