@@ -36,7 +36,7 @@ const Reviews = () => {
 
     return (
         <div className="pt-32 min-h-screen pb-20">
-            <section className="px-6 max-w-7xl mx-auto mb-16">
+            <section className="px-6 max-w-7xl mx-auto mb-16 text-center">
                 <div className="inline-block px-4 py-1.5 mb-8 rounded-full border border-indigo-500/30 bg-indigo-500/10 text-indigo-400 text-[10px] font-black uppercase tracking-[0.3em] animate-fade-in">
                     Social Proof
                 </div>
