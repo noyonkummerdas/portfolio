@@ -10,9 +10,12 @@ module.exports = {
                 inter: ["Inter", "sans-serif"],
             },
             colors: {
-                primary: "#0F0F0F",
-                secondary: "#1A1A1A",
-                accent: "#6366f1",
+                primary: "#38BDF8", // Cyan / Sky Blue
+                secondary: "#020617", // Dark Navy
+                accent: "#22C55E", // Soft Green
+                background: "#020617", // Dark Navy
+                surface: "#0F172A", // Slightly lighter navy for cards
+                textMain: "#E5E7EB", // Light Gray / White
             },
             animation: {
                 "blob": "blob 7s infinite",
