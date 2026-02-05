@@ -203,8 +203,7 @@ const HelloDeveloper = () => {
                 </div>
             </motion.div>
 
-            {/* Footer */}
-            <Footer />
+
         </div>
     );
 };
