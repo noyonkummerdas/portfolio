@@ -12,6 +12,13 @@ import Slider from "react-slick";
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
 
+// Import local assets
+import profilePic from '../assets/profile/profilePic.png';
+import coverPhoto from '../assets/profile/coverPhoto.png';
+import adminDashboard from '../assets/projectPic/adminDashboard.PNG';
+import buyerWishlist from '../assets/projectPic/buyerWishlist.PNG';
+import marketPleace from '../assets/projectPic/marketPleace.PNG';
+
 const HelloDeveloper = () => {
     // Sample Projects with multiple images
     const projects = [
@@ -20,9 +27,9 @@ const HelloDeveloper = () => {
             description: "A sustainable shopping experience with high-performance product discovery and seamless checkout flow.",
             techStack: "React, Redux Toolkit, Tailwind CSS, Stripe API",
             images: [
-                "https://images.unsplash.com/photo-1460925895917-afdab827c52f?q=80&w=2426&auto=format&fit=crop",
-                "https://images.unsplash.com/photo-1557821552-17105176677c?q=80&w=2089&auto=format&fit=crop",
-                "https://images.unsplash.com/photo-1547658719-da2b51169166?q=80&w=2064&auto=format&fit=crop"
+                marketPleace,
+                buyerWishlist,
+                adminDashboard
             ],
             link: "https://github.com/noyonkummerdas"
         },
@@ -31,9 +38,9 @@ const HelloDeveloper = () => {
             description: "Enterprise-grade dashboard for real-time stock tracking and predictive supply chain analytics.",
             techStack: "React Native, Node.js, MongoDB, Chart.js",
             images: [
-                "https://images.unsplash.com/photo-1551288049-bebda4e38f71?q=80&w=2670&auto=format&fit=crop",
-                "https://images.unsplash.com/photo-1460925895917-afdab827c52f?q=80&w=2426&auto=format&fit=crop",
-                "https://images.unsplash.com/photo-1542744173-8e7e53415bb0?q=80&w=2070&auto=format&fit=crop"
+                adminDashboard,
+                marketPleace,
+                buyerWishlist
             ],
             link: "https://github.com/noyonkummerdas"
         }
@@ -111,7 +118,7 @@ const HelloDeveloper = () => {
                 <div className="absolute inset-0 z-0">
                     <div className="absolute inset-0 bg-secondary/80 z-10"></div>
                     <img
-                        src="https://images.unsplash.com/photo-1550745165-9bc0b252726f?q=80&w=2670&auto=format&fit=crop"
+                        src={coverPhoto}
                         alt="Tech Abstract"
                         className="w-full h-full object-cover"
                     />
@@ -126,9 +133,11 @@ const HelloDeveloper = () => {
                         transition={{ duration: 0.8, type: "spring" }}
                         className="w-32 h-32 md:w-40 md:h-40 rounded-full border-4 border-primary p-1 bg-secondary mb-8 overflow-hidden shadow-[0_0_30px_rgba(56,189,248,0.3)]"
                     >
-                        <div className="w-full h-full rounded-full bg-surface flex items-center justify-center text-5xl">
-                            👨‍💻
-                        </div>
+                        <img
+                            src={profilePic}
+                            alt="NK Noyon Profile"
+                            className="w-full h-full object-cover rounded-full"
+                        />
                     </motion.div>
 
                     <motion.div
