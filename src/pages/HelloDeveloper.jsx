@@ -176,7 +176,7 @@ const HelloDeveloper = () => {
                 </div>
             </section>
 
-            {/* About Me Section */}
+            {/* About Section */}
             <section className="py-24 px-6 max-w-5xl mx-auto">
                 <motion.div
                     initial="hidden"
@@ -185,19 +185,11 @@ const HelloDeveloper = () => {
                     variants={containerVariants}
                     className="text-center"
                 >
-                    <motion.h2 variants={itemVariants} className="text-xs font-black text-primary uppercase tracking-[0.4em] mb-6 font-inter">Personal Profile</motion.h2>
-                    <motion.h3 variants={itemVariants} className="text-3xl md:text-5xl font-bold text-white mb-8 tracking-tight">About NK Noyon<span className="text-primary">.</span></motion.h3>
-                    <div className="space-y-6 text-lg text-textMain/70 leading-relaxed font-inter text-left md:text-center max-w-4xl mx-auto">
-                        <motion.p variants={itemVariants}>
-                            I am a dedicated React and React Native Developer specializing in building high-performance, cross-platform applications. With deep expertise in Expo, Redux, and modern UI frameworks like Tailwind CSS and Bootstrap, I bridge the gap between complex backend logic and seamless frontend experiences to deliver production-ready solutions.
-                        </motion.p>
-                        <motion.p variants={itemVariants}>
-                            My development philosophy is rooted in clean code, architectural integrity, and scalability. I focus on creating user-friendly designs that don't sacrifice performance, ensuring that every digital product I engineer is optimized for speed and long-term maintainability for startups and growing enterprises alike.
-                        </motion.p>
-                        <motion.p variants={itemVariants}>
-                            Whether I'm developing a mobile app or a complex web dashboard, my goal is to provide clear value to recruiters and clients through transparent communication and technical excellence. I am passionate about solving real-world problems with elegant, efficient code that helps businesses achieve their strategic objectives.
-                        </motion.p>
-                    </div>
+                    <motion.h2 variants={itemVariants} className="text-xs font-black text-primary uppercase tracking-[0.4em] mb-6 font-inter">About Work</motion.h2>
+                    <motion.h3 variants={itemVariants} className="text-3xl md:text-5xl font-bold text-white mb-8 tracking-tight">Crafting Digital Excellence.</motion.h3>
+                    <motion.p variants={itemVariants} className="text-lg text-textMain/60 leading-relaxed font-inter">
+                        I am a dedicated React and React Native Developer with a passion for building high-performance, scalable applications. My work approach is rooted in clean code, architectural integrity, and a deep understanding of the client's business goals. I specialize in turning complex requirements into intuitive user experiences that drive real results.
+                    </motion.p>
                 </motion.div>
             </section>
 
