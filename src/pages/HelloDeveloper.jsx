@@ -12,9 +12,11 @@ import Slider from "react-slick";
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
 
-// Import local assets
-import profilePic from '../assets/profile/profilePic.png';
+// Profile Assets
 import coverPhoto from '../assets/profile/coverPhoto.png';
+import profilePic from '../assets/profile/profilePic.png';
+
+// Project Assets
 import adminDashboard from '../assets/projectPic/adminDashboard.PNG';
 import buyerWishlist from '../assets/projectPic/buyerWishlist.PNG';
 import marketPleace from '../assets/projectPic/marketPleace.PNG';
@@ -23,13 +25,13 @@ const HelloDeveloper = () => {
     // Sample Projects with multiple images
     const projects = [
         {
-            name: "Eco-Commerce Platform",
+            name: "Eco-Commerce Platform Stocklot",
             description: "A sustainable shopping experience with high-performance product discovery and seamless checkout flow.",
             techStack: "React, Redux Toolkit, Tailwind CSS, Stripe API",
             images: [
                 marketPleace,
-                buyerWishlist,
-                adminDashboard
+                adminDashboard,
+                buyerWishlist
             ],
             link: "https://github.com/noyonkummerdas"
         },
@@ -38,9 +40,9 @@ const HelloDeveloper = () => {
             description: "Enterprise-grade dashboard for real-time stock tracking and predictive supply chain analytics.",
             techStack: "React Native, Node.js, MongoDB, Chart.js",
             images: [
-                adminDashboard,
-                marketPleace,
-                buyerWishlist
+                "https://images.unsplash.com/photo-1551288049-bebda4e38f71?q=80&w=2670&auto=format&fit=crop",
+                "https://images.unsplash.com/photo-1460925895917-afdab827c52f?q=80&w=2426&auto=format&fit=crop",
+                "https://images.unsplash.com/photo-1542744173-8e7e53415bb0?q=80&w=2070&auto=format&fit=crop"
             ],
             link: "https://github.com/noyonkummerdas"
         }
@@ -116,13 +118,15 @@ const HelloDeveloper = () => {
             <section className="relative h-[80vh] flex flex-col items-center justify-center overflow-hidden">
                 {/* Cover Background */}
                 <div className="absolute inset-0 z-0">
-                    <div className="absolute inset-0 bg-secondary/80 z-10"></div>
+                    {/* Subtle Overlay to ensure text readability without obscuring the photo */}
+                    <div className="absolute inset-0 bg-secondary/40 z-10"></div>
                     <img
                         src={coverPhoto}
-                        alt="Tech Abstract"
+                        alt="Profile Cover"
                         className="w-full h-full object-cover"
+                        style={{ objectPosition: 'center' }}
                     />
-                    <div className="absolute inset-0 bg-gradient-to-t from-secondary to-transparent z-20"></div>
+                    <div className="absolute inset-0 bg-gradient-to-b from-transparent via-transparent to-secondary z-20"></div>
                 </div>
 
                 <div className="relative z-30 flex flex-col items-center text-center px-6">
@@ -133,11 +137,13 @@ const HelloDeveloper = () => {
                         transition={{ duration: 0.8, type: "spring" }}
                         className="w-32 h-32 md:w-40 md:h-40 rounded-full border-4 border-primary p-1 bg-secondary mb-8 overflow-hidden shadow-[0_0_30px_rgba(56,189,248,0.3)]"
                     >
-                        <img
-                            src={profilePic}
-                            alt="NK Noyon Profile"
-                            className="w-full h-full object-cover rounded-full"
-                        />
+                        <div className="w-full h-full rounded-full bg-surface flex items-center justify-center overflow-hidden">
+                            <img
+                                src={profilePic}
+                                alt="NK Noyon"
+                                className="w-full h-full object-cover"
+                            />
+                        </div>
                     </motion.div>
 
                     <motion.div
@@ -170,7 +176,7 @@ const HelloDeveloper = () => {
                 </div>
             </section>
 
-            {/* About Section */}
+            {/* About Me Section */}
             <section className="py-24 px-6 max-w-5xl mx-auto">
                 <motion.div
                     initial="hidden"
@@ -179,11 +185,19 @@ const HelloDeveloper = () => {
                     variants={containerVariants}
                     className="text-center"
                 >
-                    <motion.h2 variants={itemVariants} className="text-xs font-black text-primary uppercase tracking-[0.4em] mb-6 font-inter">About Work</motion.h2>
-                    <motion.h3 variants={itemVariants} className="text-3xl md:text-5xl font-bold text-white mb-8 tracking-tight">Crafting Digital Excellence.</motion.h3>
-                    <motion.p variants={itemVariants} className="text-lg text-textMain/60 leading-relaxed font-inter">
-                        I am a dedicated React and React Native Developer with a passion for building high-performance, scalable applications. My work approach is rooted in clean code, architectural integrity, and a deep understanding of the client's business goals. I specialize in turning complex requirements into intuitive user experiences that drive real results.
-                    </motion.p>
+                    <motion.h2 variants={itemVariants} className="text-xs font-black text-primary uppercase tracking-[0.4em] mb-6 font-inter">Personal Profile</motion.h2>
+                    <motion.h3 variants={itemVariants} className="text-3xl md:text-5xl font-bold text-white mb-8 tracking-tight">About NK Noyon<span className="text-primary">.</span></motion.h3>
+                    <div className="space-y-6 text-lg text-textMain/70 leading-relaxed font-inter text-left md:text-center max-w-4xl mx-auto">
+                        <motion.p variants={itemVariants}>
+                            I am a dedicated React and React Native Developer specializing in building high-performance, cross-platform applications. With deep expertise in Expo, Redux, and modern UI frameworks like Tailwind CSS and Bootstrap, I bridge the gap between complex backend logic and seamless frontend experiences to deliver production-ready solutions.
+                        </motion.p>
+                        <motion.p variants={itemVariants}>
+                            My development philosophy is rooted in clean code, architectural integrity, and scalability. I focus on creating user-friendly designs that don't sacrifice performance, ensuring that every digital product I engineer is optimized for speed and long-term maintainability for startups and growing enterprises alike.
+                        </motion.p>
+                        <motion.p variants={itemVariants}>
+                            Whether I'm developing a mobile app or a complex web dashboard, my goal is to provide clear value to recruiters and clients through transparent communication and technical excellence. I am passionate about solving real-world problems with elegant, efficient code that helps businesses achieve their strategic objectives.
+                        </motion.p>
+                    </div>
                 </motion.div>
             </section>
 
