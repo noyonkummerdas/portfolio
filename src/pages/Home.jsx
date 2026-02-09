@@ -25,7 +25,7 @@ const Home = () => {
                             Explore Portfolio
                         </Link>
                         <Link to="/cv" className="px-10 py-5 bg-white/5 hover:bg-white/10 text-white font-bold rounded-2xl border border-white/10 backdrop-blur-md transition-all duration-300">
-                            View Expertis cv
+                            CV
 
                         </Link>
                     </div>
