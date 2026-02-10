@@ -1,15 +1,8 @@
-import React, { useState, useEffect } from 'react';
-import { useDispatch, useSelector } from 'react-redux';
+﻿import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { FaSave, FaArrowLeft, FaCloudUploadAlt } from 'react-icons/fa';
-import { uploadCv, resetUploadStatus } from '../features/cv/cvSlice';
 
 const AdminCVForm = () => {
-    const dispatch = useDispatch();
     const navigate = useNavigate();
-    const { uploadLoading, uploadError, uploadSuccess } = useSelector((state) => state.cv);
-
-    // Legacy State Structure
     const [formData, setFormData] = useState({
         personalInfo: {
             name: 'NK Noyon',
@@ -35,22 +28,6 @@ const AdminCVForm = () => {
         languages: ''
     });
 
-    // New State for Backend Requirements
-    const [pdfFile, setPdfFile] = useState(null);
-    const [version, setVersion] = useState('');
-
-    useEffect(() => {
-        if (uploadSuccess) {
-            const timer = setTimeout(() => {
-                dispatch(resetUploadStatus());
-                // navigate('/cv'); // Optional: Redirect
-                // Reset form handled if needed, or keep for editing
-            }, 3000);
-            return () => clearTimeout(timer);
-        }
-    }, [uploadSuccess, dispatch, navigate]);
-
-    // --- Legacy Handlers ---
     const handlePersonalInfoChange = (field, value) => {
         setFormData(prev => ({
             ...prev,
@@ -112,169 +89,93 @@ const AdminCVForm = () => {
         }));
     };
 
-    // --- New PDF Handler ---
-    const handleFileChange = (e) => {
-        setPdfFile(e.target.files[0]);
-    };
-
-    // --- Submit Handler (Connected to Redux) ---
     const handleSubmit = (e) => {
         e.preventDefault();
 
-        if (!pdfFile) {
-            alert('Please select a PDF file (Required by Backend)');
-            return;
-        }
-        if (!version) {
-            alert('Please enter a version number (Required by Backend)');
-            return;
-        }
+        const cvData = {
+            id: Date.now().toString(),
+            version: `v${new Date().getTime()}`,
+            date: new Date().toISOString().split('T')[0],
+            ...formData
+        };
 
-        // Construct Data payload
-        const data = new FormData();
+        // Get existing CVs from localStorage
+        const existingCVs = JSON.parse(localStorage.getItem('cvData') || '[]');
+        existingCVs.push(cvData);
+        localStorage.setItem('cvData', JSON.stringify(existingCVs));
 
-        // Backend Required Fields
-        data.append('title', formData.personalInfo.title); // Use Job Title as CV Title
-        data.append('version', version);
-        data.append('pdf', pdfFile);
-
-        // Optional: Send full JSON data for potential backend use
-        // If backend schema is strict, this might be ignored, which is fine.
-        // If backend accepts it, great.
-        data.append('cvData', JSON.stringify(formData));
-
-        dispatch(uploadCv(data));
+        alert('CV saved successfully!');
+        navigate(`/admin/cv/${cvData.id}`);
     };
 
     return (
         <div className="min-h-screen pt-24 pb-12 px-6">
             <div className="max-w-5xl mx-auto">
-                <div className="flex justify-between items-center mb-8">
-                    <div>
-                        <h1 className="text-4xl font-black mb-2 text-white">Manage CVs</h1>
-                        <p className="text-gray-400">Create new version & upload PDF to backend</p>
-                    </div>
-                    <button
-                        onClick={() => navigate('/cv')}
-                        className="px-6 py-2 bg-white/5 hover:bg-white/10 text-white rounded-xl transition-all flex items-center gap-2"
-                    >
-                        <FaArrowLeft /> Back to CV
-                    </button>
+                <div className="mb-8">
+                    <h1 className="text-4xl font-black mb-2">CV Management</h1>
+                    <p className="text-gray-400">Create and manage your CV versions</p>
                 </div>
 
                 <form onSubmit={handleSubmit} className="bg-white/5 rounded-2xl border border-white/10 p-8 space-y-8">
-
-                    {/* Status Messages for Backend Connection */}
-                    {uploadLoading && (
-                        <div className="p-4 bg-blue-500/10 border border-blue-500/20 text-blue-400 rounded-xl">
-                            Uploading to Server...
-                        </div>
-                    )}
-                    {uploadError && (
-                        <div className="p-4 bg-red-500/10 border border-red-500/20 text-red-400 rounded-xl">
-                            Error: {typeof uploadError === 'object' ? JSON.stringify(uploadError) : uploadError}
-                        </div>
-                    )}
-                    {uploadSuccess && (
-                        <div className="p-4 bg-green-500/10 border border-green-500/20 text-green-400 rounded-xl">
-                            CV Uploaded Successfully!
-                        </div>
-                    )}
-
-                    {/* --- BACKEND REQUIRED FIELDS SECTION --- */}
-                    <div className="p-6 bg-indigo-900/20 border border-indigo-500/30 rounded-xl mb-8">
-                        <h3 className="text-xl font-bold text-indigo-300 mb-4 flex items-center gap-2">
-                            <FaCloudUploadAlt /> Backend Requirements
-                        </h3>
-                        <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-                            <div>
-                                <label className="block text-sm font-medium mb-2 text-white">Version Number</label>
-                                <input
-                                    type="text"
-                                    value={version}
-                                    onChange={(e) => setVersion(e.target.value)}
-                                    className="w-full px-4 py-3 bg-black/20 border border-white/10 rounded-xl focus:border-indigo-500 focus:outline-none text-white"
-                                    placeholder="e.g. 1.2.0"
-                                    required
-                                />
-                            </div>
-                            <div>
-                                <label className="block text-sm font-medium mb-2 text-white">PDF File</label>
-                                <div className="bg-black/20 border border-white/10 rounded-xl px-4 py-2">
-                                    <input
-                                        type="file"
-                                        accept="application/pdf"
-                                        onChange={handleFileChange}
-                                        className="w-full text-gray-300 file:mr-4 file:py-2 file:px-4 file:rounded-lg file:border-0 file:text-sm file:font-semibold file:bg-indigo-600 file:text-white hover:file:bg-indigo-500"
-                                        required
-                                    />
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-
-
-                    {/* --- LEGACY FORM FIELDS --- */}
-
                     {/* Personal Information */}
                     <section>
                         <h2 className="text-2xl font-bold mb-4 text-indigo-400">Personal Information</h2>
                         <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                             <div>
-                                <label className="block text-sm font-medium mb-2 text-gray-300">Full Name</label>
+                                <label className="block text-sm font-medium mb-2">Full Name</label>
                                 <input
                                     type="text"
                                     value={formData.personalInfo.name}
                                     onChange={(e) => handlePersonalInfoChange('name', e.target.value)}
-                                    className="w-full px-4 py-2 bg-white/5 border border-white/10 rounded-lg focus:border-indigo-500 focus:outline-none text-white"
+                                    className="w-full px-4 py-2 bg-white/5 border border-white/10 rounded-lg focus:border-indigo-500 focus:outline-none"
                                     required
                                 />
                             </div>
                             <div>
-                                <label className="block text-sm font-medium mb-2 text-gray-300">Title</label>
+                                <label className="block text-sm font-medium mb-2">Title</label>
                                 <input
                                     type="text"
                                     value={formData.personalInfo.title}
                                     onChange={(e) => handlePersonalInfoChange('title', e.target.value)}
-                                    className="w-full px-4 py-2 bg-white/5 border border-white/10 rounded-lg focus:border-indigo-500 focus:outline-none text-white"
+                                    className="w-full px-4 py-2 bg-white/5 border border-white/10 rounded-lg focus:border-indigo-500 focus:outline-none"
                                     required
                                 />
                             </div>
                             <div>
-                                <label className="block text-sm font-medium mb-2 text-gray-300">Email</label>
+                                <label className="block text-sm font-medium mb-2">Email</label>
                                 <input
                                     type="email"
                                     value={formData.personalInfo.email}
                                     onChange={(e) => handlePersonalInfoChange('email', e.target.value)}
-                                    className="w-full px-4 py-2 bg-white/5 border border-white/10 rounded-lg focus:border-indigo-500 focus:outline-none text-white"
+                                    className="w-full px-4 py-2 bg-white/5 border border-white/10 rounded-lg focus:border-indigo-500 focus:outline-none"
                                     required
                                 />
                             </div>
                             <div>
-                                <label className="block text-sm font-medium mb-2 text-gray-300">Phone</label>
+                                <label className="block text-sm font-medium mb-2">Phone</label>
                                 <input
                                     type="tel"
                                     value={formData.personalInfo.phone}
                                     onChange={(e) => handlePersonalInfoChange('phone', e.target.value)}
-                                    className="w-full px-4 py-2 bg-white/5 border border-white/10 rounded-lg focus:border-indigo-500 focus:outline-none text-white"
+                                    className="w-full px-4 py-2 bg-white/5 border border-white/10 rounded-lg focus:border-indigo-500 focus:outline-none"
                                 />
                             </div>
                             <div>
-                                <label className="block text-sm font-medium mb-2 text-gray-300">GitHub</label>
+                                <label className="block text-sm font-medium mb-2">GitHub</label>
                                 <input
                                     type="text"
                                     value={formData.personalInfo.github}
                                     onChange={(e) => handlePersonalInfoChange('github', e.target.value)}
-                                    className="w-full px-4 py-2 bg-white/5 border border-white/10 rounded-lg focus:border-indigo-500 focus:outline-none text-white"
+                                    className="w-full px-4 py-2 bg-white/5 border border-white/10 rounded-lg focus:border-indigo-500 focus:outline-none"
                                 />
                             </div>
                             <div>
-                                <label className="block text-sm font-medium mb-2 text-gray-300">LinkedIn</label>
+                                <label className="block text-sm font-medium mb-2">LinkedIn</label>
                                 <input
                                     type="text"
                                     value={formData.personalInfo.linkedin}
                                     onChange={(e) => handlePersonalInfoChange('linkedin', e.target.value)}
-                                    className="w-full px-4 py-2 bg-white/5 border border-white/10 rounded-lg focus:border-indigo-500 focus:outline-none text-white"
+                                    className="w-full px-4 py-2 bg-white/5 border border-white/10 rounded-lg focus:border-indigo-500 focus:outline-none"
                                 />
                             </div>
                         </div>
@@ -286,7 +187,7 @@ const AdminCVForm = () => {
                         <textarea
                             value={formData.summary}
                             onChange={(e) => setFormData(prev => ({ ...prev, summary: e.target.value }))}
-                            className="w-full px-4 py-2 bg-white/5 border border-white/10 rounded-lg focus:border-indigo-500 focus:outline-none h-32 text-white"
+                            className="w-full px-4 py-2 bg-white/5 border border-white/10 rounded-lg focus:border-indigo-500 focus:outline-none h-32"
                             placeholder="Brief overview of your expertise..."
                             required
                         />
@@ -297,62 +198,62 @@ const AdminCVForm = () => {
                         <h2 className="text-2xl font-bold mb-4 text-indigo-400">Technical Skills</h2>
                         <div className="space-y-4">
                             <div>
-                                <label className="block text-sm font-medium mb-2 text-gray-300">Frontend Development</label>
+                                <label className="block text-sm font-medium mb-2">Frontend Development</label>
                                 <input
                                     type="text"
                                     value={formData.skills.frontend}
                                     onChange={(e) => handleSkillsChange('frontend', e.target.value)}
-                                    className="w-full px-4 py-2 bg-white/5 border border-white/10 rounded-lg focus:border-indigo-500 focus:outline-none text-white"
+                                    className="w-full px-4 py-2 bg-white/5 border border-white/10 rounded-lg focus:border-indigo-500 focus:outline-none"
                                     placeholder="React, React Native, JavaScript, etc."
                                 />
                             </div>
                             <div>
-                                <label className="block text-sm font-medium mb-2 text-gray-300">State Management</label>
+                                <label className="block text-sm font-medium mb-2">State Management</label>
                                 <input
                                     type="text"
                                     value={formData.skills.stateManagement}
                                     onChange={(e) => handleSkillsChange('stateManagement', e.target.value)}
-                                    className="w-full px-4 py-2 bg-white/5 border border-white/10 rounded-lg focus:border-indigo-500 focus:outline-none text-white"
+                                    className="w-full px-4 py-2 bg-white/5 border border-white/10 rounded-lg focus:border-indigo-500 focus:outline-none"
                                     placeholder="Redux, Context API, etc."
                                 />
                             </div>
                             <div>
-                                <label className="block text-sm font-medium mb-2 text-gray-300">Styling & UI</label>
+                                <label className="block text-sm font-medium mb-2">Styling & UI</label>
                                 <input
                                     type="text"
                                     value={formData.skills.styling}
                                     onChange={(e) => handleSkillsChange('styling', e.target.value)}
-                                    className="w-full px-4 py-2 bg-white/5 border border-white/10 rounded-lg focus:border-indigo-500 focus:outline-none text-white"
+                                    className="w-full px-4 py-2 bg-white/5 border border-white/10 rounded-lg focus:border-indigo-500 focus:outline-none"
                                     placeholder="Tailwind CSS, Styled Components, etc."
                                 />
                             </div>
                             <div>
-                                <label className="block text-sm font-medium mb-2 text-gray-300">Backend & APIs</label>
+                                <label className="block text-sm font-medium mb-2">Backend & APIs</label>
                                 <input
                                     type="text"
                                     value={formData.skills.backend}
                                     onChange={(e) => handleSkillsChange('backend', e.target.value)}
-                                    className="w-full px-4 py-2 bg-white/5 border border-white/10 rounded-lg focus:border-indigo-500 focus:outline-none text-white"
+                                    className="w-full px-4 py-2 bg-white/5 border border-white/10 rounded-lg focus:border-indigo-500 focus:outline-none"
                                     placeholder="REST APIs, Firebase, Node.js, etc."
                                 />
                             </div>
                             <div>
-                                <label className="block text-sm font-medium mb-2 text-gray-300">Tools & Workflow</label>
+                                <label className="block text-sm font-medium mb-2">Tools & Workflow</label>
                                 <input
                                     type="text"
                                     value={formData.skills.tools}
                                     onChange={(e) => handleSkillsChange('tools', e.target.value)}
-                                    className="w-full px-4 py-2 bg-white/5 border border-white/10 rounded-lg focus:border-indigo-500 focus:outline-none text-white"
+                                    className="w-full px-4 py-2 bg-white/5 border border-white/10 rounded-lg focus:border-indigo-500 focus:outline-none"
                                     placeholder="Git, GitHub, VS Code, etc."
                                 />
                             </div>
                             <div>
-                                <label className="block text-sm font-medium mb-2 text-gray-300">Other</label>
+                                <label className="block text-sm font-medium mb-2">Other</label>
                                 <input
                                     type="text"
                                     value={formData.skills.other}
                                     onChange={(e) => handleSkillsChange('other', e.target.value)}
-                                    className="w-full px-4 py-2 bg-white/5 border border-white/10 rounded-lg focus:border-indigo-500 focus:outline-none text-white"
+                                    className="w-full px-4 py-2 bg-white/5 border border-white/10 rounded-lg focus:border-indigo-500 focus:outline-none"
                                     placeholder="Performance Optimization, Testing, etc."
                                 />
                             </div>
@@ -366,7 +267,7 @@ const AdminCVForm = () => {
                             <button
                                 type="button"
                                 onClick={addExperience}
-                                className="px-4 py-2 bg-indigo-600 hover:bg-indigo-500 rounded-lg text-sm font-bold text-white"
+                                className="px-4 py-2 bg-indigo-600 hover:bg-indigo-500 rounded-lg text-sm font-bold"
                             >
                                 + Add Experience
                             </button>
@@ -374,7 +275,7 @@ const AdminCVForm = () => {
                         {formData.experience.map((exp, index) => (
                             <div key={index} className="mb-6 p-4 bg-white/5 rounded-lg border border-white/10">
                                 <div className="flex justify-between items-center mb-4">
-                                    <h3 className="font-bold text-white">Experience {index + 1}</h3>
+                                    <h3 className="font-bold">Experience {index + 1}</h3>
                                     {formData.experience.length > 1 && (
                                         <button
                                             type="button"
@@ -387,39 +288,39 @@ const AdminCVForm = () => {
                                 </div>
                                 <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                                     <div>
-                                        <label className="block text-sm font-medium mb-2 text-gray-300">Job Title</label>
+                                        <label className="block text-sm font-medium mb-2">Job Title</label>
                                         <input
                                             type="text"
                                             value={exp.title}
                                             onChange={(e) => handleExperienceChange(index, 'title', e.target.value)}
-                                            className="w-full px-4 py-2 bg-white/5 border border-white/10 rounded-lg focus:border-indigo-500 focus:outline-none text-white"
+                                            className="w-full px-4 py-2 bg-white/5 border border-white/10 rounded-lg focus:border-indigo-500 focus:outline-none"
                                         />
                                     </div>
                                     <div>
-                                        <label className="block text-sm font-medium mb-2 text-gray-300">Company</label>
+                                        <label className="block text-sm font-medium mb-2">Company</label>
                                         <input
                                             type="text"
                                             value={exp.company}
                                             onChange={(e) => handleExperienceChange(index, 'company', e.target.value)}
-                                            className="w-full px-4 py-2 bg-white/5 border border-white/10 rounded-lg focus:border-indigo-500 focus:outline-none text-white"
+                                            className="w-full px-4 py-2 bg-white/5 border border-white/10 rounded-lg focus:border-indigo-500 focus:outline-none"
                                         />
                                     </div>
                                     <div className="md:col-span-2">
-                                        <label className="block text-sm font-medium mb-2 text-gray-300">Duration</label>
+                                        <label className="block text-sm font-medium mb-2">Duration</label>
                                         <input
                                             type="text"
                                             value={exp.duration}
                                             onChange={(e) => handleExperienceChange(index, 'duration', e.target.value)}
-                                            className="w-full px-4 py-2 bg-white/5 border border-white/10 rounded-lg focus:border-indigo-500 focus:outline-none text-white"
+                                            className="w-full px-4 py-2 bg-white/5 border border-white/10 rounded-lg focus:border-indigo-500 focus:outline-none"
                                             placeholder="e.g., 2020 - 2022"
                                         />
                                     </div>
                                     <div className="md:col-span-2">
-                                        <label className="block text-sm font-medium mb-2 text-gray-300">Responsibilities (one per line)</label>
+                                        <label className="block text-sm font-medium mb-2">Responsibilities (one per line)</label>
                                         <textarea
                                             value={exp.responsibilities}
                                             onChange={(e) => handleExperienceChange(index, 'responsibilities', e.target.value)}
-                                            className="w-full px-4 py-2 bg-white/5 border border-white/10 rounded-lg focus:border-indigo-500 focus:outline-none h-24 text-white"
+                                            className="w-full px-4 py-2 bg-white/5 border border-white/10 rounded-lg focus:border-indigo-500 focus:outline-none h-24"
                                             placeholder="List your key responsibilities..."
                                         />
                                     </div>
@@ -435,7 +336,7 @@ const AdminCVForm = () => {
                             <button
                                 type="button"
                                 onClick={addProject}
-                                className="px-4 py-2 bg-indigo-600 hover:bg-indigo-500 rounded-lg text-sm font-bold text-white"
+                                className="px-4 py-2 bg-indigo-600 hover:bg-indigo-500 rounded-lg text-sm font-bold"
                             >
                                 + Add Project
                             </button>
@@ -443,7 +344,7 @@ const AdminCVForm = () => {
                         {formData.projects.map((project, index) => (
                             <div key={index} className="mb-6 p-4 bg-white/5 rounded-lg border border-white/10">
                                 <div className="flex justify-between items-center mb-4">
-                                    <h3 className="font-bold text-white">Project {index + 1}</h3>
+                                    <h3 className="font-bold">Project {index + 1}</h3>
                                     {formData.projects.length > 1 && (
                                         <button
                                             type="button"
@@ -456,39 +357,39 @@ const AdminCVForm = () => {
                                 </div>
                                 <div className="space-y-4">
                                     <div>
-                                        <label className="block text-sm font-medium mb-2 text-gray-300">Project Name</label>
+                                        <label className="block text-sm font-medium mb-2">Project Name</label>
                                         <input
                                             type="text"
                                             value={project.name}
                                             onChange={(e) => handleProjectChange(index, 'name', e.target.value)}
-                                            className="w-full px-4 py-2 bg-white/5 border border-white/10 rounded-lg focus:border-indigo-500 focus:outline-none text-white"
+                                            className="w-full px-4 py-2 bg-white/5 border border-white/10 rounded-lg focus:border-indigo-500 focus:outline-none"
                                         />
                                     </div>
                                     <div>
-                                        <label className="block text-sm font-medium mb-2 text-gray-300">Description</label>
+                                        <label className="block text-sm font-medium mb-2">Description</label>
                                         <textarea
                                             value={project.description}
                                             onChange={(e) => handleProjectChange(index, 'description', e.target.value)}
-                                            className="w-full px-4 py-2 bg-white/5 border border-white/10 rounded-lg focus:border-indigo-500 focus:outline-none h-20 text-white"
+                                            className="w-full px-4 py-2 bg-white/5 border border-white/10 rounded-lg focus:border-indigo-500 focus:outline-none h-20"
                                         />
                                     </div>
                                     <div>
-                                        <label className="block text-sm font-medium mb-2 text-gray-300">Technologies (comma separated)</label>
+                                        <label className="block text-sm font-medium mb-2">Technologies (comma separated)</label>
                                         <input
                                             type="text"
                                             value={project.tech}
                                             onChange={(e) => handleProjectChange(index, 'tech', e.target.value)}
-                                            className="w-full px-4 py-2 bg-white/5 border border-white/10 rounded-lg focus:border-indigo-500 focus:outline-none text-white"
+                                            className="w-full px-4 py-2 bg-white/5 border border-white/10 rounded-lg focus:border-indigo-500 focus:outline-none"
                                             placeholder="React, Node.js, MongoDB"
                                         />
                                     </div>
                                     <div>
-                                        <label className="block text-sm font-medium mb-2 text-gray-300">Result/Impact</label>
+                                        <label className="block text-sm font-medium mb-2">Result/Impact</label>
                                         <input
                                             type="text"
                                             value={project.result}
                                             onChange={(e) => handleProjectChange(index, 'result', e.target.value)}
-                                            className="w-full px-4 py-2 bg-white/5 border border-white/10 rounded-lg focus:border-indigo-500 focus:outline-none text-white"
+                                            className="w-full px-4 py-2 bg-white/5 border border-white/10 rounded-lg focus:border-indigo-500 focus:outline-none"
                                             placeholder="Result: Improved performance by 40%"
                                         />
                                     </div>
@@ -502,31 +403,31 @@ const AdminCVForm = () => {
                         <h2 className="text-2xl font-bold mb-4 text-indigo-400">Education</h2>
                         <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                             <div>
-                                <label className="block text-sm font-medium mb-2 text-gray-300">Degree</label>
+                                <label className="block text-sm font-medium mb-2">Degree</label>
                                 <input
                                     type="text"
                                     value={formData.education.degree}
                                     onChange={(e) => handleEducationChange('degree', e.target.value)}
-                                    className="w-full px-4 py-2 bg-white/5 border border-white/10 rounded-lg focus:border-indigo-500 focus:outline-none text-white"
+                                    className="w-full px-4 py-2 bg-white/5 border border-white/10 rounded-lg focus:border-indigo-500 focus:outline-none"
                                     placeholder="Bachelor of Science in Computer Science"
                                 />
                             </div>
                             <div>
-                                <label className="block text-sm font-medium mb-2 text-gray-300">University</label>
+                                <label className="block text-sm font-medium mb-2">University</label>
                                 <input
                                     type="text"
                                     value={formData.education.university}
                                     onChange={(e) => handleEducationChange('university', e.target.value)}
-                                    className="w-full px-4 py-2 bg-white/5 border border-white/10 rounded-lg focus:border-indigo-500 focus:outline-none text-white"
+                                    className="w-full px-4 py-2 bg-white/5 border border-white/10 rounded-lg focus:border-indigo-500 focus:outline-none"
                                 />
                             </div>
                             <div className="md:col-span-2">
-                                <label className="block text-sm font-medium mb-2 text-gray-300">Duration</label>
+                                <label className="block text-sm font-medium mb-2">Duration</label>
                                 <input
                                     type="text"
                                     value={formData.education.duration}
                                     onChange={(e) => handleEducationChange('duration', e.target.value)}
-                                    className="w-full px-4 py-2 bg-white/5 border border-white/10 rounded-lg focus:border-indigo-500 focus:outline-none text-white"
+                                    className="w-full px-4 py-2 bg-white/5 border border-white/10 rounded-lg focus:border-indigo-500 focus:outline-none"
                                     placeholder="2016 - 2020"
                                 />
                             </div>
@@ -539,7 +440,7 @@ const AdminCVForm = () => {
                         <textarea
                             value={formData.certifications}
                             onChange={(e) => setFormData(prev => ({ ...prev, certifications: e.target.value }))}
-                            className="w-full px-4 py-2 bg-white/5 border border-white/10 rounded-lg focus:border-indigo-500 focus:outline-none h-24 text-white"
+                            className="w-full px-4 py-2 bg-white/5 border border-white/10 rounded-lg focus:border-indigo-500 focus:outline-none h-24"
                             placeholder="List your certifications (one per line)..."
                         />
                     </section>
@@ -550,19 +451,25 @@ const AdminCVForm = () => {
                         <textarea
                             value={formData.languages}
                             onChange={(e) => setFormData(prev => ({ ...prev, languages: e.target.value }))}
-                            className="w-full px-4 py-2 bg-white/5 border border-white/10 rounded-lg focus:border-indigo-500 focus:outline-none h-20 text-white"
+                            className="w-full px-4 py-2 bg-white/5 border border-white/10 rounded-lg focus:border-indigo-500 focus:outline-none h-20"
                             placeholder="English - Professional, Bengali - Native"
                         />
                     </section>
 
                     {/* Submit Button */}
-                    <div className="flex gap-4 pt-6 border-t border-white/10">
+                    <div className="flex gap-4">
                         <button
                             type="submit"
-                            disabled={uploadLoading}
-                            className={`px-8 py-3 bg-indigo-600 hover:bg-indigo-500 rounded-xl font-bold transition-all text-white flex items-center gap-2 ${uploadLoading ? 'opacity-50 cursor-not-allowed' : ''}`}
+                            className="px-8 py-3 bg-indigo-600 hover:bg-indigo-500 rounded-xl font-bold transition-all"
                         >
-                            <FaCloudUploadAlt /> {uploadLoading ? 'Uploading...' : 'Save & Upload PDF'}
+                            Save CV
+                        </button>
+                        <button
+                            type="button"
+                            onClick={() => navigate('/admin')}
+                            className="px-8 py-3 bg-white/5 hover:bg-white/10 rounded-xl font-bold border border-white/10 transition-all"
+                        >
+                            Cancel
                         </button>
                     </div>
                 </form>

@@ -19,7 +19,7 @@ const CV = () => {
     // Default/Placeholder CV data
     const defaultData = {
         personalInfo: {
-            name: 'NK Noyon',
+            name: 'Noyon Kumar Das',
             title: 'React & React Native Developer',
             email: 'nknoyon01936@gmail.com',
             github: 'github.com/noyonkummerdas',
