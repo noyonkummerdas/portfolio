@@ -8,13 +8,21 @@ const InquiryDetails = () => {
     const [inquiry, setInquiry] = useState(null);
 
     useEffect(() => {
-        const allInquiries = JSON.parse(localStorage.getItem('inquiries') || '[]');
-        const found = allInquiries.find(item => item.id === id);
-        if (found) {
-            setInquiry(found);
-        } else {
-            navigate('/admin');
-        }
+        const fetchInquiry = async () => {
+            try {
+                const response = await fetch(`http://localhost:5000/api/hire-me/${id}`);
+                const data = await response.json();
+                if (response.ok) {
+                    setInquiry(data);
+                } else {
+                    navigate('/admin');
+                }
+            } catch (err) {
+                console.error('Fetch Error:', err);
+                navigate('/admin');
+            }
+        };
+        fetchInquiry();
     }, [id, navigate]);
 
     if (!inquiry) return null;
@@ -35,7 +43,7 @@ const InquiryDetails = () => {
                         <div className="inline-block px-4 py-1 bg-indigo-600/20 text-indigo-400 rounded-full text-xs font-bold uppercase tracking-widest mb-2">
                             {inquiry.projectType}
                         </div>
-                        <p className="text-gray-400 text-sm">{inquiry.date}</p>
+                        <p className="text-gray-400 text-sm">{new Date(inquiry.createdAt).toLocaleString()}</p>
                     </div>
                 </div>
 
@@ -55,7 +63,7 @@ const InquiryDetails = () => {
                     <h3 className="text-[10px] uppercase tracking-widest font-bold text-gray-500 mb-6">Project Requirements</h3>
                     <div className="bg-black/20 rounded-2xl p-6 border border-white/5">
                         <p className="text-gray-300 font-inter leading-relaxed whitespace-pre-wrap">
-                            {inquiry.details || "No additional details provided."}
+                            {inquiry.message || "No additional details provided."}
                         </p>
                     </div>
                 </div>

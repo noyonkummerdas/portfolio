@@ -1,7 +1,12 @@
 
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
+import { submitHireMe, resetSubmitStatus } from '../features/hireMeSlice';
 
 const HireMe = () => {
+    const dispatch = useDispatch();
+    const { submitLoading, submitSuccess, submitError } = useSelector((state) => state.hireMe);
+
     const [formData, setFormData] = useState({
         name: '', email: '', company: '',
         projectType: 'Web Application',
@@ -10,32 +15,35 @@ const HireMe = () => {
         details: ''
     });
 
+    useEffect(() => {
+        if (submitSuccess) {
+            alert("Thanks! Your inquiry has been sent successfully.");
+            setFormData({
+                name: '', email: '', company: '',
+                projectType: 'Web Application',
+                budget: '$5k - $10k',
+                timeline: '1 - 3 Months',
+                details: ''
+            });
+            dispatch(resetSubmitStatus());
+        }
+        if (submitError) {
+            alert(`Error: ${submitError}`);
+            dispatch(resetSubmitStatus());
+        }
+    }, [submitSuccess, submitError, dispatch]);
+
     const handleChange = (e) => {
         setFormData({ ...formData, [e.target.name]: e.target.value });
     };
 
-    const handleSubmit = (e) => {
+    const handleSubmit = async (e) => {
         e.preventDefault();
-
-        const newInquiry = {
-            id: Date.now().toString(),
-            date: new Date().toLocaleDateString(),
-            ...formData
+        const submissionData = {
+            ...formData,
+            message: formData.details
         };
-
-        const existingInquiries = JSON.parse(localStorage.getItem('inquiries') || '[]');
-        localStorage.setItem('inquiries', JSON.stringify([newInquiry, ...existingInquiries]));
-
-        console.log('Form Submitted & Saved:', newInquiry);
-        alert("Thanks! Your inquiry has been saved. Check the dashboard.");
-
-        setFormData({
-            name: '', email: '', company: '',
-            projectType: 'Web Application',
-            budget: '$5k - $10k',
-            timeline: '1 - 3 Months',
-            details: ''
-        });
+        dispatch(submitHireMe(submissionData));
     };
 
     const services = [

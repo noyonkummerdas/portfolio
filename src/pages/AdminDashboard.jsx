@@ -1,20 +1,19 @@
 
-import React, { useEffect, useState } from 'react';
+import React, { useEffect } from 'react';
 import { Link } from 'react-router-dom';
+import { useDispatch, useSelector } from 'react-redux';
+import { fetchSubmissions } from '../features/hireMeSlice';
 
 const AdminDashboard = () => {
-    const [inquiries, setInquiries] = useState([]);
+    const dispatch = useDispatch();
+    const { submissions, loading, error } = useSelector((state) => state.hireMe);
 
     useEffect(() => {
-        const data = JSON.parse(localStorage.getItem('inquiries') || '[]');
-        setInquiries(data);
-    }, []);
+        dispatch(fetchSubmissions());
+    }, [dispatch]);
 
     const clearData = () => {
-        if (window.confirm('Are you sure you want to delete all inquiries?')) {
-            localStorage.removeItem('inquiries');
-            setInquiries([]);
-        }
+        alert("Clear All Data is disabled. Submissions are preserved in database.");
     }
 
     return (
@@ -31,16 +30,16 @@ const AdminDashboard = () => {
                 </div>
             </div>
 
-            {inquiries.length === 0 ? (
+            {submissions.length === 0 ? (
                 <div className="text-center py-20 bg-white/5 rounded-3xl border border-white/5">
                     <p className="text-gray-400 font-inter">No inquiries received yet.</p>
                 </div>
             ) : (
                 <div className="grid gap-4">
-                    {inquiries.map((item) => (
+                    {submissions.map((item) => (
                         <Link
-                            to={`/admin/inquiries/${item.id}`}
-                            key={item.id}
+                            to={`/admin/inquiries/${item._id}`}
+                            key={item._id}
                             className="flex flex-col md:flex-row md:items-center justify-between p-6 bg-secondary/40 backdrop-blur-xl border border-white/5 rounded-2xl hover:border-indigo-500/50 transition-all group"
                         >
                             <div className="mb-4 md:mb-0">
@@ -50,7 +49,7 @@ const AdminDashboard = () => {
                             <div className="flex items-center gap-6">
                                 <div className="text-right">
                                     <div className="text-xs font-bold text-indigo-400 uppercase tracking-widest mb-1">{item.projectType}</div>
-                                    <div className="text-sm text-gray-300">{item.date}</div>
+                                    <div className="text-sm text-gray-300">{new Date(item.createdAt).toLocaleDateString()}</div>
                                 </div>
                                 <div className="w-8 h-8 rounded-full bg-white/5 flex items-center justify-center text-gray-400 group-hover:bg-indigo-600 group-hover:text-white transition-all">
                                     →
