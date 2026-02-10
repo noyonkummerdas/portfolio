@@ -134,14 +134,19 @@ const AdminCVForm = () => {
         const data = new FormData();
 
         // Backend Required Fields
-        data.append('title', formData.personalInfo.title); // Use Job Title as CV Title
+        data.append('title', formData.personalInfo.title);
         data.append('version', version);
-        data.append('pdf', pdfFile);
+        data.append('cv', pdfFile); // Fixed field name to match backend 'cv'
 
-        // Optional: Send full JSON data for potential backend use
-        // If backend schema is strict, this might be ignored, which is fine.
-        // If backend accepts it, great.
-        data.append('cvData', JSON.stringify(formData));
+        // Send all fields individually as expected by new backend controller
+        data.append('personalInfo', JSON.stringify(formData.personalInfo));
+        data.append('summary', formData.summary);
+        data.append('skills', JSON.stringify(formData.skills));
+        data.append('experience', JSON.stringify(formData.experience));
+        data.append('projects', JSON.stringify(formData.projects));
+        data.append('education', JSON.stringify(formData.education));
+        data.append('certifications', formData.certifications);
+        data.append('languages', formData.languages);
 
         dispatch(uploadCv(data));
     };
