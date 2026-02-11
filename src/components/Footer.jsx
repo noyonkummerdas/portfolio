@@ -2,7 +2,7 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 const Footer = () => {
     return (
-        <footer id="contact" className="py-32 px-6 text-center max-w-7xl mx-auto border-t border-white/5 mt-24">
+        <footer id="contact" className="py-32 px-6 text-center max-w-7xl mx-auto border-t border-white/5 mt-24 print:hidden">
             <h2 className="text-5xl md:text-8xl font-black font-poppins tracking-tighter mb-12">
                 Ready to elevate <br />
                 <span className="text-primary">your next venture?</span>

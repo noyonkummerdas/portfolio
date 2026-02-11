@@ -3,6 +3,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { FaGithub, FaLinkedin, FaEnvelope, FaDownload, FaEdit } from 'react-icons/fa';
 import { Link } from 'react-router-dom';
 import { fetchCvs } from '../features/cv/cvSlice';
+import profilePic from '../assets/profile/profilePic.png';
 
 const CV = () => {
     const dispatch = useDispatch();
@@ -90,7 +91,7 @@ const CV = () => {
     const displayData = defaultData;
 
     return (
-        <div className="min-h-screen pt-24 pb-12 px-6">
+        <div className="min-h-screen pt-24 pb-12 px-6 print:pt-0 print:pb-0 print:px-0 print:min-h-0">
             <div className="max-w-7xl mx-auto flex gap-6">
                 {/* Main Content */}
                 <div className="flex-1">
@@ -127,31 +128,41 @@ const CV = () => {
                         {/* CV Content - Keeping the EXACT old layout/content as requested since backend doesn't provide it */}
                         <div className="p-8 md:p-12 print:p-12 print:bg-white print:text-black">
                             {/* Header */}
-                            <header className="mb-12 pb-8 border-b border-white/10 print:border-gray-300">
-                                <h1 className="text-5xl font-black mb-2 print:text-black">{displayData.personalInfo.name}</h1>
-                                <h2 className="text-2xl text-indigo-400 font-semibold mb-6 print:text-gray-700">
-                                    {displayData.personalInfo.title}
-                                </h2>
+                            <header className="mb-12 pb-8 border-b border-white/10 print:border-gray-300 flex flex-col md:flex-row justify-between items-start gap-8">
+                                <div className="flex-1">
+                                    <h1 className="text-5xl font-black mb-2 print:text-black">{displayData.personalInfo.name}</h1>
+                                    <h2 className="text-2xl text-indigo-400 font-semibold mb-6 print:text-gray-700">
+                                        {displayData.personalInfo.title}
+                                    </h2>
 
-                                <div className="flex flex-wrap gap-4 text-sm text-gray-400 print:text-gray-600">
-                                    <a href={`mailto:${displayData.personalInfo.email}`} className="flex items-center gap-2 hover:text-white print:text-gray-600">
-                                        <FaEnvelope /> {displayData.personalInfo.email}
-                                    </a>
-                                    {displayData.personalInfo.phone && (
-                                        <span className="flex items-center gap-2">
-                                            📱 {displayData.personalInfo.phone}
-                                        </span>
-                                    )}
-                                    {displayData.personalInfo.github && (
-                                        <a href={`https://${displayData.personalInfo.github}`} className="flex items-center gap-2 hover:text-white print:text-gray-600">
-                                            <FaGithub /> {displayData.personalInfo.github}
+                                    <div className="flex flex-wrap gap-4 text-sm text-gray-400 print:text-gray-600">
+                                        <a href={`mailto:${displayData.personalInfo.email}`} className="flex items-center gap-2 hover:text-white print:text-gray-600">
+                                            <FaEnvelope /> {displayData.personalInfo.email}
                                         </a>
-                                    )}
-                                    {displayData.personalInfo.linkedin && (
-                                        <a href={`https://${displayData.personalInfo.linkedin}`} className="flex items-center gap-2 hover:text-white print:text-gray-600">
-                                            <FaLinkedin /> {displayData.personalInfo.linkedin}
-                                        </a>
-                                    )}
+                                        {displayData.personalInfo.phone && (
+                                            <span className="flex items-center gap-2">
+                                                📱 {displayData.personalInfo.phone}
+                                            </span>
+                                        )}
+                                        {displayData.personalInfo.github && (
+                                            <a href={`https://${displayData.personalInfo.github}`} className="flex items-center gap-2 hover:text-white print:text-gray-600">
+                                                <FaGithub /> {displayData.personalInfo.github}
+                                            </a>
+                                        )}
+                                        {displayData.personalInfo.linkedin && (
+                                            <a href={`https://${displayData.personalInfo.linkedin}`} className="flex items-center gap-2 hover:text-white print:text-gray-600">
+                                                <FaLinkedin /> {displayData.personalInfo.linkedin}
+                                            </a>
+                                        )}
+                                    </div>
+                                </div>
+
+                                <div className="flex-shrink-0">
+                                    <img
+                                        src={profilePic}
+                                        alt={displayData.personalInfo.name}
+                                        className="w-[5in] h-[5in] object-cover rounded-2xl border border-white/10 print:border-gray-300 shadow-2xl"
+                                    />
                                 </div>
                             </header>
 

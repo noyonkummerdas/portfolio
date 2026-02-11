@@ -5,7 +5,7 @@ const Navigation = () => {
     const location = useLocation();
 
     return (
-        <nav className="fixed top-0 w-full z-50 border-b border-white/5 bg-secondary/60 backdrop-blur-xl">
+        <nav className="fixed top-0 w-full z-50 border-b border-white/5 bg-secondary/60 backdrop-blur-xl print:hidden">
             <div className="max-w-7xl mx-auto px-6 h-20 flex justify-between items-center">
                 <Link to="/" className="text-xl font-black font-poppins tracking-tighter text-white">
                     PORTFOLIO<span className="text-primary">.</span>2026
