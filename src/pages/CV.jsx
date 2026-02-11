@@ -128,7 +128,7 @@ const CV = () => {
                         {/* CV Content - Keeping the EXACT old layout/content as requested since backend doesn't provide it */}
                         <div className="p-8 md:p-12 print:p-12 print:bg-white print:text-black">
                             {/* Header */}
-                            <header className="mb-12 pb-8 border-b border-white/10 print:border-gray-300 flex flex-col md:flex-row justify-between items-start gap-8">
+                            <header className="mb-12 pb-8 border-b border-white/10 print:border-gray-300 flex flex-col md:flex-row print:flex-row justify-between items-start gap-8">
                                 <div className="flex-1">
                                     <h1 className="text-5xl font-black mb-2 print:text-black">{displayData.personalInfo.name}</h1>
                                     <h2 className="text-2xl text-indigo-400 font-semibold mb-6 print:text-gray-700">
