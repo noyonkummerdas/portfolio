@@ -312,6 +312,18 @@ const CV = () => {
                                     </div>
                                 </section>
                             )}
+
+                            {/* Signature & Date Section */}
+                            <div className="mt-20 flex justify-between items-end border-t border-white/5 pt-12 print:border-gray-200">
+                                <div className="flex flex-col items-start gap-2">
+                                    <div className="w-48 border-b border-white/20 print:border-gray-400"></div>
+                                    <p className="text-xs font-bold uppercase tracking-widest text-gray-500 print:text-gray-600">Date</p>
+                                </div>
+                                <div className="flex flex-col items-end gap-2 text-right">
+                                    <div className="w-48 border-b border-white/20 print:border-gray-400"></div>
+                                    <p className="text-xs font-bold uppercase tracking-widest text-gray-500 print:text-gray-600">Signature</p>
+                                </div>
+                            </div>
                         </div>
                     </div>
                 </div>
