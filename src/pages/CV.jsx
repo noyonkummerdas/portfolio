@@ -161,7 +161,7 @@ const CV = () => {
                                     <img
                                         src={profilePic}
                                         alt={displayData.personalInfo.name}
-                                        className="w-[3in] h-[3in] object-cover rounded-none bg-white border border-white/10 print:border-gray-300 shadow-2xl"
+                                        className="w-[2.5in] h-[2.5in] object-cover rounded-none bg-white border border-white/10 print:border-gray-300 shadow-2xl"
                                     />
                                 </div>
                             </header>
