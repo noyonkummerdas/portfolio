@@ -37,6 +37,7 @@ const AdminCVForm = () => {
 
     // New State for Backend Requirements
     const [pdfFile, setPdfFile] = useState(null);
+    const [imageFile, setImageFile] = useState(null);
     const [version, setVersion] = useState('');
 
     useEffect(() => {
@@ -117,6 +118,10 @@ const AdminCVForm = () => {
         setPdfFile(e.target.files[0]);
     };
 
+    const handleImageChange = (e) => {
+        setImageFile(e.target.files[0]);
+    };
+
     // --- Submit Handler (Connected to Redux) ---
     const handleSubmit = (e) => {
         e.preventDefault();
@@ -137,6 +142,9 @@ const AdminCVForm = () => {
         data.append('title', formData.personalInfo.title);
         data.append('version', version);
         data.append('cv', pdfFile); // Fixed field name to match backend 'cv'
+        if (imageFile) {
+            data.append('image', imageFile); // Assuming backend expects 'image'
+        }
 
         // Send all fields individually as expected by new backend controller
         data.append('personalInfo', JSON.stringify(formData.personalInfo));
@@ -191,7 +199,7 @@ const AdminCVForm = () => {
                         <h3 className="text-xl font-bold text-indigo-300 mb-4 flex items-center gap-2">
                             <FaCloudUploadAlt /> Backend Requirements
                         </h3>
-                        <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+                        <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
                             <div>
                                 <label className="block text-sm font-medium mb-2 text-white">Version Number</label>
                                 <input
@@ -212,6 +220,17 @@ const AdminCVForm = () => {
                                         onChange={handleFileChange}
                                         className="w-full text-gray-300 file:mr-4 file:py-2 file:px-4 file:rounded-lg file:border-0 file:text-sm file:font-semibold file:bg-indigo-600 file:text-white hover:file:bg-indigo-500"
                                         required
+                                    />
+                                </div>
+                            </div>
+                            <div>
+                                <label className="block text-sm font-medium mb-2 text-white">Profile Image</label>
+                                <div className="bg-black/20 border border-white/10 rounded-xl px-4 py-2">
+                                    <input
+                                        type="file"
+                                        accept="image/*"
+                                        onChange={handleImageChange}
+                                        className="w-full text-gray-300 file:mr-4 file:py-2 file:px-4 file:rounded-lg file:border-0 file:text-sm file:font-semibold file:bg-indigo-600 file:text-white hover:file:bg-indigo-500"
                                     />
                                 </div>
                             </div>

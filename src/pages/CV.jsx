@@ -86,9 +86,19 @@ const CV = () => {
     const sortedCvs = [...cvs].sort((a, b) => new Date(b.createdAt) - new Date(a.createdAt));
     const latestCv = sortedCvs.length > 0 ? sortedCvs[0] : null;
 
-    // Use the fetched currentLatestCv if you want to display dynamic title/version, otherwise use defaultData
-    // Ideally we would merge them, but for now we keep the "Old UI" which was static content + dynamic versions.
-    const displayData = defaultData;
+    // Merge default data with latest CV data if available
+    const displayData = latestCv ? {
+        ...defaultData,
+        personalInfo: latestCv.personalInfo ? (typeof latestCv.personalInfo === 'string' ? JSON.parse(latestCv.personalInfo) : latestCv.personalInfo) : defaultData.personalInfo,
+        summary: latestCv.summary || defaultData.summary,
+        skills: latestCv.skills ? (typeof latestCv.skills === 'string' ? JSON.parse(latestCv.skills) : latestCv.skills) : defaultData.skills,
+        experience: latestCv.experience ? (typeof latestCv.experience === 'string' ? JSON.parse(latestCv.experience) : latestCv.experience) : defaultData.experience,
+        projects: latestCv.projects ? (typeof latestCv.projects === 'string' ? JSON.parse(latestCv.projects) : latestCv.projects) : defaultData.projects,
+        education: latestCv.education ? (typeof latestCv.education === 'string' ? JSON.parse(latestCv.education) : latestCv.education) : defaultData.education,
+        certifications: latestCv.certifications || defaultData.certifications,
+        languages: latestCv.languages || defaultData.languages,
+        imageUrl: latestCv.imageUrl // New field from backend
+    } : defaultData;
 
     return (
         <div className="min-h-screen pt-24 pb-12 px-6 print:pt-0 print:pb-0 print:px-0 print:min-h-0">
@@ -159,7 +169,7 @@ const CV = () => {
 
                                 <div className="flex-shrink-0">
                                     <img
-                                        src={profilePic}
+                                        src={displayData.imageUrl ? (displayData.imageUrl.startsWith('http') ? displayData.imageUrl : `http://localhost:5000${displayData.imageUrl}`) : profilePic}
                                         alt={displayData.personalInfo.name}
                                         className="w-[2.5in] h-[2.5in] object-cover rounded-none bg-white border border-white/10 print:border-gray-300 shadow-2xl"
                                     />
