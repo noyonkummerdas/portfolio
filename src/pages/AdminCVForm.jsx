@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
-import { FaSave, FaArrowLeft, FaCloudUploadAlt } from 'react-icons/fa';
+import { FaArrowLeft, FaCloudUploadAlt } from 'react-icons/fa';
 import { uploadCv, resetUploadStatus } from '../features/cv/cvSlice';
 
 const AdminCVForm = () => {

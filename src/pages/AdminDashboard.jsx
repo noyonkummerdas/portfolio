@@ -6,7 +6,7 @@ import { fetchSubmissions } from '../features/hireMeSlice';
 
 const AdminDashboard = () => {
     const dispatch = useDispatch();
-    const { submissions, loading, error } = useSelector((state) => state.hireMe);
+    const { submissions } = useSelector((state) => state.hireMe);
 
     useEffect(() => {
         dispatch(fetchSubmissions());

@@ -5,7 +5,7 @@ import { submitHireMe, resetSubmitStatus } from '../features/hireMeSlice';
 
 const HireMe = () => {
     const dispatch = useDispatch();
-    const { submitLoading, submitSuccess, submitError } = useSelector((state) => state.hireMe);
+    const { submitSuccess, submitError } = useSelector((state) => state.hireMe);
 
     const [formData, setFormData] = useState({
         name: '', email: '', company: '',
