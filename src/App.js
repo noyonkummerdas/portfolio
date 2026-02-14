@@ -21,7 +21,7 @@ import CvFrom from './pages/cvFrom';
 function App() {
   return (
     <Router>
-      <div className="min-h-screen text-white font-inter selection:bg-indigo-500/30 relative">
+      <div className="min-h-screen font-inter selection:bg-indigo-500/30 relative transition-colors duration-300">
         <Background />
         <ScrollToTop />
         <Navigation />

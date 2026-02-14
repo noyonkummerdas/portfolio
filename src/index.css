@@ -15,9 +15,9 @@
     margin: 0;
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
-    background-color: #020617;
-    color: #E5E7EB;
+    @apply bg-slate-50 text-slate-900 dark:bg-secondary dark:text-textMain;
     overflow-x: hidden;
+    transition: background-color 0.3s ease, color 0.3s ease;
   }
 }
 
@@ -88,6 +88,7 @@
   @page {
     margin: 0;
   }
+
   body {
     margin: 1cm;
   }
