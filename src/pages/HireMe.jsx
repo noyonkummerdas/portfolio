@@ -59,11 +59,11 @@ const HireMe = () => {
                 <div className="inline-block px-4 py-1.5 mb-6 rounded-full border border-indigo-500/30 bg-indigo-500/10 text-indigo-400 text-[10px] font-black uppercase tracking-[0.3em] animate-fade-in">
                     Open for Business
                 </div>
-                <h1 className="text-5xl md:text-7xl font-black font-poppins mb-8 tracking-tighter text-white">
+                <h1 className="text-5xl md:text-7xl font-black font-poppins mb-8 tracking-tighter text-slate-900 dark:text-white">
                     Let's Build the <br />
                     <span className="text-transparent bg-clip-text bg-gradient-to-r from-indigo-400 via-purple-400 to-indigo-400 bg-[length:200%_auto] animate-gradient">Extraordinary</span>
                 </h1>
-                <p className="text-xl text-gray-400 font-inter mb-10 leading-relaxed max-w-2xl mx-auto">
+                <p className="text-xl text-slate-600 dark:text-gray-400 font-inter mb-10 leading-relaxed max-w-2xl mx-auto">
                     I partner with forward-thinking companies to build high-performance web and mobile applications.
                 </p>
             </section>
@@ -71,13 +71,13 @@ const HireMe = () => {
             <div className="max-w-7xl mx-auto px-6 grid grid-cols-1 lg:grid-cols-2 gap-16 mb-24">
                 {/* Left Column: Context & Services */}
                 <div>
-                    <h2 className="text-3xl font-black font-poppins mb-8">How I Add Value</h2>
+                    <h2 className="text-3xl font-black font-poppins mb-8 text-slate-900 dark:text-white">How I Add Value</h2>
                     <div className="space-y-6 mb-16">
                         {services.map((service, index) => (
-                            <div key={index} className="p-6 bg-secondary/40 backdrop-blur-xl border border-white/5 rounded-3xl hover:border-indigo-500/30 transition-all duration-500">
+                            <div key={index} className="p-6 bg-white dark:bg-secondary/40 backdrop-blur-xl border border-slate-200 dark:border-white/5 rounded-3xl hover:border-indigo-500/30 transition-all duration-500 shadow-sm dark:shadow-none">
                                 <div className="text-3xl mb-4">{service.icon}</div>
-                                <h3 className="text-lg font-bold text-white mb-2 font-poppins">{service.title}</h3>
-                                <p className="text-sm text-gray-400 font-inter leading-relaxed">{service.description}</p>
+                                <h3 className="text-lg font-bold text-slate-900 dark:text-white mb-2 font-poppins">{service.title}</h3>
+                                <p className="text-sm text-slate-600 dark:text-gray-400 font-inter leading-relaxed">{service.description}</p>
                             </div>
                         ))}
                     </div>

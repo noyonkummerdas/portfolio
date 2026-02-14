@@ -11,12 +11,12 @@ const Projects = () => {
         : projects.filter(p => p.techStack.includes(filter));
 
     return (
-        <div className="pt-32 min-h-screen bg-secondary text-white">
+        <div className="pt-32 min-h-screen">
             <section className="px-6 max-w-7xl mx-auto mb-20">
-                <h1 className="text-5xl md:text-8xl font-black font-poppins mb-8 tracking-tighter">
+                <h1 className="text-5xl md:text-8xl font-black font-poppins mb-8 tracking-tighter text-slate-900 dark:text-white">
                     The Archive<span className="text-primary">.</span>
                 </h1>
-                <p className="text-xl text-textMain/50 max-w-2xl font-inter mb-12">
+                <p className="text-xl text-slate-600 dark:text-textMain/50 max-w-2xl font-inter mb-12">
                     An exhaustive list of strategic engineering projects, sorted by impact and technology.
                 </p>
 
@@ -28,7 +28,7 @@ const Projects = () => {
                             onClick={() => setFilter(tech)}
                             className={`px-6 py-2 rounded-full border text-[10px] font-black uppercase tracking-widest transition-all ${filter === tech
                                 ? 'bg-primary border-primary text-secondary'
-                                : 'bg-white/5 border-white/10 text-textMain/40 hover:border-white/30'
+                                : 'bg-slate-200 dark:bg-white/5 border-slate-300 dark:border-white/10 text-slate-600 dark:text-textMain/40 hover:border-primary/50'
                                 }`}
                         >
                             {tech}
