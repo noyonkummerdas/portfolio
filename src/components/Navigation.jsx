@@ -18,10 +18,21 @@ const Navigation = () => {
 
     return (
         <nav className="fixed top-0 w-full z-50 border-b border-white/5 dark:border-white/5 bg-white/60 dark:bg-secondary/60 backdrop-blur-xl print:hidden transition-colors duration-300">
-            <div className="max-w-7xl mx-auto px-6 h-20 flex justify-between items-center">
-                <Link to="/" className="text-xl font-black font-poppins tracking-tighter text-secondary dark:text-white">
-                    PORTFOLIO<span className="text-primary">.</span>2026
-                </Link>
+            <div className="max-w-7xl mx-auto px-4 sm:px-6 h-20 flex justify-between items-center">
+                <div className="flex items-center gap-3 sm:gap-4 font-poppins">
+                    {/* Mobile Menu Toggle - Left Side */}
+                    <button
+                        onClick={() => setIsMenuOpen(!isMenuOpen)}
+                        className="md:hidden p-2 rounded-lg bg-secondary/5 dark:bg-white/5 text-secondary dark:text-white border border-secondary/10 dark:border-white/10 transition-all active:scale-95"
+                        aria-label="Toggle Menu"
+                    >
+                        {isMenuOpen ? <FaTimes /> : <FaBars />}
+                    </button>
+
+                    <Link to="/" className="text-lg sm:text-xl font-black tracking-tighter text-secondary dark:text-white">
+                        PORTFOLIO<span className="text-primary">.</span>2026
+                    </Link>
+                </div>
 
                 {/* Desktop Navigation */}
                 <div className="hidden md:flex gap-10 text-xs font-bold uppercase tracking-widest text-secondary/60 dark:text-textMain/60">
@@ -37,10 +48,10 @@ const Navigation = () => {
                     <a href="#contact" className="hover:text-primary transition-colors">Contact</a>
                 </div>
 
-                <div className="flex items-center gap-4">
+                <div className="flex items-center gap-3 sm:gap-4">
                     <button
                         onClick={toggleTheme}
-                        className="p-2.5 rounded-xl bg-secondary/5 dark:bg-white/5 text-secondary dark:text-white hover:bg-secondary/10 dark:hover:bg-white/10 transition-all border border-secondary/10 dark:border-white/10"
+                        className="p-2 sm:p-2.5 rounded-lg sm:rounded-xl bg-secondary/5 dark:bg-white/5 text-secondary dark:text-white hover:bg-secondary/10 dark:hover:bg-white/10 transition-all border border-secondary/10 dark:border-white/10"
                         aria-label="Toggle Theme"
                     >
                         {isDarkMode ? <FaSun className="text-yellow-400" /> : <FaMoon className="text-indigo-600" />}
@@ -52,15 +63,6 @@ const Navigation = () => {
                     >
                         Hire Me
                     </Link>
-
-                    {/* Mobile Menu Toggle */}
-                    <button
-                        onClick={() => setIsMenuOpen(!isMenuOpen)}
-                        className="md:hidden p-2.5 rounded-xl bg-secondary/5 dark:bg-white/5 text-secondary dark:text-white border border-secondary/10 dark:border-white/10"
-                        aria-label="Toggle Menu"
-                    >
-                        {isMenuOpen ? <FaTimes /> : <FaBars />}
-                    </button>
                 </div>
             </div>
 
