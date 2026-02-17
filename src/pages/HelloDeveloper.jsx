@@ -128,13 +128,13 @@ const HelloDeveloper = () => {
                     <div className="absolute inset-0 bg-gradient-to-b from-transparent via-transparent to-secondary z-20"></div>
                 </div>
 
-                <div className="relative z-30 flex flex-col items-center text-center px-6">
+                <div className="relative z-30 flex flex-col items-center text-center px-4 sm:px-6">
                     {/* Profile Photo Container */}
                     <motion.div
                         initial={{ opacity: 0, scale: 0.5 }}
                         animate={{ opacity: 1, scale: 1 }}
                         transition={{ duration: 0.8, type: "spring" }}
-                        className="w-32 h-32 md:w-40 md:h-40 rounded-full border-4 border-primary p-1 bg-secondary mb-8 overflow-hidden shadow-[0_0_30px_rgba(56,189,248,0.3)]"
+                        className="w-28 h-28 sm:w-32 sm:h-32 md:w-40 md:h-40 rounded-full border-4 border-primary p-1 bg-secondary mb-8 overflow-hidden shadow-[0_0_30px_rgba(56,189,248,0.3)]"
                     >
                         <div className="w-full h-full rounded-full bg-surface flex items-center justify-center overflow-hidden">
                             <img
@@ -150,10 +150,10 @@ const HelloDeveloper = () => {
                         animate={{ opacity: 1, y: 0 }}
                         transition={{ duration: 0.8, delay: 0.2 }}
                     >
-                        <h1 className="text-5xl md:text-8xl font-black mb-4 tracking-tighter text-white">
+                        <h1 className="text-4xl sm:text-5xl md:text-8xl font-black mb-4 tracking-tighter text-white leading-tight">
                             Hello <span className="text-primary">Developer</span>
                         </h1>
-                        <p className="text-xl md:text-2xl text-textMain/80 font-medium mb-10 max-w-2xl mx-auto">
+                        <p className="text-lg sm:text-xl md:text-2xl text-textMain/80 font-medium mb-10 max-w-2xl mx-auto px-4">
                             I’m <span className="text-white font-bold">NK Noyon</span>, <br className="md:hidden" />
                             React & React Native Developer
                         </p>

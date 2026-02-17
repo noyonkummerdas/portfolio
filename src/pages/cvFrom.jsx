@@ -113,365 +113,294 @@ const CvFrom = () => {
     };
 
     return (
-        <div className="min-h-screen pt-24 pb-12 px-6">
+        <div className="min-h-screen pt-24 pb-12 px-4 sm:px-6">
             <div className="max-w-5xl mx-auto">
-                <div className="mb-8">
-                    <h1 className="text-4xl font-black mb-2">CV Management</h1>
-                    <p className="text-gray-400">Create and manage your CV versions</p>
+                <div className="flex flex-col sm:flex-row justify-between items-center gap-6 mb-8 text-center sm:text-left">
+                    <div>
+                        <h1 className="text-3xl md:text-4xl font-black mb-2 text-white">CV Management</h1>
+                        <p className="text-sm text-gray-400">Create and manage your CV versions</p>
+                    </div>
                 </div>
 
-                <form onSubmit={handleSubmit} className="bg-white/5 rounded-2xl border border-white/10 p-8 space-y-8">
+                <form onSubmit={handleSubmit} className="bg-white/5 rounded-2xl border border-white/10 p-6 sm:p-8 space-y-8">
                     {/* Personal Information */}
-                    <section>
-                        <h2 className="text-2xl font-bold mb-4 text-indigo-400">Personal Information</h2>
+                    <section className="space-y-6">
+                        <h2 className="text-xl md:text-2xl font-black text-indigo-400 uppercase tracking-widest text-xs">Personal Information</h2>
                         <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-                            <div>
-                                <label className="block text-sm font-medium mb-2">Full Name</label>
-                                <input
-                                    type="text"
-                                    value={formData.personalInfo.name}
-                                    onChange={(e) => handlePersonalInfoChange('name', e.target.value)}
-                                    className="w-full px-4 py-2 bg-white/5 border border-white/10 rounded-lg focus:border-indigo-500 focus:outline-none"
-                                    required
-                                />
-                            </div>
-                            <div>
-                                <label className="block text-sm font-medium mb-2">Title</label>
-                                <input
-                                    type="text"
-                                    value={formData.personalInfo.title}
-                                    onChange={(e) => handlePersonalInfoChange('title', e.target.value)}
-                                    className="w-full px-4 py-2 bg-white/5 border border-white/10 rounded-lg focus:border-indigo-500 focus:outline-none"
-                                    required
-                                />
-                            </div>
-                            <div>
-                                <label className="block text-sm font-medium mb-2">Email</label>
-                                <input
-                                    type="email"
-                                    value={formData.personalInfo.email}
-                                    onChange={(e) => handlePersonalInfoChange('email', e.target.value)}
-                                    className="w-full px-4 py-2 bg-white/5 border border-white/10 rounded-lg focus:border-indigo-500 focus:outline-none"
-                                    required
-                                />
-                            </div>
-                            <div>
-                                <label className="block text-sm font-medium mb-2">Phone</label>
-                                <input
-                                    type="tel"
-                                    value={formData.personalInfo.phone}
-                                    onChange={(e) => handlePersonalInfoChange('phone', e.target.value)}
-                                    className="w-full px-4 py-2 bg-white/5 border border-white/10 rounded-lg focus:border-indigo-500 focus:outline-none"
-                                />
-                            </div>
-                            <div>
-                                <label className="block text-sm font-medium mb-2">GitHub</label>
-                                <input
-                                    type="text"
-                                    value={formData.personalInfo.github}
-                                    onChange={(e) => handlePersonalInfoChange('github', e.target.value)}
-                                    className="w-full px-4 py-2 bg-white/5 border border-white/10 rounded-lg focus:border-indigo-500 focus:outline-none"
-                                />
-                            </div>
-                            <div>
-                                <label className="block text-sm font-medium mb-2">LinkedIn</label>
-                                <input
-                                    type="text"
-                                    value={formData.personalInfo.linkedin}
-                                    onChange={(e) => handlePersonalInfoChange('linkedin', e.target.value)}
-                                    className="w-full px-4 py-2 bg-white/5 border border-white/10 rounded-lg focus:border-indigo-500 focus:outline-none"
-                                />
-                            </div>
+                            {[
+                                { label: 'Full Name', field: 'name', type: 'text' },
+                                { label: 'Title', field: 'title', type: 'text' },
+                                { label: 'Email', field: 'email', type: 'email' },
+                                { label: 'Phone', field: 'phone', type: 'tel' },
+                                { label: 'GitHub', field: 'github', type: 'text' },
+                                { label: 'LinkedIn', field: 'linkedin', type: 'text' }
+                            ].map((input) => (
+                                <div key={input.field}>
+                                    <label className="block text-xs font-black uppercase tracking-widest mb-2 text-gray-400">{input.label}</label>
+                                    <input
+                                        type={input.type}
+                                        value={formData.personalInfo[input.field]}
+                                        onChange={(e) => handlePersonalInfoChange(input.field, e.target.value)}
+                                        className="w-full px-4 py-3 bg-white/5 border border-white/10 rounded-xl focus:border-indigo-500 focus:outline-none text-white text-sm"
+                                        required={['name', 'title', 'email'].includes(input.field)}
+                                    />
+                                </div>
+                            ))}
                         </div>
                     </section>
 
                     {/* Professional Summary */}
-                    <section>
-                        <h2 className="text-2xl font-bold mb-4 text-indigo-400">Professional Summary</h2>
+                    <section className="space-y-6">
+                        <h2 className="text-xl md:text-2xl font-black text-indigo-400 uppercase tracking-widest text-xs">Professional Summary</h2>
                         <textarea
                             value={formData.summary}
                             onChange={(e) => setFormData(prev => ({ ...prev, summary: e.target.value }))}
-                            className="w-full px-4 py-2 bg-white/5 border border-white/10 rounded-lg focus:border-indigo-500 focus:outline-none h-32"
+                            className="w-full px-4 py-3 bg-white/5 border border-white/10 rounded-xl focus:border-indigo-500 focus:outline-none h-32 text-white text-sm font-inter"
                             placeholder="Brief overview of your expertise..."
                             required
                         />
                     </section>
 
                     {/* Skills */}
-                    <section>
-                        <h2 className="text-2xl font-bold mb-4 text-indigo-400">Technical Skills</h2>
+                    <section className="space-y-6">
+                        <h2 className="text-xl md:text-2xl font-black text-indigo-400 uppercase tracking-widest text-xs">Technical Skills</h2>
                         <div className="space-y-4">
-                            <div>
-                                <label className="block text-sm font-medium mb-2">Frontend Development</label>
-                                <input
-                                    type="text"
-                                    value={formData.skills.frontend}
-                                    onChange={(e) => handleSkillsChange('frontend', e.target.value)}
-                                    className="w-full px-4 py-2 bg-white/5 border border-white/10 rounded-lg focus:border-indigo-500 focus:outline-none"
-                                    placeholder="React, React Native, JavaScript, etc."
-                                />
-                            </div>
-                            <div>
-                                <label className="block text-sm font-medium mb-2">State Management</label>
-                                <input
-                                    type="text"
-                                    value={formData.skills.stateManagement}
-                                    onChange={(e) => handleSkillsChange('stateManagement', e.target.value)}
-                                    className="w-full px-4 py-2 bg-white/5 border border-white/10 rounded-lg focus:border-indigo-500 focus:outline-none"
-                                    placeholder="Redux, Context API, etc."
-                                />
-                            </div>
-                            <div>
-                                <label className="block text-sm font-medium mb-2">Styling & UI</label>
-                                <input
-                                    type="text"
-                                    value={formData.skills.styling}
-                                    onChange={(e) => handleSkillsChange('styling', e.target.value)}
-                                    className="w-full px-4 py-2 bg-white/5 border border-white/10 rounded-lg focus:border-indigo-500 focus:outline-none"
-                                    placeholder="Tailwind CSS, Styled Components, etc."
-                                />
-                            </div>
-                            <div>
-                                <label className="block text-sm font-medium mb-2">Backend & APIs</label>
-                                <input
-                                    type="text"
-                                    value={formData.skills.backend}
-                                    onChange={(e) => handleSkillsChange('backend', e.target.value)}
-                                    className="w-full px-4 py-2 bg-white/5 border border-white/10 rounded-lg focus:border-indigo-500 focus:outline-none"
-                                    placeholder="REST APIs, Firebase, Node.js, etc."
-                                />
-                            </div>
-                            <div>
-                                <label className="block text-sm font-medium mb-2">Tools & Workflow</label>
-                                <input
-                                    type="text"
-                                    value={formData.skills.tools}
-                                    onChange={(e) => handleSkillsChange('tools', e.target.value)}
-                                    className="w-full px-4 py-2 bg-white/5 border border-white/10 rounded-lg focus:border-indigo-500 focus:outline-none"
-                                    placeholder="Git, GitHub, VS Code, etc."
-                                />
-                            </div>
-                            <div>
-                                <label className="block text-sm font-medium mb-2">Other</label>
-                                <input
-                                    type="text"
-                                    value={formData.skills.other}
-                                    onChange={(e) => handleSkillsChange('other', e.target.value)}
-                                    className="w-full px-4 py-2 bg-white/5 border border-white/10 rounded-lg focus:border-indigo-500 focus:outline-none"
-                                    placeholder="Performance Optimization, Testing, etc."
-                                />
-                            </div>
+                            {[
+                                { label: 'Frontend Development', field: 'frontend' },
+                                { label: 'State Management', field: 'stateManagement' },
+                                { label: 'Styling & UI', field: 'styling' },
+                                { label: 'Backend & APIs', field: 'backend' },
+                                { label: 'Tools & Workflow', field: 'tools' },
+                                { label: 'Other', field: 'other' }
+                            ].map((skill) => (
+                                <div key={skill.field}>
+                                    <label className="block text-xs font-black uppercase tracking-widest mb-2 text-gray-400">{skill.label}</label>
+                                    <input
+                                        type="text"
+                                        value={formData.skills[skill.field]}
+                                        onChange={(e) => handleSkillsChange(skill.field, e.target.value)}
+                                        className="w-full px-4 py-3 bg-white/5 border border-white/10 rounded-xl focus:border-indigo-500 focus:outline-none text-white text-sm"
+                                        placeholder={`e.g. ${skill.label === 'Frontend Development' ? 'React, React Native' : '...'}`}
+                                    />
+                                </div>
+                            ))}
                         </div>
                     </section>
 
                     {/* Experience */}
-                    <section>
-                        <div className="flex justify-between items-center mb-4">
-                            <h2 className="text-2xl font-bold text-indigo-400">Professional Experience</h2>
+                    <section className="space-y-6">
+                        <div className="flex flex-col sm:flex-row justify-between items-center gap-4">
+                            <h2 className="text-xl md:text-2xl font-black text-indigo-400 uppercase tracking-widest text-xs">Professional Experience</h2>
                             <button
                                 type="button"
                                 onClick={addExperience}
-                                className="px-4 py-2 bg-indigo-600 hover:bg-indigo-500 rounded-lg text-sm font-bold"
+                                className="w-full sm:w-auto px-4 py-2 bg-indigo-600 hover:bg-indigo-500 rounded-lg text-xs font-black text-white uppercase tracking-widest transition-all"
                             >
                                 + Add Experience
                             </button>
                         </div>
-                        {formData.experience.map((exp, index) => (
-                            <div key={index} className="mb-6 p-4 bg-white/5 rounded-lg border border-white/10">
-                                <div className="flex justify-between items-center mb-4">
-                                    <h3 className="font-bold">Experience {index + 1}</h3>
-                                    {formData.experience.length > 1 && (
-                                        <button
-                                            type="button"
-                                            onClick={() => removeExperience(index)}
-                                            className="text-red-500 hover:text-red-400 text-sm"
-                                        >
-                                            Remove
-                                        </button>
-                                    )}
+                        <div className="space-y-6">
+                            {formData.experience.map((exp, index) => (
+                                <div key={index} className="p-6 bg-white/5 rounded-2xl border border-white/10 relative group">
+                                    <div className="flex justify-between items-center mb-6">
+                                        <h3 className="text-sm font-black text-white uppercase tracking-widest">Experience {index + 1}</h3>
+                                        {formData.experience.length > 1 && (
+                                            <button
+                                                type="button"
+                                                onClick={() => removeExperience(index)}
+                                                className="text-red-500 hover:text-red-400 text-[10px] font-black uppercase tracking-widest"
+                                            >
+                                                Remove
+                                            </button>
+                                        )}
+                                    </div>
+                                    <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+                                        <div>
+                                            <label className="block text-xs font-black uppercase tracking-widest mb-2 text-gray-400">Job Title</label>
+                                            <input
+                                                type="text"
+                                                value={exp.title}
+                                                onChange={(e) => handleExperienceChange(index, 'title', e.target.value)}
+                                                className="w-full px-4 py-3 bg-black/20 border border-white/10 rounded-xl focus:border-indigo-500 focus:outline-none text-white text-sm"
+                                            />
+                                        </div>
+                                        <div>
+                                            <label className="block text-xs font-black uppercase tracking-widest mb-2 text-gray-400">Company</label>
+                                            <input
+                                                type="text"
+                                                value={exp.company}
+                                                onChange={(e) => handleExperienceChange(index, 'company', e.target.value)}
+                                                className="w-full px-4 py-3 bg-black/20 border border-white/10 rounded-xl focus:border-indigo-500 focus:outline-none text-white text-sm"
+                                            />
+                                        </div>
+                                        <div className="md:col-span-2">
+                                            <label className="block text-xs font-black uppercase tracking-widest mb-2 text-gray-400">Duration</label>
+                                            <input
+                                                type="text"
+                                                value={exp.duration}
+                                                onChange={(e) => handleExperienceChange(index, 'duration', e.target.value)}
+                                                className="w-full px-4 py-3 bg-black/20 border border-white/10 rounded-xl focus:border-indigo-500 focus:outline-none text-white text-sm"
+                                                placeholder="e.g., 2020 - 2022"
+                                            />
+                                        </div>
+                                        <div className="md:col-span-2">
+                                            <label className="block text-xs font-black uppercase tracking-widest mb-2 text-gray-400">Responsibilities (one per line)</label>
+                                            <textarea
+                                                value={exp.responsibilities}
+                                                onChange={(e) => handleExperienceChange(index, 'responsibilities', e.target.value)}
+                                                className="w-full px-4 py-3 bg-black/20 border border-white/10 rounded-xl focus:border-indigo-500 focus:outline-none h-32 text-white text-sm font-inter"
+                                                placeholder="List your key responsibilities..."
+                                            />
+                                        </div>
+                                    </div>
                                 </div>
-                                <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-                                    <div>
-                                        <label className="block text-sm font-medium mb-2">Job Title</label>
-                                        <input
-                                            type="text"
-                                            value={exp.title}
-                                            onChange={(e) => handleExperienceChange(index, 'title', e.target.value)}
-                                            className="w-full px-4 py-2 bg-white/5 border border-white/10 rounded-lg focus:border-indigo-500 focus:outline-none"
-                                        />
-                                    </div>
-                                    <div>
-                                        <label className="block text-sm font-medium mb-2">Company</label>
-                                        <input
-                                            type="text"
-                                            value={exp.company}
-                                            onChange={(e) => handleExperienceChange(index, 'company', e.target.value)}
-                                            className="w-full px-4 py-2 bg-white/5 border border-white/10 rounded-lg focus:border-indigo-500 focus:outline-none"
-                                        />
-                                    </div>
-                                    <div className="md:col-span-2">
-                                        <label className="block text-sm font-medium mb-2">Duration</label>
-                                        <input
-                                            type="text"
-                                            value={exp.duration}
-                                            onChange={(e) => handleExperienceChange(index, 'duration', e.target.value)}
-                                            className="w-full px-4 py-2 bg-white/5 border border-white/10 rounded-lg focus:border-indigo-500 focus:outline-none"
-                                            placeholder="e.g., 2020 - 2022"
-                                        />
-                                    </div>
-                                    <div className="md:col-span-2">
-                                        <label className="block text-sm font-medium mb-2">Responsibilities (one per line)</label>
-                                        <textarea
-                                            value={exp.responsibilities}
-                                            onChange={(e) => handleExperienceChange(index, 'responsibilities', e.target.value)}
-                                            className="w-full px-4 py-2 bg-white/5 border border-white/10 rounded-lg focus:border-indigo-500 focus:outline-none h-24"
-                                            placeholder="List your key responsibilities..."
-                                        />
-                                    </div>
-                                </div>
-                            </div>
-                        ))}
+                            ))}
+                        </div>
                     </section>
 
                     {/* Projects */}
-                    <section>
-                        <div className="flex justify-between items-center mb-4">
-                            <h2 className="text-2xl font-bold text-indigo-400">Key Projects</h2>
+                    <section className="space-y-6">
+                        <div className="flex flex-col sm:flex-row justify-between items-center gap-4">
+                            <h2 className="text-xl md:text-2xl font-black text-indigo-400 uppercase tracking-widest text-xs">Key Projects</h2>
                             <button
                                 type="button"
                                 onClick={addProject}
-                                className="px-4 py-2 bg-indigo-600 hover:bg-indigo-500 rounded-lg text-sm font-bold"
+                                className="w-full sm:w-auto px-4 py-2 bg-indigo-600 hover:bg-indigo-500 rounded-lg text-xs font-black text-white uppercase tracking-widest transition-all"
                             >
                                 + Add Project
                             </button>
                         </div>
-                        {formData.projects.map((project, index) => (
-                            <div key={index} className="mb-6 p-4 bg-white/5 rounded-lg border border-white/10">
-                                <div className="flex justify-between items-center mb-4">
-                                    <h3 className="font-bold">Project {index + 1}</h3>
-                                    {formData.projects.length > 1 && (
-                                        <button
-                                            type="button"
-                                            onClick={() => removeProject(index)}
-                                            className="text-red-500 hover:text-red-400 text-sm"
-                                        >
-                                            Remove
-                                        </button>
-                                    )}
+                        <div className="space-y-6">
+                            {formData.projects.map((project, index) => (
+                                <div key={index} className="p-6 bg-white/5 rounded-2xl border border-white/10 relative group">
+                                    <div className="flex justify-between items-center mb-6">
+                                        <h3 className="text-sm font-black text-white uppercase tracking-widest">Project {index + 1}</h3>
+                                        {formData.projects.length > 1 && (
+                                            <button
+                                                type="button"
+                                                onClick={() => removeProject(index)}
+                                                className="text-red-500 hover:text-red-400 text-[10px] font-black uppercase tracking-widest"
+                                            >
+                                                Remove
+                                            </button>
+                                        )}
+                                    </div>
+                                    <div className="space-y-6">
+                                        <div>
+                                            <label className="block text-xs font-black uppercase tracking-widest mb-2 text-gray-400">Project Name</label>
+                                            <input
+                                                type="text"
+                                                value={project.name}
+                                                onChange={(e) => handleProjectChange(index, 'name', e.target.value)}
+                                                className="w-full px-4 py-3 bg-black/20 border border-white/10 rounded-xl focus:border-indigo-500 focus:outline-none text-white text-sm"
+                                            />
+                                        </div>
+                                        <div>
+                                            <label className="block text-xs font-black uppercase tracking-widest mb-2 text-gray-400">Description</label>
+                                            <textarea
+                                                value={project.description}
+                                                onChange={(e) => handleProjectChange(index, 'description', e.target.value)}
+                                                className="w-full px-4 py-3 bg-black/20 border border-white/10 rounded-xl focus:border-indigo-500 focus:outline-none h-24 text-white text-sm font-inter"
+                                            />
+                                        </div>
+                                        <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+                                            <div>
+                                                <label className="block text-xs font-black uppercase tracking-widest mb-2 text-gray-400">Technologies</label>
+                                                <input
+                                                    type="text"
+                                                    value={project.tech}
+                                                    onChange={(e) => handleProjectChange(index, 'tech', e.target.value)}
+                                                    className="w-full px-4 py-3 bg-black/20 border border-white/10 rounded-xl focus:border-indigo-500 focus:outline-none text-white text-sm"
+                                                    placeholder="React, Node.js, MongoDB"
+                                                />
+                                            </div>
+                                            <div>
+                                                <label className="block text-xs font-black uppercase tracking-widest mb-2 text-gray-400">Result/Impact</label>
+                                                <input
+                                                    type="text"
+                                                    value={project.result}
+                                                    onChange={(e) => handleProjectChange(index, 'result', e.target.value)}
+                                                    className="w-full px-4 py-3 bg-black/20 border border-white/10 rounded-xl focus:border-indigo-500 focus:outline-none text-white text-sm"
+                                                    placeholder="e.g. Improved Performance by 40%"
+                                                />
+                                            </div>
+                                        </div>
+                                    </div>
                                 </div>
-                                <div className="space-y-4">
-                                    <div>
-                                        <label className="block text-sm font-medium mb-2">Project Name</label>
-                                        <input
-                                            type="text"
-                                            value={project.name}
-                                            onChange={(e) => handleProjectChange(index, 'name', e.target.value)}
-                                            className="w-full px-4 py-2 bg-white/5 border border-white/10 rounded-lg focus:border-indigo-500 focus:outline-none"
-                                        />
-                                    </div>
-                                    <div>
-                                        <label className="block text-sm font-medium mb-2">Description</label>
-                                        <textarea
-                                            value={project.description}
-                                            onChange={(e) => handleProjectChange(index, 'description', e.target.value)}
-                                            className="w-full px-4 py-2 bg-white/5 border border-white/10 rounded-lg focus:border-indigo-500 focus:outline-none h-20"
-                                        />
-                                    </div>
-                                    <div>
-                                        <label className="block text-sm font-medium mb-2">Technologies (comma separated)</label>
-                                        <input
-                                            type="text"
-                                            value={project.tech}
-                                            onChange={(e) => handleProjectChange(index, 'tech', e.target.value)}
-                                            className="w-full px-4 py-2 bg-white/5 border border-white/10 rounded-lg focus:border-indigo-500 focus:outline-none"
-                                            placeholder="React, Node.js, MongoDB"
-                                        />
-                                    </div>
-                                    <div>
-                                        <label className="block text-sm font-medium mb-2">Result/Impact</label>
-                                        <input
-                                            type="text"
-                                            value={project.result}
-                                            onChange={(e) => handleProjectChange(index, 'result', e.target.value)}
-                                            className="w-full px-4 py-2 bg-white/5 border border-white/10 rounded-lg focus:border-indigo-500 focus:outline-none"
-                                            placeholder="Result: Improved performance by 40%"
-                                        />
-                                    </div>
-                                </div>
-                            </div>
-                        ))}
+                            ))}
+                        </div>
                     </section>
 
                     {/* Education */}
-                    <section>
-                        <h2 className="text-2xl font-bold mb-4 text-indigo-400">Education</h2>
+                    <section className="space-y-6">
+                        <h2 className="text-xl md:text-2xl font-black text-indigo-400 uppercase tracking-widest text-xs">Education</h2>
                         <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                             <div>
-                                <label className="block text-sm font-medium mb-2">Degree</label>
+                                <label className="block text-xs font-black uppercase tracking-widest mb-2 text-gray-400">Degree</label>
                                 <input
                                     type="text"
                                     value={formData.education.degree}
                                     onChange={(e) => handleEducationChange('degree', e.target.value)}
-                                    className="w-full px-4 py-2 bg-white/5 border border-white/10 rounded-lg focus:border-indigo-500 focus:outline-none"
-                                    placeholder="Bachelor of Science in Computer Science"
+                                    className="w-full px-4 py-3 bg-white/5 border border-white/10 rounded-xl focus:border-indigo-500 focus:outline-none text-white text-sm"
+                                    placeholder="e.g. B.Sc in Computer Science"
                                 />
                             </div>
                             <div>
-                                <label className="block text-sm font-medium mb-2">University</label>
+                                <label className="block text-xs font-black uppercase tracking-widest mb-2 text-gray-400">University</label>
                                 <input
                                     type="text"
                                     value={formData.education.university}
                                     onChange={(e) => handleEducationChange('university', e.target.value)}
-                                    className="w-full px-4 py-2 bg-white/5 border border-white/10 rounded-lg focus:border-indigo-500 focus:outline-none"
+                                    className="w-full px-4 py-3 bg-white/5 border border-white/10 rounded-xl focus:border-indigo-500 focus:outline-none text-white text-sm"
                                 />
                             </div>
                             <div className="md:col-span-2">
-                                <label className="block text-sm font-medium mb-2">Duration</label>
+                                <label className="block text-xs font-black uppercase tracking-widest mb-2 text-gray-400">Duration</label>
                                 <input
                                     type="text"
                                     value={formData.education.duration}
                                     onChange={(e) => handleEducationChange('duration', e.target.value)}
-                                    className="w-full px-4 py-2 bg-white/5 border border-white/10 rounded-lg focus:border-indigo-500 focus:outline-none"
+                                    className="w-full px-4 py-3 bg-white/5 border border-white/10 rounded-xl focus:border-indigo-500 focus:outline-none text-white text-sm"
                                     placeholder="2016 - 2020"
                                 />
                             </div>
                         </div>
                     </section>
 
-                    {/* Certifications */}
-                    <section>
-                        <h2 className="text-2xl font-bold mb-4 text-indigo-400">Certifications & Training</h2>
-                        <textarea
-                            value={formData.certifications}
-                            onChange={(e) => setFormData(prev => ({ ...prev, certifications: e.target.value }))}
-                            className="w-full px-4 py-2 bg-white/5 border border-white/10 rounded-lg focus:border-indigo-500 focus:outline-none h-24"
-                            placeholder="List your certifications (one per line)..."
-                        />
-                    </section>
-
-                    {/* Languages */}
-                    <section>
-                        <h2 className="text-2xl font-bold mb-4 text-indigo-400">Languages</h2>
-                        <textarea
-                            value={formData.languages}
-                            onChange={(e) => setFormData(prev => ({ ...prev, languages: e.target.value }))}
-                            className="w-full px-4 py-2 bg-white/5 border border-white/10 rounded-lg focus:border-indigo-500 focus:outline-none h-20"
-                            placeholder="English - Professional, Bengali - Native"
-                        />
-                    </section>
+                    {/* Certifications & Languages */}
+                    <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
+                        <section className="space-y-6">
+                            <h2 className="text-xl md:text-2xl font-black text-indigo-400 uppercase tracking-widest text-xs">Certifications</h2>
+                            <textarea
+                                value={formData.certifications}
+                                onChange={(e) => setFormData(prev => ({ ...prev, certifications: e.target.value }))}
+                                className="w-full px-4 py-3 bg-white/5 border border-white/10 rounded-xl focus:border-indigo-500 focus:outline-none h-32 text-white text-sm font-inter"
+                                placeholder="List your certifications..."
+                            />
+                        </section>
+                        <section className="space-y-6">
+                            <h2 className="text-xl md:text-2xl font-black text-indigo-400 uppercase tracking-widest text-xs">Languages</h2>
+                            <textarea
+                                value={formData.languages}
+                                onChange={(e) => setFormData(prev => ({ ...prev, languages: e.target.value }))}
+                                className="w-full px-4 py-3 bg-white/5 border border-white/10 rounded-xl focus:border-indigo-500 focus:outline-none h-32 text-white text-sm font-inter"
+                                placeholder="English - Professional..."
+                            />
+                        </section>
+                    </div>
 
                     {/* Submit Button */}
-                    <div className="flex gap-4">
+                    <div className="flex flex-col sm:flex-row gap-4 pt-8 border-t border-white/10">
                         <button
                             type="submit"
-                            className="px-8 py-3 bg-indigo-600 hover:bg-indigo-500 rounded-xl font-bold transition-all"
+                            className="px-8 py-4 bg-indigo-600 hover:bg-indigo-500 text-white rounded-xl font-black uppercase tracking-widest text-xs transition-all flex items-center justify-center gap-3 active:scale-[0.98]"
                         >
                             Save CV
                         </button>
                         <button
                             type="button"
                             onClick={() => navigate('/cv')}
-                            className="px-8 py-3 bg-white/5 hover:bg-white/10 rounded-xl font-bold border border-white/10 transition-all"
+                            className="px-8 py-4 bg-white/5 hover:bg-white/10 text-white rounded-xl font-black uppercase tracking-widest text-xs border border-white/10 transition-all flex items-center justify-center gap-3 active:scale-[0.98]"
                         >
                             Cancel
                         </button>

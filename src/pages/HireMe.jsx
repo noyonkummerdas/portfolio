@@ -55,23 +55,23 @@ const HireMe = () => {
     return (
         <div className="pt-32 min-h-screen pb-20">
             {/* Hero Section */}
-            <section className="px-6 max-w-4xl mx-auto text-center mb-20">
-                <div className="inline-block px-4 py-1.5 mb-6 rounded-full border border-indigo-500/30 bg-indigo-500/10 text-indigo-400 text-[10px] font-black uppercase tracking-[0.3em] animate-fade-in">
+            <section className="px-6 max-w-4xl mx-auto text-center mb-16 md:mb-20">
+                <div className="inline-block px-4 py-1.5 mb-6 rounded-full border border-indigo-500/30 bg-indigo-500/10 text-indigo-400 text-[8px] md:text-[10px] font-black uppercase tracking-[0.3em] animate-fade-in">
                     Open for Business
                 </div>
-                <h1 className="text-5xl md:text-7xl font-black font-poppins mb-8 tracking-tighter text-slate-900 dark:text-white">
-                    Let's Build the <br />
+                <h1 className="text-4xl sm:text-5xl md:text-7xl font-black font-poppins mb-6 md:mb-8 tracking-tighter text-slate-900 dark:text-white leading-[1.1]">
+                    Let's Build the <br className="hidden sm:block" />
                     <span className="text-transparent bg-clip-text bg-gradient-to-r from-indigo-400 via-purple-400 to-indigo-400 bg-[length:200%_auto] animate-gradient">Extraordinary</span>
                 </h1>
-                <p className="text-xl text-slate-600 dark:text-gray-400 font-inter mb-10 leading-relaxed max-w-2xl mx-auto">
+                <p className="text-base sm:text-xl text-slate-600 dark:text-gray-400 font-inter mb-10 leading-relaxed max-w-2xl mx-auto">
                     I partner with forward-thinking companies to build high-performance web and mobile applications.
                 </p>
             </section>
 
-            <div className="max-w-7xl mx-auto px-6 grid grid-cols-1 lg:grid-cols-2 gap-16 mb-24">
+            <div className="max-w-7xl mx-auto px-6 grid grid-cols-1 lg:grid-cols-2 gap-12 md:gap-16 mb-24">
                 {/* Left Column: Context & Services */}
-                <div>
-                    <h2 className="text-3xl font-black font-poppins mb-8 text-slate-900 dark:text-white">How I Add Value</h2>
+                <div className="order-2 lg:order-1">
+                    <h2 className="text-2xl md:text-3xl font-black font-poppins mb-8 text-slate-900 dark:text-white text-center lg:text-left">How I Add Value</h2>
                     <div className="space-y-6 mb-16">
                         {services.map((service, index) => (
                             <div key={index} className="p-6 bg-white dark:bg-secondary/40 backdrop-blur-xl border border-slate-200 dark:border-white/5 rounded-3xl hover:border-indigo-500/30 transition-all duration-500 shadow-sm dark:shadow-none">
@@ -84,27 +84,27 @@ const HireMe = () => {
                 </div>
 
                 {/* Right Column: Intake Form */}
-                <div className="bg-white/5 backdrop-blur-xl border border-white/10 p-8 md:p-10 rounded-[2.5rem]">
-                    <h2 className="text-2xl font-black font-poppins mb-6">Tell me about your project</h2>
+                <div className="bg-white/5 backdrop-blur-xl border border-white/10 p-6 sm:p-8 md:p-10 rounded-[2rem] md:rounded-[2.5rem] order-1 lg:order-2 self-start">
+                    <h2 className="text-xl md:text-2xl font-black font-poppins mb-6 text-white text-center lg:text-left">Tell me about your project</h2>
                     <form onSubmit={handleSubmit} className="space-y-6">
 
                         {/* Client Info */}
-                        <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                        <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                             <div className="space-y-2">
                                 <label className="text-[10px] uppercase tracking-widest font-bold text-gray-400">Name</label>
-                                <input type="text" name="name" value={formData.name} onChange={handleChange} className="w-full bg-black/20 border border-white/10 rounded-xl px-4 py-3 text-white focus:outline-none focus:border-indigo-500 transition-colors" placeholder="John Doe" required />
+                                <input type="text" name="name" value={formData.name} onChange={handleChange} className="w-full bg-black/20 border border-white/10 rounded-xl px-4 py-3 text-white focus:outline-none focus:border-indigo-500 transition-colors text-sm" placeholder="John Doe" required />
                             </div>
                             <div className="space-y-2">
                                 <label className="text-[10px] uppercase tracking-widest font-bold text-gray-400">Email</label>
-                                <input type="email" name="email" value={formData.email} onChange={handleChange} className="w-full bg-black/20 border border-white/10 rounded-xl px-4 py-3 text-white focus:outline-none focus:border-indigo-500 transition-colors" placeholder="john@example.com" required />
+                                <input type="email" name="email" value={formData.email} onChange={handleChange} className="w-full bg-black/20 border border-white/10 rounded-xl px-4 py-3 text-white focus:outline-none focus:border-indigo-500 transition-colors text-sm" placeholder="john@example.com" required />
                             </div>
                         </div>
 
                         {/* Project Scope */}
-                        <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                        <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                             <div className="space-y-2">
                                 <label className="text-[10px] uppercase tracking-widest font-bold text-gray-400">Project Type</label>
-                                <select name="projectType" value={formData.projectType} onChange={handleChange} className="w-full bg-black/20 border border-white/10 rounded-xl px-4 py-3 text-white focus:outline-none focus:border-indigo-500 transition-colors appearance-none cursor-pointer">
+                                <select name="projectType" value={formData.projectType} onChange={handleChange} className="w-full bg-black/20 border border-white/10 rounded-xl px-4 py-3 text-white focus:outline-none focus:border-indigo-500 transition-colors appearance-none cursor-pointer text-sm">
                                     <option>Web Application</option>
                                     <option>Mobile App (React Native)</option>
                                     <option>Marketing Website</option>
@@ -113,7 +113,7 @@ const HireMe = () => {
                             </div>
                             <div className="space-y-2">
                                 <label className="text-[10px] uppercase tracking-widest font-bold text-gray-400">Target Timeline</label>
-                                <select name="timeline" value={formData.timeline} onChange={handleChange} className="w-full bg-black/20 border border-white/10 rounded-xl px-4 py-3 text-white focus:outline-none focus:border-indigo-500 transition-colors appearance-none cursor-pointer">
+                                <select name="timeline" value={formData.timeline} onChange={handleChange} className="w-full bg-black/20 border border-white/10 rounded-xl px-4 py-3 text-white focus:outline-none focus:border-indigo-500 transition-colors appearance-none cursor-pointer text-sm">
                                     <option>&lt; 1 Month</option>
                                     <option>1 - 3 Months</option>
                                     <option>3 - 6 Months</option>
@@ -125,13 +125,13 @@ const HireMe = () => {
                         {/* Budget */}
                         <div className="space-y-2">
                             <label className="text-[10px] uppercase tracking-widest font-bold text-gray-400">Estimated Budget</label>
-                            <div className="grid grid-cols-2 md:grid-cols-4 gap-2">
+                            <div className="grid grid-cols-2 sm:grid-cols-4 gap-2">
                                 {['<$5k', '$5k-$10k', '$10k-$20k', '$20k+'].map(b => (
                                     <button
                                         key={b}
                                         type="button"
                                         onClick={() => setFormData({ ...formData, budget: b })}
-                                        className={`px-4 py-2 rounded-lg text-xs font-bold border transition-all ${formData.budget === b ? 'bg-indigo-600 border-indigo-600 text-white' : 'bg-white/5 border-white/10 text-gray-400 hover:bg-white/10'}`}
+                                        className={`px-2 py-2.5 rounded-lg text-[10px] font-bold border transition-all ${formData.budget === b ? 'bg-indigo-600 border-indigo-600 text-white' : 'bg-white/5 border-white/10 text-gray-400 hover:bg-white/10'}`}
                                     >
                                         {b}
                                     </button>
@@ -147,12 +147,12 @@ const HireMe = () => {
                                 value={formData.details}
                                 onChange={handleChange}
                                 rows="5"
-                                className="w-full bg-black/20 border border-white/10 rounded-xl px-4 py-3 text-white focus:outline-none focus:border-indigo-500 transition-colors resize-none"
-                                placeholder="Describe the problem you're solving, key features needed, and any technical constraints..."
+                                className="w-full bg-black/20 border border-white/10 rounded-xl px-4 py-3 text-white focus:outline-none focus:border-indigo-500 transition-colors resize-none text-sm placeholder:text-gray-600"
+                                placeholder="Describe the problem you're solving..."
                             ></textarea>
                         </div>
 
-                        <button type="submit" className="w-full py-4 bg-indigo-600 hover:bg-indigo-500 text-white font-bold rounded-xl transition-all shadow-lg hover:shadow-indigo-600/30 uppercase tracking-widest text-xs">
+                        <button type="submit" className="w-full py-4 bg-indigo-600 hover:bg-indigo-500 text-white font-bold rounded-xl transition-all shadow-lg hover:shadow-indigo-600/30 uppercase tracking-widest text-xs active:scale-[0.98]">
                             Send Inquiry
                         </button>
                     </form>

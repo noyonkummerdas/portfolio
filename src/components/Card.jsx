@@ -12,17 +12,17 @@ const Card = ({ project }) => {
             {/* Visual Accent Gradient */}
             <div className="absolute inset-0 bg-gradient-to-br from-primary/10 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
 
-            <div className="p-8 relative z-10">
+            <div className="p-6 sm:p-8 relative z-10">
                 {/* Header */}
                 <div className="flex justify-between items-center mb-6">
-                    <h3 className="text-2xl font-bold font-poppins text-slate-900 dark:text-white group-hover:text-primary transition-colors duration-300">
+                    <h3 className="text-xl sm:text-2xl font-bold font-poppins text-slate-900 dark:text-white group-hover:text-primary transition-colors duration-300">
                         {project.name}
                     </h3>
                     <div className="w-2 h-2 rounded-full bg-primary animate-pulse" />
                 </div>
 
                 {/* Tagline */}
-                <p className="text-lg text-slate-700 dark:text-textMain/90 font-medium mb-6 leading-relaxed font-poppins">
+                <p className="text-base sm:text-lg text-slate-700 dark:text-textMain/90 font-medium mb-6 leading-relaxed font-poppins">
                     {project.tagline}
                 </p>
 
@@ -30,13 +30,13 @@ const Card = ({ project }) => {
                 <div className="space-y-6 mb-8">
                     <div>
                         <h4 className="text-[10px] font-black text-primary uppercase tracking-[0.2em] mb-2 font-inter">Challenge</h4>
-                        <p className="text-sm text-slate-600 dark:text-textMain/60 leading-relaxed font-inter line-clamp-2">{project.problem}</p>
+                        <p className="text-xs sm:text-sm text-slate-600 dark:text-textMain/60 leading-relaxed font-inter line-clamp-2">{project.problem}</p>
                     </div>
                     <div>
                         <h4 className="text-[10px] font-black text-primary uppercase tracking-[0.2em] mb-2 font-inter">Impact Strategy</h4>
                         <ul className="space-y-2">
                             {project.features.slice(0, 2).map((feature, idx) => (
-                                <li key={idx} className="text-sm text-slate-700 dark:text-textMain/80 flex items-start gap-3 font-inter">
+                                <li key={idx} className="text-xs sm:text-sm text-slate-700 dark:text-textMain/80 flex items-start gap-3 font-inter">
                                     <span className="text-accent mt-1">
                                         <svg className="w-3 h-3" fill="currentColor" viewBox="0 0 20 20"><path fillRule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clipRule="evenodd" /></svg>
                                     </span>
