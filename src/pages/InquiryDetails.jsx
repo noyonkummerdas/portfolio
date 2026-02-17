@@ -33,36 +33,36 @@ const InquiryDetails = () => {
                 ← Back to Dashboard
             </Link>
 
-            <div className="bg-secondary/40 backdrop-blur-xl border border-white/5 rounded-2xl md:rounded-[2.5rem] p-6 sm:p-8 md:p-12">
-                <div className="flex flex-col md:flex-row justify-between items-start gap-6 border-b border-white/10 pb-8 mb-8">
+            <div className="bg-white dark:bg-secondary/40 backdrop-blur-xl border border-slate-200 dark:border-white/5 rounded-2xl md:rounded-[2.5rem] p-6 sm:p-8 md:p-12 shadow-sm dark:shadow-none">
+                <div className="flex flex-col md:flex-row justify-between items-start gap-6 border-b border-slate-200 dark:border-white/10 pb-8 mb-8">
                     <div>
-                        <h1 className="text-3xl md:text-5xl font-black font-poppins text-white mb-2 leading-tight">{inquiry.name}</h1>
-                        <p className="text-lg md:text-xl text-indigo-400 font-medium">{inquiry.company}</p>
+                        <h1 className="text-3xl md:text-5xl font-black font-poppins text-slate-900 dark:text-white mb-2 leading-tight">{inquiry.name}</h1>
+                        <p className="text-lg md:text-xl text-indigo-600 dark:text-indigo-400 font-medium">{inquiry.company}</p>
                     </div>
                     <div className="text-left md:text-right">
-                        <div className="inline-block px-4 py-1 bg-indigo-600/20 text-indigo-400 rounded-full text-[10px] md:text-xs font-bold uppercase tracking-widest mb-2">
+                        <div className="inline-block px-4 py-1 bg-indigo-600/20 text-indigo-600 dark:text-indigo-400 rounded-full text-[10px] md:text-xs font-bold uppercase tracking-widest mb-2">
                             {inquiry.projectType}
                         </div>
-                        <p className="text-gray-400 text-xs md:text-sm">{new Date(inquiry.createdAt).toLocaleString()}</p>
+                        <p className="text-slate-500 dark:text-gray-400 text-xs md:text-sm">{new Date(inquiry.createdAt).toLocaleString()}</p>
                     </div>
                 </div>
 
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-8 md:gap-12 mb-12">
                     <div>
-                        <h3 className="text-[10px] uppercase tracking-widest font-black text-gray-500 mb-4">Contact Info</h3>
-                        <p className="text-base md:text-lg text-white font-inter break-all">{inquiry.email}</p>
+                        <h3 className="text-[10px] uppercase tracking-widest font-black text-slate-400 dark:text-gray-500 mb-4">Contact Info</h3>
+                        <p className="text-base md:text-lg text-slate-900 dark:text-white font-inter break-all">{inquiry.email}</p>
                     </div>
                     <div>
-                        <h3 className="text-[10px] uppercase tracking-widest font-black text-gray-500 mb-4">Budget & Timeline</h3>
-                        <p className="text-base md:text-lg text-white font-inter mb-1">Budget: <span className="text-green-400 font-bold">{inquiry.budget}</span></p>
-                        <p className="text-base md:text-lg text-white font-inter">Timeline: {inquiry.timeline}</p>
+                        <h3 className="text-[10px] uppercase tracking-widest font-black text-slate-400 dark:text-gray-500 mb-4">Budget & Timeline</h3>
+                        <p className="text-base md:text-lg text-slate-900 dark:text-white font-inter mb-1">Budget: <span className="text-green-600 dark:text-green-400 font-bold">{inquiry.budget}</span></p>
+                        <p className="text-base md:text-lg text-slate-900 dark:text-white font-inter">Timeline: {inquiry.timeline}</p>
                     </div>
                 </div>
 
                 <div>
-                    <h3 className="text-[10px] uppercase tracking-widest font-black text-gray-500 mb-6">Project Requirements</h3>
-                    <div className="bg-black/20 rounded-xl md:rounded-2xl p-6 border border-white/5">
-                        <p className="text-sm md:text-base text-gray-300 font-inter leading-relaxed whitespace-pre-wrap">
+                    <h3 className="text-[10px] uppercase tracking-widest font-black text-slate-400 dark:text-gray-500 mb-6">Project Requirements</h3>
+                    <div className="bg-slate-100 dark:bg-black/20 rounded-xl md:rounded-2xl p-6 border border-slate-200 dark:border-white/5">
+                        <p className="text-sm md:text-base text-slate-700 dark:text-gray-300 font-inter leading-relaxed whitespace-pre-wrap">
                             {inquiry.message || "No additional details provided."}
                         </p>
                     </div>

@@ -105,7 +105,7 @@ const CV = () => {
             <div className="max-w-7xl mx-auto flex flex-col lg:flex-row gap-6 md:gap-10">
                 {/* Main Content */}
                 <div className="flex-1 order-2 lg:order-1">
-                    <div className="bg-white/5 rounded-2xl border border-white/10 overflow-hidden shadow-2xl">
+                    <div className="bg-white dark:bg-white/5 rounded-2xl border border-slate-200 dark:border-white/10 overflow-hidden shadow-2xl">
                         {/* Action Buttons */}
                         <div className="p-6 border-b border-white/10 print:hidden flex flex-col sm:flex-row gap-4">
                             {latestCv ? (
@@ -139,13 +139,13 @@ const CV = () => {
                             {/* Header */}
                             <header className="mb-12 pb-8 border-b border-white/10 print:border-gray-300 flex flex-col md:flex-row print:flex-row justify-between items-center md:items-start text-center md:text-left gap-8">
                                 <div className="flex-1 w-full">
-                                    <h1 className="text-4xl sm:text-5xl font-black mb-2 print:text-black tracking-tighter">{displayData.personalInfo.name}</h1>
-                                    <h2 className="text-xl sm:text-2xl text-indigo-400 font-semibold mb-6 print:text-gray-700">
+                                    <h1 className="text-4xl sm:text-5xl font-black mb-2 text-slate-900 dark:text-white print:text-black tracking-tighter">{displayData.personalInfo.name}</h1>
+                                    <h2 className="text-xl sm:text-2xl text-indigo-600 dark:text-indigo-400 font-semibold mb-6 print:text-gray-700">
                                         {displayData.personalInfo.title}
                                     </h2>
 
-                                    <div className="flex flex-wrap justify-center md:justify-start gap-4 text-sm text-gray-400 print:text-gray-600">
-                                        <a href={`mailto:${displayData.personalInfo.email}`} className="flex items-center gap-2 hover:text-white print:text-gray-600 transition-colors">
+                                    <div className="flex flex-wrap justify-center md:justify-start gap-4 text-sm text-slate-500 dark:text-gray-400 print:text-gray-600">
+                                        <a href={`mailto:${displayData.personalInfo.email}`} className="flex items-center gap-2 hover:text-indigo-600 dark:hover:text-white print:text-gray-600 transition-colors">
                                             <FaEnvelope /> <span className="break-all">{displayData.personalInfo.email}</span>
                                         </a>
                                         {displayData.personalInfo.phone && (
@@ -154,12 +154,12 @@ const CV = () => {
                                             </span>
                                         )}
                                         {displayData.personalInfo.github && (
-                                            <a href={`https://${displayData.personalInfo.github}`} className="flex items-center gap-2 hover:text-white print:text-gray-600 transition-colors">
+                                            <a href={`https://${displayData.personalInfo.github}`} className="flex items-center gap-2 hover:text-indigo-600 dark:hover:text-white print:text-gray-600 transition-colors">
                                                 <FaGithub /> {displayData.personalInfo.github}
                                             </a>
                                         )}
                                         {displayData.personalInfo.linkedin && (
-                                            <a href={`https://${displayData.personalInfo.linkedin}`} className="flex items-center gap-2 hover:text-white print:text-gray-600 transition-colors">
+                                            <a href={`https://${displayData.personalInfo.linkedin}`} className="flex items-center gap-2 hover:text-indigo-600 dark:hover:text-white print:text-gray-600 transition-colors">
                                                 <FaLinkedin /> {displayData.personalInfo.linkedin}
                                             </a>
                                         )}
@@ -178,41 +178,41 @@ const CV = () => {
                             {/* Professional Summary */}
                             {displayData.summary && (
                                 <section className="mb-10">
-                                    <h3 className="text-xl sm:text-2xl font-bold mb-4 text-indigo-400 print:text-gray-900 flex items-center gap-3">
-                                        <span className="w-8 h-px bg-indigo-400/30"></span> Summary
+                                    <h3 className="text-xl sm:text-2xl font-bold mb-4 text-indigo-600 dark:text-indigo-400 print:text-gray-900 flex items-center gap-3">
+                                        <span className="w-8 h-px bg-indigo-600/30 dark:bg-indigo-400/30"></span> Summary
                                     </h3>
-                                    <p className="text-gray-300 leading-relaxed print:text-gray-700 text-sm md:text-base">{displayData.summary}</p>
+                                    <p className="text-slate-700 dark:text-gray-300 leading-relaxed print:text-gray-700 text-sm md:text-base">{displayData.summary}</p>
                                 </section>
                             )}
 
                             {/* Technical Skills */}
                             <section className="mb-10">
-                                <h3 className="text-xl sm:text-2xl font-bold mb-6 text-indigo-400 print:text-gray-900 flex items-center gap-3">
-                                    <span className="w-8 h-px bg-indigo-400/30"></span> Skills
+                                <h3 className="text-xl sm:text-2xl font-bold mb-6 text-indigo-600 dark:text-indigo-400 print:text-gray-900 flex items-center gap-3">
+                                    <span className="w-8 h-px bg-indigo-600/30 dark:bg-indigo-400/30"></span> Skills
                                 </h3>
                                 <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                                     {displayData.skills.frontend && (
-                                        <div className="p-4 rounded-xl bg-white/5 border border-white/5">
-                                            <h4 className="font-bold mb-2 text-white print:text-gray-900">Frontend Development</h4>
-                                            <p className="text-gray-300 print:text-gray-700 text-sm">{displayData.skills.frontend}</p>
+                                        <div className="p-4 rounded-xl bg-slate-50 dark:bg-white/5 border border-slate-200 dark:border-white/5">
+                                            <h4 className="font-bold mb-2 text-slate-900 dark:text-white print:text-gray-900">Frontend Development</h4>
+                                            <p className="text-slate-600 dark:text-gray-300 print:text-gray-700 text-sm">{displayData.skills.frontend}</p>
                                         </div>
                                     )}
                                     {displayData.skills.stateManagement && (
-                                        <div className="p-4 rounded-xl bg-white/5 border border-white/5">
-                                            <h4 className="font-bold mb-2 text-white print:text-gray-900">State Management</h4>
-                                            <p className="text-gray-300 print:text-gray-700 text-sm">{displayData.skills.stateManagement}</p>
+                                        <div className="p-4 rounded-xl bg-slate-50 dark:bg-white/5 border border-slate-200 dark:border-white/5">
+                                            <h4 className="font-bold mb-2 text-slate-900 dark:text-white print:text-gray-900">State Management</h4>
+                                            <p className="text-slate-600 dark:text-gray-300 print:text-gray-700 text-sm">{displayData.skills.stateManagement}</p>
                                         </div>
                                     )}
                                     {displayData.skills.styling && (
-                                        <div className="p-4 rounded-xl bg-white/5 border border-white/5">
-                                            <h4 className="font-bold mb-2 text-white print:text-gray-900">Styling & UI</h4>
-                                            <p className="text-gray-300 print:text-gray-700 text-sm">{displayData.skills.styling}</p>
+                                        <div className="p-4 rounded-xl bg-slate-50 dark:bg-white/5 border border-slate-200 dark:border-white/5">
+                                            <h4 className="font-bold mb-2 text-slate-900 dark:text-white print:text-gray-900">Styling & UI</h4>
+                                            <p className="text-slate-600 dark:text-gray-300 print:text-gray-700 text-sm">{displayData.skills.styling}</p>
                                         </div>
                                     )}
                                     {displayData.skills.backend && (
-                                        <div className="p-4 rounded-xl bg-white/5 border border-white/5">
-                                            <h4 className="font-bold mb-2 text-white print:text-gray-900">Backend & APIs</h4>
-                                            <p className="text-gray-300 print:text-gray-700 text-sm">{displayData.skills.backend}</p>
+                                        <div className="p-4 rounded-xl bg-slate-50 dark:bg-white/5 border border-slate-200 dark:border-white/5">
+                                            <h4 className="font-bold mb-2 text-slate-900 dark:text-white print:text-gray-900">Backend & APIs</h4>
+                                            <p className="text-slate-600 dark:text-gray-300 print:text-gray-700 text-sm">{displayData.skills.backend}</p>
                                         </div>
                                     )}
                                 </div>
@@ -221,24 +221,24 @@ const CV = () => {
                             {/* Professional Experience */}
                             {displayData.experience && displayData.experience.length > 0 && (
                                 <section className="mb-10">
-                                    <h3 className="text-xl sm:text-2xl font-bold mb-6 text-indigo-400 print:text-gray-900 flex items-center gap-3">
-                                        <span className="w-8 h-px bg-indigo-400/30"></span> Experience
+                                    <h3 className="text-xl sm:text-2xl font-bold mb-6 text-indigo-600 dark:text-indigo-400 print:text-gray-900 flex items-center gap-3">
+                                        <span className="w-8 h-px bg-indigo-600/30 dark:bg-indigo-400/30"></span> Experience
                                     </h3>
                                     {displayData.experience.map((exp, index) => (
                                         exp.title && (
-                                            <div key={index} className="mb-8 relative pl-6 border-l-2 border-indigo-500/20 last:mb-0">
-                                                <div className="absolute -left-[9px] top-2 w-4 h-4 rounded-full bg-indigo-600 border-4 border-secondary shadow-lg"></div>
+                                            <div key={index} className="mb-8 relative pl-6 border-l-2 border-indigo-600/20 dark:border-indigo-500/20 last:mb-0">
+                                                <div className="absolute -left-[9px] top-2 w-4 h-4 rounded-full bg-indigo-600 border-4 border-white dark:border-secondary shadow-lg"></div>
                                                 <div className="flex flex-col sm:flex-row justify-between items-start mb-2 gap-1">
                                                     <div>
-                                                        <h4 className="text-lg sm:text-xl font-bold text-white print:text-gray-900">{exp.title}</h4>
-                                                        <p className="text-indigo-300 print:text-gray-600 font-medium">{exp.company}</p>
+                                                        <h4 className="text-lg sm:text-xl font-bold text-slate-900 dark:text-white print:text-gray-900">{exp.title}</h4>
+                                                        <p className="text-indigo-600 dark:text-indigo-300 print:text-gray-600 font-medium">{exp.company}</p>
                                                     </div>
                                                     {exp.duration && (
-                                                        <span className="text-gray-500 text-xs font-bold uppercase tracking-wider print:text-gray-600">{exp.duration}</span>
+                                                        <span className="text-slate-500 dark:text-gray-500 text-xs font-bold uppercase tracking-wider print:text-gray-600">{exp.duration}</span>
                                                     )}
                                                 </div>
                                                 {exp.responsibilities && (
-                                                    <ul className="list-disc list-outside ml-4 text-gray-300 space-y-2 print:text-gray-700 text-sm md:text-base mt-4">
+                                                    <ul className="list-disc list-outside ml-4 text-slate-600 dark:text-gray-300 space-y-2 print:text-gray-700 text-sm md:text-base mt-4">
                                                         {exp.responsibilities.split('\n').filter(r => r.trim()).map((resp, i) => (
                                                             <li key={i}>{resp}</li>
                                                         ))}
@@ -251,14 +251,14 @@ const CV = () => {
                             )}
 
                             {/* Signature Section */}
-                            <div className="mt-20 flex flex-col sm:flex-row justify-between items-center sm:items-end border-t border-white/5 pt-12 print:border-gray-200 gap-12 sm:gap-0">
+                            <div className="mt-20 flex flex-col sm:flex-row justify-between items-center sm:items-end border-t border-slate-200 dark:border-white/5 pt-12 print:border-gray-200 gap-12 sm:gap-0">
                                 <div className="flex flex-col items-center sm:items-start gap-2">
-                                    <div className="w-48 border-b border-white/20 print:border-gray-400"></div>
-                                    <p className="text-xs font-bold uppercase tracking-widest text-gray-500 print:text-gray-600">Date</p>
+                                    <div className="w-48 border-b border-slate-300 dark:border-white/20 print:border-gray-400"></div>
+                                    <p className="text-xs font-bold uppercase tracking-widest text-slate-400 dark:text-gray-500 print:text-gray-600">Date</p>
                                 </div>
                                 <div className="flex flex-col items-center sm:items-end gap-2 text-right">
-                                    <div className="w-48 border-b border-white/20 print:border-gray-400"></div>
-                                    <p className="text-xs font-bold uppercase tracking-widest text-gray-500 print:text-gray-600">Signature</p>
+                                    <div className="w-48 border-b border-slate-300 dark:border-white/20 print:border-gray-400"></div>
+                                    <p className="text-xs font-bold uppercase tracking-widest text-slate-400 dark:text-gray-500 print:text-gray-600">Signature</p>
                                 </div>
                             </div>
                         </div>
@@ -267,27 +267,27 @@ const CV = () => {
 
                 {/* Sidebar */}
                 <aside className="w-full lg:w-72 flex-shrink-0 print:hidden order-1 lg:order-2">
-                    <div className="bg-white/5 rounded-2xl border border-white/10 p-6 sticky top-24 shadow-xl">
-                        <h3 className="text-lg font-bold mb-4 flex items-center gap-2">
+                    <div className="bg-white dark:bg-white/5 rounded-2xl border border-slate-200 dark:border-white/10 p-6 sticky top-24 shadow-xl">
+                        <h3 className="text-lg font-bold mb-4 flex items-center gap-2 text-slate-900 dark:text-white">
                             <span className="w-2 h-2 rounded-full bg-primary"></span>
                             CV History
                         </h3>
                         <div className="space-y-3 mb-6 max-h-[400px] overflow-y-auto pr-2 custom-scrollbar">
-                            {loading && <p className="text-sm text-gray-400 animate-pulse">Fetching versions...</p>}
+                            {loading && <p className="text-sm text-slate-500 dark:text-gray-400 animate-pulse">Fetching versions...</p>}
                             {!loading && sortedCvs.length === 0 ? (
-                                <div className="text-sm text-gray-400 py-4 italic">
+                                <div className="text-sm text-slate-500 dark:text-gray-400 py-4 italic">
                                     <p>No saved versions yet.</p>
                                 </div>
                             ) : (
                                 sortedCvs.map((cv) => (
                                     <div
                                         key={cv._id || cv.id}
-                                        className="p-4 rounded-xl bg-white/5 hover:bg-white/10 border border-white/5 transition-all group cursor-pointer"
+                                        className="p-4 rounded-xl bg-slate-50 dark:bg-white/5 hover:bg-slate-100 dark:hover:bg-white/10 border border-slate-200 dark:border-white/5 transition-all group cursor-pointer"
                                     >
                                         <div className="flex justify-between items-center">
                                             <div className="flex-1 min-w-0">
-                                                <div className="text-sm font-bold text-white truncate group-hover:text-primary transition-colors">{cv.title || 'Resume'}</div>
-                                                <div className="text-[10px] text-gray-500 font-bold uppercase tracking-tight mt-1">
+                                                <div className="text-sm font-bold text-slate-900 dark:text-white truncate group-hover:text-primary transition-colors">{cv.title || 'Resume'}</div>
+                                                <div className="text-[10px] text-slate-500 dark:text-gray-500 font-bold uppercase tracking-tight mt-1">
                                                     v{cv.version} • {new Date(cv.createdAt).toLocaleDateString()}
                                                 </div>
                                             </div>
@@ -295,7 +295,7 @@ const CV = () => {
                                                 href={cv.pdfUrl}
                                                 target="_blank"
                                                 rel="noopener noreferrer"
-                                                className="w-8 h-8 rounded-lg bg-indigo-500/10 flex items-center justify-center text-indigo-400 hover:bg-indigo-500 hover:text-white transition-all shadow-sm"
+                                                className="w-8 h-8 rounded-lg bg-indigo-500/10 flex items-center justify-center text-indigo-600 dark:text-indigo-400 hover:bg-indigo-600 dark:hover:bg-indigo-500 hover:text-white transition-all shadow-sm"
                                                 title="Download PDF"
                                             >
                                                 <FaDownload size={12} />

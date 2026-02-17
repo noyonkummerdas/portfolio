@@ -164,18 +164,18 @@ const AdminCVForm = () => {
             <div className="max-w-5xl mx-auto">
                 <div className="flex flex-col sm:flex-row justify-between items-center gap-6 mb-8 text-center sm:text-left">
                     <div>
-                        <h1 className="text-3xl md:text-4xl font-black mb-2 text-white">Manage CVs</h1>
-                        <p className="text-sm text-gray-400">Create new version & upload PDF to backend</p>
+                        <h1 className="text-3xl md:text-4xl font-black mb-2 text-slate-900 dark:text-white">Manage CVs</h1>
+                        <p className="text-sm text-slate-500 dark:text-gray-400">Create new version & upload PDF to backend</p>
                     </div>
                     <button
                         onClick={() => navigate('/cv')}
-                        className="w-full sm:w-auto px-6 py-2.5 bg-white/5 hover:bg-white/10 text-white rounded-xl transition-all flex items-center justify-center gap-2 text-sm"
+                        className="w-full sm:w-auto px-6 py-2.5 bg-slate-100 dark:bg-white/5 hover:bg-slate-200 dark:hover:bg-white/10 text-slate-900 dark:text-white rounded-xl transition-all flex items-center justify-center gap-2 text-sm border border-slate-200 dark:border-white/10"
                     >
                         <FaArrowLeft /> Back to CV
                     </button>
                 </div>
 
-                <form onSubmit={handleSubmit} className="bg-white/5 rounded-2xl border border-white/10 p-6 sm:p-8 space-y-8">
+                <form onSubmit={handleSubmit} className="bg-white dark:bg-white/5 rounded-2xl border border-slate-200 dark:border-white/10 p-6 sm:p-8 space-y-8 shadow-sm dark:shadow-none">
 
                     {/* Status Messages for Backend Connection */}
                     {uploadLoading && (
@@ -195,18 +195,18 @@ const AdminCVForm = () => {
                     )}
 
                     {/* --- BACKEND REQUIRED FIELDS SECTION --- */}
-                    <div className="p-6 bg-indigo-900/20 border border-indigo-500/30 rounded-2xl mb-8">
-                        <h3 className="text-lg md:text-xl font-bold text-indigo-300 mb-6 flex items-center gap-2">
+                    <div className="p-6 bg-indigo-50 dark:bg-indigo-900/20 border border-indigo-100 dark:border-indigo-500/30 rounded-2xl mb-8">
+                        <h3 className="text-lg md:text-xl font-bold text-indigo-600 dark:text-indigo-300 mb-6 flex items-center gap-2">
                             <FaCloudUploadAlt /> Backend Requirements
                         </h3>
                         <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
                             <div>
-                                <label className="block text-xs font-black uppercase tracking-widest mb-2 text-gray-400">Version Number</label>
+                                <label className="block text-xs font-black uppercase tracking-widest mb-2 text-slate-500 dark:text-gray-400">Version Number</label>
                                 <input
                                     type="text"
                                     value={version}
                                     onChange={(e) => setVersion(e.target.value)}
-                                    className="w-full px-4 py-3 bg-black/20 border border-white/10 rounded-xl focus:border-indigo-500 focus:outline-none text-white text-sm"
+                                    className="w-full px-4 py-3 bg-white dark:bg-black/20 border border-slate-200 dark:border-white/10 rounded-xl focus:border-indigo-500 focus:outline-none text-slate-900 dark:text-white text-sm"
                                     placeholder="e.g. 1.2.0"
                                     required
                                 />

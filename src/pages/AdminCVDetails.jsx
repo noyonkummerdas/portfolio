@@ -43,11 +43,11 @@ const AdminCVDetails = () => {
             <div className="max-w-7xl mx-auto flex flex-col lg:flex-row gap-8 lg:gap-10">
                 {/* Sidebar - CV Versions */}
                 <aside className="w-full lg:w-72 flex-shrink-0 print:hidden order-2 lg:order-1">
-                    <div className="bg-white/5 rounded-2xl border border-white/10 p-6 sticky top-24">
-                        <h3 className="text-lg font-bold mb-6 text-white font-poppins">CV Versions</h3>
+                    <div className="bg-white dark:bg-white/5 rounded-2xl border border-slate-200 dark:border-white/10 p-6 sticky top-24 shadow-sm dark:shadow-none">
+                        <h3 className="text-lg font-bold mb-6 text-slate-900 dark:text-white font-poppins">CV Versions</h3>
                         <div className="space-y-3 max-h-[400px] overflow-y-auto pr-2 custom-scrollbar">
                             {allCVs.length === 0 ? (
-                                <p className="text-sm text-gray-400 font-inter">No CV versions yet</p>
+                                <p className="text-sm text-slate-500 dark:text-gray-400 font-inter">No CV versions yet</p>
                             ) : (
                                 allCVs.map((cv) => (
                                     <Link
@@ -55,7 +55,7 @@ const AdminCVDetails = () => {
                                         to={`/admin/cv/${cv.id}`}
                                         className={`block p-4 rounded-xl transition-all ${cv.id === id
                                             ? 'bg-indigo-600 text-white shadow-lg shadow-indigo-600/20'
-                                            : 'bg-white/5 hover:bg-white/10 text-gray-300'
+                                            : 'bg-slate-100 dark:bg-white/5 hover:bg-slate-200 dark:hover:bg-white/10 text-slate-600 dark:text-gray-300'
                                             }`}
                                     >
                                         <div className="text-sm font-bold truncate leading-none mb-2">{cv.version}</div>
@@ -98,23 +98,23 @@ const AdminCVDetails = () => {
                     </div>
 
                     {/* CV Content */}
-                    <div className="bg-white/5 rounded-2xl border border-white/10 p-6 sm:p-8 md:p-12 print:bg-white print:text-black print:border-0 shadow-2xl">
+                    <div className="bg-white dark:bg-white/5 rounded-2xl border border-slate-200 dark:border-white/10 p-6 sm:p-8 md:p-12 print:bg-white print:text-black print:border-0 shadow-2xl">
                         {/* Header */}
-                        <header className="mb-10 pb-8 border-b border-white/10 print:border-gray-300">
+                        <header className="mb-10 pb-8 border-b border-slate-200 dark:border-white/10">
                             <div className="flex flex-col sm:flex-row justify-between items-start gap-6 sm:gap-4 mb-6">
                                 <div>
-                                    <h1 className="text-3xl sm:text-5xl font-black mb-2 print:text-black text-white leading-tight">{cvData.personalInfo.name}</h1>
-                                    <h2 className="text-lg sm:text-2xl text-indigo-400 font-bold print:text-gray-700">
+                                    <h1 className="text-3xl sm:text-5xl font-black mb-2 print:text-black text-slate-900 dark:text-white leading-tight">{cvData.personalInfo.name}</h1>
+                                    <h2 className="text-lg sm:text-2xl text-indigo-600 dark:text-indigo-400 font-bold print:text-gray-700">
                                         {cvData.personalInfo.title}
                                     </h2>
                                 </div>
-                                <div className="text-[10px] md:text-sm text-gray-500 print:text-gray-600 font-bold uppercase tracking-widest">
-                                    <div className="mb-1">Version: <span className="text-white print:text-black">{cvData.version}</span></div>
-                                    <div>Date: <span className="text-white print:text-black">{cvData.date}</span></div>
+                                <div className="text-[10px] md:text-sm text-slate-500 print:text-gray-600 font-bold uppercase tracking-widest">
+                                    <div className="mb-1">Version: <span className="text-slate-900 dark:text-white print:text-black">{cvData.version}</span></div>
+                                    <div>Date: <span className="text-slate-900 dark:text-white print:text-black">{cvData.date}</span></div>
                                 </div>
                             </div>
 
-                            <div className="flex flex-wrap gap-x-6 gap-y-3 text-sm text-gray-400 print:text-gray-600 font-inter">
+                            <div className="flex flex-wrap gap-x-6 gap-y-3 text-sm text-slate-500 dark:text-gray-400 print:text-gray-600 font-inter">
                                 <span className="flex items-center gap-2">📧 {cvData.personalInfo.email}</span>
                                 {cvData.personalInfo.phone && <span className="flex items-center gap-2">📱 {cvData.personalInfo.phone}</span>}
                                 {cvData.personalInfo.github && <span className="flex items-center gap-2">💻 {cvData.personalInfo.github}</span>}
@@ -125,22 +125,22 @@ const AdminCVDetails = () => {
                         {/* Professional Summary */}
                         {cvData.summary && (
                             <section className="mb-12">
-                                <h3 className="text-xl md:text-2xl font-black mb-4 text-indigo-400 uppercase tracking-widest text-xs print:text-gray-900">Professional Summary</h3>
-                                <p className="text-gray-300 leading-relaxed print:text-gray-700 font-inter text-sm md:text-base">{cvData.summary}</p>
+                                <h3 className="text-xl md:text-2xl font-black mb-4 text-indigo-600 dark:text-indigo-400 uppercase tracking-widest text-xs print:text-gray-900">Professional Summary</h3>
+                                <p className="text-slate-700 dark:text-gray-300 leading-relaxed print:text-gray-700 font-inter text-sm md:text-base">{cvData.summary}</p>
                             </section>
                         )}
 
                         {/* Technical Skills */}
                         <section className="mb-12">
-                            <h3 className="text-xl md:text-2xl font-black mb-6 text-indigo-400 uppercase tracking-widest text-xs print:text-gray-900">Technical Skills</h3>
+                            <h3 className="text-xl md:text-2xl font-black mb-6 text-indigo-600 dark:text-indigo-400 uppercase tracking-widest text-xs print:text-gray-900">Technical Skills</h3>
                             <div className="grid grid-cols-1 md:grid-cols-2 gap-6 md:gap-8">
                                 {Object.entries(cvData.skills).map(([key, value]) => (
                                     value && (
                                         <div key={key}>
-                                            <h4 className="font-bold mb-2 text-white print:text-gray-900 text-sm md:text-base capitalize">
+                                            <h4 className="font-bold mb-2 text-slate-900 dark:text-white print:text-gray-900 text-sm md:text-base capitalize">
                                                 {key.replace(/([A-Z])/g, ' $1')}
                                             </h4>
-                                            <p className="text-gray-400 print:text-gray-700 font-inter text-sm">{value}</p>
+                                            <p className="text-slate-500 dark:text-gray-400 print:text-gray-700 font-inter text-sm">{value}</p>
                                         </div>
                                     )
                                 ))}
