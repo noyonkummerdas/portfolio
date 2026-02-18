@@ -16,6 +16,7 @@ import CV from './pages/CV';
 import AdminCVForm from './pages/AdminCVForm';
 import AdminCVDetails from './pages/AdminCVDetails';
 import CvFrom from './pages/cvFrom';
+import ProfessionalCV from './pages/ProfessionalCV';
 
 // Routes Configuration
 function App() {
@@ -37,6 +38,7 @@ function App() {
             <Route path="/admin/inquiries/:id" element={<InquiryDetails />} />
             <Route path="/hello-developer" element={<HelloDeveloper />} />
             <Route path="/cv" element={<CV />} />
+            <Route path="/professional-cv" element={<ProfessionalCV />} />
             <Route path="/admin/cv" element={<AdminCVForm />} />
             <Route path="/cvFrom" element={<CvFrom />} />
             <Route path="/admin/cv/:id" element={<AdminCVDetails />} />

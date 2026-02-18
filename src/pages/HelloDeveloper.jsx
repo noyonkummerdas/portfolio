@@ -323,7 +323,7 @@ const HelloDeveloper = () => {
                                     </div>
 
                                     <div className="space-y-4 pt-4">
-                                        <p className="text-sm font-black text-primary uppercase tracking-[0.2em]">Tech Stack</p>
+                                        <p className="text-sm font-black text-primary uppercase tracking-[0.2em]">Tech </p>
                                         <p className="text-lg font-bold text-white bg-white/5 px-6 py-3 rounded-xl border border-white/10 inline-block">
                                             {project.techStack}
                                         </p>
