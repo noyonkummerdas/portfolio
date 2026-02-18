@@ -336,7 +336,7 @@ const HelloDeveloper = () => {
                                             rel="noopener noreferrer"
                                             className="inline-flex items-center gap-3 px-8 py-4 bg-primary text-secondary font-black rounded-xl hover:bg-white hover:scale-105 transition-all duration-300 shadow-xl shadow-primary/20"
                                         >
-                                            View Project <FaGithub className="text-xl" />
+                                            Project <FaGithub className="text-xl" />
                                         </a>
                                     </div>
                                 </motion.div>
