@@ -2,7 +2,9 @@
 import React, { useState, useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { submitHireMe, resetSubmitStatus } from '../features/hireMeSlice';
+// import { ChevronDownIcon } from "@heroicons/react/24/solid";
 import { ChevronDownIcon } from "@heroicons/react/24/solid";
+
 
 const HireMe = () => {
     const dispatch = useDispatch();
@@ -83,7 +85,7 @@ const HireMe = () => {
                         ))}
                     </div>
                 </div>
-                        
+
                 {/* Right Column: Intake Form */}
                 <div className="bg-white/5 backdrop-blur-xl border border-white/10 p-6 sm:p-8 md:p-10 rounded-[2rem] md:rounded-[2.5rem] order-1 lg:order-2 self-start">
                     <h2 className="text-xl md:text-2xl font-black font-poppins mb-6 text-white text-center lg:text-left">Tell me about your project</h2>
