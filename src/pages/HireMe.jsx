@@ -2,6 +2,7 @@
 import React, { useState, useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { submitHireMe, resetSubmitStatus } from '../features/hireMeSlice';
+import { ChevronDownIcon } from "@heroicons/react/24/solid";
 
 const HireMe = () => {
     const dispatch = useDispatch();
@@ -82,7 +83,7 @@ const HireMe = () => {
                         ))}
                     </div>
                 </div>
-
+                        
                 {/* Right Column: Intake Form */}
                 <div className="bg-white/5 backdrop-blur-xl border border-white/10 p-6 sm:p-8 md:p-10 rounded-[2rem] md:rounded-[2.5rem] order-1 lg:order-2 self-start">
                     <h2 className="text-xl md:text-2xl font-black font-poppins mb-6 text-white text-center lg:text-left">Tell me about your project</h2>
@@ -91,29 +92,49 @@ const HireMe = () => {
                         {/* Client Info */}
                         <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                             <div className="space-y-2">
-                                <label className="text-[10px] uppercase tracking-widest font-bold text-gray-400">Name</label>
-                                <input type="text" name="name" value={formData.name} onChange={handleChange} className="w-full bg-black/20 border border-white/10 rounded-xl px-4 py-3 text-white focus:outline-none focus:border-indigo-500 transition-colors text-sm" placeholder="John Doe" required />
+                                <label className="text-[14px] uppercase tracking-widest font-bold text-black-500">Name</label>
+                                <input type="text" name="name" value={formData.name} onChange={handleChange} className="w-full bg-white/30 border border-gray-200 rounded-xl px-4 py-3 text-white focus:outline-none focus:border-indigo-500 placeholder-gray-300 transition-colors text-sm" placeholder="John Doe" required />
                             </div>
                             <div className="space-y-2">
                                 <label className="text-[10px] uppercase tracking-widest font-bold text-gray-400">Email</label>
-                                <input type="email" name="email" value={formData.email} onChange={handleChange} className="w-full bg-black/20 border border-white/10 rounded-xl px-4 py-3 text-white focus:outline-none focus:border-indigo-500 transition-colors text-sm" placeholder="john@example.com" required />
+                                <input type="email" name="email" value={formData.email} onChange={handleChange} className="w-full bg-white/30 border border-gray-200 rounded-xl px-4 py-3 text-white focus:outline-none focus:border-indigo-500 placeholder-gray-300 transition-colors text-sm" placeholder="john@example.com" required />
                             </div>
                         </div>
 
                         {/* Project Scope */}
                         <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                            import {ChevronDownIcon} from "@heroicons/react/24/solid";
+
                             <div className="space-y-2">
-                                <label className="text-[10px] uppercase tracking-widest font-bold text-gray-400">Project Type</label>
-                                <select name="projectType" value={formData.projectType} onChange={handleChange} className="w-full bg-black/20 border border-white/10 rounded-xl px-4 py-3 text-white focus:outline-none focus:border-indigo-500 transition-colors appearance-none cursor-pointer text-sm">
-                                    <option>Web Application</option>
-                                    <option>Mobile App (React Native)</option>
-                                    <option>Marketing Website</option>
-                                    <option>Consulting / Audit</option>
-                                </select>
+                                <label className="text-[12px] uppercase tracking-widest font-bold text-black-400">
+                                    Project Type
+                                </label>
+
+                                <div className="relative">
+                                    <select
+                                        name="projectType"
+                                        value={formData.projectType}
+                                        onChange={handleChange}
+                                        className="w-full bg-black border border-gray-200 rounded-xl px-4 py-3 
+                 text-gray-200 focus:outline-none transition-colors 
+                 appearance-none cursor-pointer text-sm pr-10"
+                                    >
+                                        <option className="bg-black text-gray-300">Web Application</option>
+                                        <option className="bg-black text-gray-300">Mobile App (React Native)</option>
+                                        <option className="bg-black text-gray-300">Marketing Website</option>
+                                        <option className="bg-black text-gray-300">Consulting / Audit</option>
+                                    </select>
+
+                                    {/* Down Arrow */}
+                                    <ChevronDownIcon
+                                        className="absolute right-3 top-1/2 -translate-y-1/2 h-5 w-5 text-gray-400 pointer-events-none"
+                                    />
+                                </div>
                             </div>
+
                             <div className="space-y-2">
                                 <label className="text-[10px] uppercase tracking-widest font-bold text-gray-400">Target Timeline</label>
-                                <select name="timeline" value={formData.timeline} onChange={handleChange} className="w-full bg-black/20 border border-white/10 rounded-xl px-4 py-3 text-white focus:outline-none focus:border-indigo-500 transition-colors appearance-none cursor-pointer text-sm">
+                                <select name="timeline" value={formData.timeline} onChange={handleChange} className="w-full bg-white/30 border border-gray-200 rounded-xl px-4 py-3 text-white focus:outline-none focus:border-indigo-500 placeholder-gray-300 transition-colors appearance-none cursor-pointer text-sm">
                                     <option>&lt; 1 Month</option>
                                     <option>1 - 3 Months</option>
                                     <option>3 - 6 Months</option>
