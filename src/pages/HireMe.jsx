@@ -141,6 +141,7 @@ const HireMe = () => {
                                     <option>1 - 3 Months</option>
                                     <option>3 - 6 Months</option>
                                     <option>6+ Months</option>
+                                    <option>1 year</option>
                                 </select>
                             </div>
                         </div>
