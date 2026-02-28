@@ -19,13 +19,33 @@ export const uploadCv = createAsyncThunk('cv/uploadCv', async (cvData, { rejectW
                 'Content-Type': 'multipart/form-data',
             },
         });
-        return response.data.cv; // Assuming the backend returns the new CV object
+        return response.data; // Backend returns the full new CV object
     } catch (error) {
-         if (error.response && error.response.data.message) {
-            return rejectWithValue(error.response.data.message);
+        if (error.response && error.response.data.error) {
+            return rejectWithValue(error.response.data.error);
         } else {
             return rejectWithValue(error.message);
         }
+    }
+});
+
+// Async thunk for fetching a single CV by ID
+export const fetchCvById = createAsyncThunk('cv/fetchCvById', async (id, { rejectWithValue }) => {
+    try {
+        const response = await axios.get(`${API_URL}/${id}`);
+        return response.data;
+    } catch (error) {
+        return rejectWithValue(error.response.data.error || error.message);
+    }
+});
+
+// Async thunk for deleting a CV
+export const deleteCv = createAsyncThunk('cv/deleteCv', async (id, { rejectWithValue }) => {
+    try {
+        await axios.delete(`${API_URL}/${id}`);
+        return id;
+    } catch (error) {
+        return rejectWithValue(error.response.data.error || error.message);
     }
 });
 
@@ -33,6 +53,7 @@ const cvSlice = createSlice({
     name: 'cv',
     initialState: {
         cvs: [],
+        currentCv: null,
         loading: false,
         error: null,
         uploadLoading: false,
@@ -77,6 +98,35 @@ const cvSlice = createSlice({
             .addCase(uploadCv.rejected, (state, action) => {
                 state.uploadLoading = false;
                 state.uploadError = action.payload || action.error.message;
+            })
+            // Fetch CV by ID
+            .addCase(fetchCvById.pending, (state) => {
+                state.loading = true;
+                state.error = null;
+            })
+            .addCase(fetchCvById.fulfilled, (state, action) => {
+                state.loading = false;
+                state.currentCv = action.payload;
+            })
+            .addCase(fetchCvById.rejected, (state, action) => {
+                state.loading = false;
+                state.error = action.payload || action.error.message;
+            })
+            // Delete CV
+            .addCase(deleteCv.pending, (state) => {
+                state.loading = true;
+                state.error = null;
+            })
+            .addCase(deleteCv.fulfilled, (state, action) => {
+                state.loading = false;
+                state.cvs = state.cvs.filter(cv => cv._id !== action.payload);
+                if (state.currentCv && state.currentCv._id === action.payload) {
+                    state.currentCv = null;
+                }
+            })
+            .addCase(deleteCv.rejected, (state, action) => {
+                state.loading = false;
+                state.error = action.payload || action.error.message;
             });
     },
 });

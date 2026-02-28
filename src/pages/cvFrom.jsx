@@ -1,8 +1,14 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
+import { FaArrowLeft, FaCloudUploadAlt } from 'react-icons/fa';
+import { uploadCv, resetUploadStatus } from '../features/cv/cvSlice';
 
 const CvFrom = () => {
     const navigate = useNavigate();
+    const dispatch = useDispatch();
+    const { uploadSuccess } = useSelector((state) => state.cv);
+
     const [formData, setFormData] = useState({
         personalInfo: {
             name: 'NK Noyon',
@@ -27,6 +33,16 @@ const CvFrom = () => {
         certifications: '',
         languages: ''
     });
+
+    useEffect(() => {
+        if (uploadSuccess) {
+            const timer = setTimeout(() => {
+                dispatch(resetUploadStatus());
+                navigate('/cv');
+            }, 3000);
+            return () => clearTimeout(timer);
+        }
+    }, [uploadSuccess, dispatch, navigate]);
 
     const handlePersonalInfoChange = (field, value) => {
         setFormData(prev => ({
@@ -91,25 +107,7 @@ const CvFrom = () => {
 
     const handleSubmit = (e) => {
         e.preventDefault();
-
-        // Get existing CVs from localStorage
-        const existingCVs = JSON.parse(localStorage.getItem('cvData') || '[]');
-
-        // Generate version number based on existing CVs count
-        const versionNumber = String(existingCVs.length + 1).padStart(2, '0');
-
-        const cvData = {
-            id: Date.now().toString(),
-            version: `CV-v-${versionNumber}`,
-            date: new Date().toISOString().split('T')[0],
-            ...formData
-        };
-
-        existingCVs.push(cvData);
-        localStorage.setItem('cvData', JSON.stringify(existingCVs));
-
-        alert('CV saved successfully!');
-        navigate(`/cv`);
+        dispatch(uploadCv(formData));
     };
 
     return (

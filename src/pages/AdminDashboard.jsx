@@ -3,13 +3,16 @@ import React, { useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 import { fetchSubmissions } from '../features/hireMeSlice';
+import { fetchCvs } from '../features/cv/cvSlice';
+import { FaFileAlt, FaArrowRight } from 'react-icons/fa';
 
 const AdminDashboard = () => {
     const dispatch = useDispatch();
-    const { submissions } = useSelector((state) => state.hireMe);
+    const { cvs } = useSelector((state) => state.cv);
 
     useEffect(() => {
         dispatch(fetchSubmissions());
+        dispatch(fetchCvs());
     }, [dispatch]);
 
     const clearData = () => {
@@ -30,35 +33,42 @@ const AdminDashboard = () => {
                 </div>
             </div>
 
-            {submissions.length === 0 ? (
-                <div className="text-center py-20 bg-slate-100 dark:bg-white/5 rounded-3xl border border-slate-200 dark:border-white/5">
-                    <p className="text-slate-500 dark:text-gray-400">No inquiries received yet.</p>
+            {/* CV Management Section */}
+            <div className="mt-20">
+                <div className="flex justify-between items-center mb-8">
+                    <h2 className="text-2xl font-black text-slate-900 dark:text-white uppercase tracking-widest text-sm">CV Versions</h2>
+                    <Link to="/admin/cv" className="text-xs font-black text-indigo-600 hover:text-indigo-500 uppercase tracking-widest transition-colors">
+                        + New Version
+                    </Link>
                 </div>
-            ) : (
-                <div className="grid gap-4">
-                    {submissions.map((item) => (
-                        <Link
-                            to={`/admin/inquiries/${item._id}`}
-                            key={item._id}
-                            className="flex flex-col md:flex-row md:items-center justify-between p-6 bg-white dark:bg-secondary/40 backdrop-blur-xl border border-slate-200 dark:border-white/5 rounded-2xl hover:border-indigo-500/50 transition-all group gap-4 md:gap-0 shadow-sm dark:shadow-none"
-                        >
-                            <div>
-                                <h3 className="text-lg md:text-xl font-bold text-slate-900 dark:text-white group-hover:text-indigo-600 dark:group-hover:text-indigo-400 transition-colors">{item.name}</h3>
-                                <p className="text-sm text-slate-500 dark:text-gray-400 truncate max-w-[250px] sm:max-w-none">{item.email} • {item.company || 'No Company'}</p>
-                            </div>
-                            <div className="flex items-center justify-between md:justify-end gap-6">
-                                <div className="text-left md:text-right">
-                                    <div className="text-xs font-bold text-indigo-600 dark:text-indigo-400 uppercase tracking-widest mb-1">{item.projectType}</div>
-                                    <div className="text-xs text-slate-500 dark:text-gray-300">{new Date(item.createdAt).toLocaleDateString()}</div>
+
+                {cvs.length === 0 ? (
+                    <div className="text-center py-12 bg-slate-100 dark:bg-white/5 rounded-3xl border border-dashed border-slate-300 dark:border-white/10">
+                        <p className="text-slate-500 dark:text-gray-400">No CV versions uploaded to backend.</p>
+                    </div>
+                ) : (
+                    <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+                        {cvs.map((cv) => (
+                            <Link
+                                key={cv._id}
+                                to={`/admin/cv/${cv._id}`}
+                                className="group p-6 bg-white dark:bg-secondary/40 border border-slate-200 dark:border-white/5 rounded-2xl hover:border-indigo-500/50 transition-all flex items-center justify-between shadow-sm dark:shadow-none"
+                            >
+                                <div className="flex items-center gap-4">
+                                    <div className="w-10 h-10 rounded-xl bg-indigo-600/10 text-indigo-600 flex items-center justify-center group-hover:bg-indigo-600 group-hover:text-white transition-all">
+                                        <FaFileAlt />
+                                    </div>
+                                    <div>
+                                        <h3 className="font-bold text-slate-900 dark:text-white">{cv.version}</h3>
+                                        <p className="text-xs text-slate-500 dark:text-gray-400">{new Date(cv.createdAt).toLocaleDateString()}</p>
+                                    </div>
                                 </div>
-                                <div className="w-8 h-8 rounded-full bg-slate-100 dark:bg-white/5 flex items-center justify-center text-slate-400 dark:text-gray-400 group-hover:bg-indigo-600 group-hover:text-white transition-all transform group-hover:translate-x-1">
-                                    →
-                                </div>
-                            </div>
-                        </Link>
-                    ))}
-                </div>
-            )}
+                                <FaArrowRight className="text-slate-300 dark:text-gray-600 group-hover:text-indigo-500 group-hover:translate-x-1 transition-all" />
+                            </Link>
+                        ))}
+                    </div>
+                )}
+            </div>
         </div>
     );
 };

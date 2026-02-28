@@ -1,27 +1,25 @@
 import React, { useState, useEffect } from 'react';
 import { useParams, useNavigate, Link } from 'react-router-dom';
+import { useDispatch, useSelector } from 'react-redux';
 import { FaTrash, FaDownload } from 'react-icons/fa';
+import { fetchCvs, fetchCvById, deleteCv } from '../features/cv/cvSlice';
 
 const AdminCVDetails = () => {
     const { id } = useParams();
     const navigate = useNavigate();
-    const [cvData, setCvData] = useState(null);
-    const [allCVs, setAllCVs] = useState([]);
+    const dispatch = useDispatch();
+    const { cvs: allCVs, currentCv: cvData, loading } = useSelector((state) => state.cv);
 
     useEffect(() => {
-        const cvs = JSON.parse(localStorage.getItem('cvData') || '[]');
-        setAllCVs(cvs);
-
-        const current = cvs.find(cv => cv.id === id);
-        if (current) {
-            setCvData(current);
+        dispatch(fetchCvs());
+        if (id) {
+            dispatch(fetchCvById(id));
         }
-    }, [id]);
+    }, [id, dispatch]);
 
-    const handleDelete = () => {
+    const handleDelete = async () => {
         if (window.confirm('Are you sure you want to delete this CV version?')) {
-            const updatedCVs = allCVs.filter(cv => cv.id !== id);
-            localStorage.setItem('cvData', JSON.stringify(updatedCVs));
+            await dispatch(deleteCv(id));
             navigate('/admin');
         }
     };
@@ -30,10 +28,18 @@ const AdminCVDetails = () => {
         window.print();
     };
 
+    if (loading) {
+        return (
+            <div className="min-h-screen pt-24 pb-12 px-6 flex items-center justify-center bg-slate-100 dark:bg-secondary">
+                <p className="text-indigo-600 animate-pulse font-bold">Loading CV Details...</p>
+            </div>
+        );
+    }
+
     if (!cvData) {
         return (
-            <div className="min-h-screen pt-24 pb-12 px-6 flex items-center justify-center">
-                <p className="text-gray-400">CV not found</p>
+            <div className="min-h-screen pt-24 pb-12 px-6 flex items-center justify-center bg-slate-100 dark:bg-secondary">
+                <p className="text-gray-400">CV not found on server</p>
             </div>
         );
     }
