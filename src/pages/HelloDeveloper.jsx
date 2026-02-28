@@ -1,5 +1,5 @@
 
-import React from 'react';
+import React, { useState } from 'react';
 import { motion } from 'framer-motion';
 import { useNavigate } from 'react-router-dom';
 import {
@@ -30,9 +30,11 @@ import profilePic from '../assets/profile/profilePic.png';
 
 // Project Assets
 import projects from '../data/projects';
+import Chatbot from '../components/Chatbot';
 
 const HelloDeveloper = () => {
     const navigate = useNavigate();
+    const [isChatOpen, setIsChatOpen] = useState(false);
     // Projects are now imported from ../data/projects.js
 
 
@@ -197,12 +199,12 @@ const HelloDeveloper = () => {
                             >
                                 <FaPlus />
                             </button>
-                            <a
-                                href="tel:+8801700000000"
+                            <button
+                                onClick={() => setIsChatOpen(true)}
                                 className="flex items-center gap-2 px-6 py-2 bg-[#f6f8fa] hover:bg-[#ebeff2] text-[#24292f] font-bold rounded-md transition-all border border-[#d0d7de] text-sm"
                             >
                                 <SiMessenger className="text-[#0969da]" /> chat
-                            </a>
+                            </button>
                         </div>
                     </div>
 
@@ -434,6 +436,8 @@ const HelloDeveloper = () => {
                     </div>
                 </div>
             </div>
+
+            <Chatbot isOpen={isChatOpen} onClose={() => setIsChatOpen(false)} />
         </div >
     );
 };
