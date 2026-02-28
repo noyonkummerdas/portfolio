@@ -218,7 +218,7 @@ const AdminCVForm = () => {
                                         type="file"
                                         accept="application/pdf"
                                         onChange={handleFileChange}
-                                        className="w-full text-[10px] text-gray-300 file:mr-4 file:py-1.5 file:px-3 file:rounded-lg file:border-0 file:text-[10px] file:font-black file:bg-indigo-600 file:text-white hover:file:bg-indigo-500 cursor-pointer"
+                                        className="w-full text-xs text-gray-300 file:mr-4 file:py-1.5 file:px-3 file:rounded-lg file:border-0 file:text-xs file:font-black file:bg-indigo-600 file:text-white hover:file:bg-indigo-500 cursor-pointer"
                                         required
                                     />
                                 </div>
@@ -230,7 +230,7 @@ const AdminCVForm = () => {
                                         type="file"
                                         accept="image/*"
                                         onChange={handleImageChange}
-                                        className="w-full text-[10px] text-gray-300 file:mr-4 file:py-1.5 file:px-3 file:rounded-lg file:border-0 file:text-[10px] file:font-black file:bg-indigo-600 file:text-white hover:file:bg-indigo-500 cursor-pointer"
+                                        className="w-full text-xs text-gray-300 file:mr-4 file:py-1.5 file:px-3 file:rounded-lg file:border-0 file:text-xs file:font-black file:bg-indigo-600 file:text-white hover:file:bg-indigo-500 cursor-pointer"
                                     />
                                 </div>
                             </div>
@@ -253,12 +253,12 @@ const AdminCVForm = () => {
                                 { label: 'LinkedIn', field: 'linkedin', type: 'text' }
                             ].map((input) => (
                                 <div key={input.field}>
-                                    <label className="block text-xs font-black uppercase tracking-widest mb-2 text-gray-400">{input.label}</label>
+                                    <label className="block text-xs font-black uppercase tracking-widest mb-2 text-slate-700 dark:text-gray-400">{input.label}</label>
                                     <input
                                         type={input.type}
                                         value={formData.personalInfo[input.field]}
                                         onChange={(e) => handlePersonalInfoChange(input.field, e.target.value)}
-                                        className="w-full px-4 py-3 bg-white/5 border border-white/10 rounded-xl focus:border-indigo-500 focus:outline-none text-white text-sm"
+                                        className="w-full px-4 py-3 bg-white/50 dark:bg-white/5 border border-slate-300 dark:border-white/10 rounded-xl focus:border-indigo-500 focus:outline-none text-slate-800 dark:text-white text-sm"
                                         required={['name', 'title', 'email'].includes(input.field)}
                                     />
                                 </div>
@@ -272,7 +272,7 @@ const AdminCVForm = () => {
                         <textarea
                             value={formData.summary}
                             onChange={(e) => setFormData(prev => ({ ...prev, summary: e.target.value }))}
-                            className="w-full px-4 py-3 bg-white/5 border border-white/10 rounded-xl focus:border-indigo-500 focus:outline-none h-32 text-white text-sm font-inter"
+                            className="w-full px-4 py-3 bg-white/50 dark:bg-white/5 border border-slate-300 dark:border-white/10 rounded-xl focus:border-indigo-500 focus:outline-none h-32 text-slate-800 dark:text-white text-sm"
                             placeholder="Brief overview of your expertise..."
                             required
                         />
@@ -291,12 +291,12 @@ const AdminCVForm = () => {
                                 { label: 'Other', field: 'other' }
                             ].map((skill) => (
                                 <div key={skill.field}>
-                                    <label className="block text-xs font-black uppercase tracking-widest mb-2 text-gray-400">{skill.label}</label>
+                                    <label className="block text-xs font-black uppercase tracking-widest mb-2 text-slate-700 dark:text-gray-400">{skill.label}</label>
                                     <input
                                         type="text"
                                         value={formData.skills[skill.field]}
                                         onChange={(e) => handleSkillsChange(skill.field, e.target.value)}
-                                        className="w-full px-4 py-3 bg-white/5 border border-white/10 rounded-xl focus:border-indigo-500 focus:outline-none text-white text-sm"
+                                        className="w-full px-4 py-3 bg-white/50 dark:bg-white/5 border border-slate-300 dark:border-white/10 rounded-xl focus:border-indigo-500 focus:outline-none text-slate-800 dark:text-white text-sm"
                                         placeholder={`e.g. ${skill.label === 'Frontend Development' ? 'React, React Native' : '...'}`}
                                     />
                                 </div>
@@ -333,39 +333,39 @@ const AdminCVForm = () => {
                                     </div>
                                     <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                                         <div>
-                                            <label className="block text-xs font-black uppercase tracking-widest mb-2 text-gray-400">Job Title</label>
+                                            <label className="block text-[10px] font-black uppercase tracking-widest mb-2 text-slate-700 dark:text-gray-400">Job Title</label>
                                             <input
                                                 type="text"
                                                 value={exp.title}
                                                 onChange={(e) => handleExperienceChange(index, 'title', e.target.value)}
-                                                className="w-full px-4 py-3 bg-black/20 border border-white/10 rounded-xl focus:border-indigo-500 focus:outline-none text-white text-sm"
+                                                className="w-full px-4 py-3 bg-white/50 dark:bg-black/20 border border-slate-300 dark:border-white/10 rounded-xl focus:border-indigo-500 focus:outline-none text-slate-800 dark:text-white text-sm"
                                             />
                                         </div>
                                         <div>
-                                            <label className="block text-xs font-black uppercase tracking-widest mb-2 text-gray-400">Company</label>
+                                            <label className="block text-[10px] font-black uppercase tracking-widest mb-2 text-slate-700 dark:text-gray-400">Company</label>
                                             <input
                                                 type="text"
                                                 value={exp.company}
                                                 onChange={(e) => handleExperienceChange(index, 'company', e.target.value)}
-                                                className="w-full px-4 py-3 bg-black/20 border border-white/10 rounded-xl focus:border-indigo-500 focus:outline-none text-white text-sm"
+                                                className="w-full px-4 py-3 bg-white/50 dark:bg-black/20 border border-slate-300 dark:border-white/10 rounded-xl focus:border-indigo-500 focus:outline-none text-slate-800 dark:text-white text-sm"
                                             />
                                         </div>
                                         <div className="md:col-span-2">
-                                            <label className="block text-xs font-black uppercase tracking-widest mb-2 text-gray-400">Duration</label>
+                                            <label className="block text-[10px] font-black uppercase tracking-widest mb-2 text-slate-700 dark:text-gray-400">Duration</label>
                                             <input
                                                 type="text"
                                                 value={exp.duration}
                                                 onChange={(e) => handleExperienceChange(index, 'duration', e.target.value)}
-                                                className="w-full px-4 py-3 bg-black/20 border border-white/10 rounded-xl focus:border-indigo-500 focus:outline-none text-white text-sm"
+                                                className="w-full px-4 py-3 bg-white/50 dark:bg-black/20 border border-slate-300 dark:border-white/10 rounded-xl focus:border-indigo-500 focus:outline-none text-slate-800 dark:text-white text-sm"
                                                 placeholder="e.g., 2020 - 2022"
                                             />
                                         </div>
                                         <div className="md:col-span-2">
-                                            <label className="block text-xs font-black uppercase tracking-widest mb-2 text-gray-400">Responsibilities (one per line)</label>
+                                            <label className="block text-xs font-black uppercase tracking-widest mb-2 text-slate-700 dark:text-gray-400">Responsibilities (one per line)</label>
                                             <textarea
                                                 value={exp.responsibilities}
                                                 onChange={(e) => handleExperienceChange(index, 'responsibilities', e.target.value)}
-                                                className="w-full px-4 py-3 bg-black/20 border border-white/10 rounded-xl focus:border-indigo-500 focus:outline-none h-32 text-white text-sm font-inter"
+                                                className="w-full px-4 py-3 bg-white/50 dark:bg-black/20 border border-slate-300 dark:border-white/10 rounded-xl focus:border-indigo-500 focus:outline-none h-32 text-slate-800 dark:text-white text-sm"
                                                 placeholder="List your key responsibilities..."
                                             />
                                         </div>
@@ -396,7 +396,7 @@ const AdminCVForm = () => {
                                             <button
                                                 type="button"
                                                 onClick={() => removeProject(index)}
-                                                className="text-red-500 hover:text-red-400 text-[10px] font-black uppercase tracking-widest"
+                                                className="text-red-500 hover:text-red-400 text-xs font-black uppercase tracking-widest"
                                             >
                                                 Remove
                                             </button>
@@ -404,40 +404,40 @@ const AdminCVForm = () => {
                                     </div>
                                     <div className="space-y-6">
                                         <div>
-                                            <label className="block text-xs font-black uppercase tracking-widest mb-2 text-gray-400">Project Name</label>
+                                            <label className="block text-[10px] font-black uppercase tracking-widest mb-2 text-slate-700 dark:text-gray-400">Project Name</label>
                                             <input
                                                 type="text"
                                                 value={project.name}
                                                 onChange={(e) => handleProjectChange(index, 'name', e.target.value)}
-                                                className="w-full px-4 py-3 bg-black/20 border border-white/10 rounded-xl focus:border-indigo-500 focus:outline-none text-white text-sm"
+                                                className="w-full px-4 py-3 bg-white/50 dark:bg-black/20 border border-slate-300 dark:border-white/10 rounded-xl focus:border-indigo-500 focus:outline-none text-slate-800 dark:text-white text-sm"
                                             />
                                         </div>
                                         <div>
-                                            <label className="block text-xs font-black uppercase tracking-widest mb-2 text-gray-400">Description</label>
+                                            <label className="block text-xs font-black uppercase tracking-widest mb-2 text-slate-700 dark:text-gray-400">Description</label>
                                             <textarea
                                                 value={project.description}
                                                 onChange={(e) => handleProjectChange(index, 'description', e.target.value)}
-                                                className="w-full px-4 py-3 bg-black/20 border border-white/10 rounded-xl focus:border-indigo-500 focus:outline-none h-24 text-white text-sm font-inter"
+                                                className="w-full px-4 py-3 bg-white/50 dark:bg-black/20 border border-slate-300 dark:border-white/10 rounded-xl focus:border-indigo-500 focus:outline-none h-24 text-slate-800 dark:text-white text-sm"
                                             />
                                         </div>
                                         <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                                             <div>
-                                                <label className="block text-xs font-black uppercase tracking-widest mb-2 text-gray-400">Technologies</label>
+                                                <label className="block text-[10px] font-black uppercase tracking-widest mb-2 text-slate-700 dark:text-gray-400">Technologies</label>
                                                 <input
                                                     type="text"
                                                     value={project.tech}
                                                     onChange={(e) => handleProjectChange(index, 'tech', e.target.value)}
-                                                    className="w-full px-4 py-3 bg-black/20 border border-white/10 rounded-xl focus:border-indigo-500 focus:outline-none text-white text-sm"
+                                                    className="w-full px-4 py-3 bg-white/50 dark:bg-black/20 border border-slate-300 dark:border-white/10 rounded-xl focus:border-indigo-500 focus:outline-none text-slate-800 dark:text-white text-sm"
                                                     placeholder="React, Node.js, MongoDB"
                                                 />
                                             </div>
                                             <div>
-                                                <label className="block text-xs font-black uppercase tracking-widest mb-2 text-gray-400">Result/Impact</label>
+                                                <label className="block text-[10px] font-black uppercase tracking-widest mb-2 text-slate-700 dark:text-gray-400">Result/Impact</label>
                                                 <input
                                                     type="text"
                                                     value={project.result}
                                                     onChange={(e) => handleProjectChange(index, 'result', e.target.value)}
-                                                    className="w-full px-4 py-3 bg-black/20 border border-white/10 rounded-xl focus:border-indigo-500 focus:outline-none text-white text-sm"
+                                                    className="w-full px-4 py-3 bg-white/50 dark:bg-black/20 border border-slate-300 dark:border-white/10 rounded-xl focus:border-indigo-500 focus:outline-none text-slate-800 dark:text-white text-sm"
                                                     placeholder="e.g. Improved Performance by 40%"
                                                 />
                                             </div>
@@ -491,7 +491,7 @@ const AdminCVForm = () => {
                             <textarea
                                 value={formData.certifications}
                                 onChange={(e) => setFormData(prev => ({ ...prev, certifications: e.target.value }))}
-                                className="w-full px-4 py-3 bg-white/5 border border-white/10 rounded-xl focus:border-indigo-500 focus:outline-none h-32 text-white text-sm font-inter"
+                                className="w-full px-4 py-3 bg-white/5 border border-white/10 rounded-xl focus:border-indigo-500 focus:outline-none h-32 text-white text-sm"
                                 placeholder="List your certifications..."
                             />
                         </section>
@@ -500,7 +500,7 @@ const AdminCVForm = () => {
                             <textarea
                                 value={formData.languages}
                                 onChange={(e) => setFormData(prev => ({ ...prev, languages: e.target.value }))}
-                                className="w-full px-4 py-3 bg-white/5 border border-white/10 rounded-xl focus:border-indigo-500 focus:outline-none h-32 text-white text-sm font-inter"
+                                className="w-full px-4 py-3 bg-white/5 border border-white/10 rounded-xl focus:border-indigo-500 focus:outline-none h-32 text-white text-sm"
                                 placeholder="English - Professional..."
                             />
                         </section>

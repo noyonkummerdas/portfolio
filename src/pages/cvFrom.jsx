@@ -136,12 +136,12 @@ const CvFrom = () => {
                                 { label: 'LinkedIn', field: 'linkedin', type: 'text' }
                             ].map((input) => (
                                 <div key={input.field}>
-                                    <label className="block text-xs font-black uppercase tracking-widest mb-2 text-gray-400">{input.label}</label>
+                                    <label className="block text-xs font-black uppercase tracking-widest mb-2 text-slate-700 dark:text-gray-400">{input.label}</label>
                                     <input
                                         type={input.type}
                                         value={formData.personalInfo[input.field]}
                                         onChange={(e) => handlePersonalInfoChange(input.field, e.target.value)}
-                                        className="w-full px-4 py-3 bg-white/5 border border-white/10 rounded-xl focus:border-indigo-500 focus:outline-none text-white text-sm"
+                                        className="w-full px-4 py-3 bg-white/50 dark:bg-white/5 border border-slate-300 dark:border-white/10 rounded-xl focus:border-indigo-500 focus:outline-none text-slate-800 dark:text-white text-sm"
                                         required={['name', 'title', 'email'].includes(input.field)}
                                     />
                                 </div>
@@ -155,7 +155,7 @@ const CvFrom = () => {
                         <textarea
                             value={formData.summary}
                             onChange={(e) => setFormData(prev => ({ ...prev, summary: e.target.value }))}
-                            className="w-full px-4 py-3 bg-white/5 border border-white/10 rounded-xl focus:border-indigo-500 focus:outline-none h-32 text-white text-sm font-inter"
+                            className="w-full px-4 py-3 bg-white/50 dark:bg-white/5 border border-slate-300 dark:border-white/10 rounded-xl focus:border-indigo-500 focus:outline-none h-32 text-slate-800 dark:text-white text-sm"
                             placeholder="Brief overview of your expertise..."
                             required
                         />
@@ -174,12 +174,12 @@ const CvFrom = () => {
                                 { label: 'Other', field: 'other' }
                             ].map((skill) => (
                                 <div key={skill.field}>
-                                    <label className="block text-xs font-black uppercase tracking-widest mb-2 text-gray-400">{skill.label}</label>
+                                    <label className="block text-xs font-black uppercase tracking-widest mb-2 text-slate-700 dark:text-gray-400">{skill.label}</label>
                                     <input
                                         type="text"
                                         value={formData.skills[skill.field]}
                                         onChange={(e) => handleSkillsChange(skill.field, e.target.value)}
-                                        className="w-full px-4 py-3 bg-white/5 border border-white/10 rounded-xl focus:border-indigo-500 focus:outline-none text-white text-sm"
+                                        className="w-full px-4 py-3 bg-white/50 dark:bg-white/5 border border-slate-300 dark:border-white/10 rounded-xl focus:border-indigo-500 focus:outline-none text-slate-800 dark:text-white text-sm"
                                         placeholder={`e.g. ${skill.label === 'Frontend Development' ? 'React, React Native' : '...'}`}
                                     />
                                 </div>
@@ -248,7 +248,7 @@ const CvFrom = () => {
                                             <textarea
                                                 value={exp.responsibilities}
                                                 onChange={(e) => handleExperienceChange(index, 'responsibilities', e.target.value)}
-                                                className="w-full px-4 py-3 bg-black/20 border border-white/10 rounded-xl focus:border-indigo-500 focus:outline-none h-32 text-white text-sm font-inter"
+                                                className="w-full px-4 py-3 bg-black/20 border border-white/10 rounded-xl focus:border-indigo-500 focus:outline-none h-32 text-white text-sm"
                                                 placeholder="List your key responsibilities..."
                                             />
                                         </div>
@@ -279,7 +279,7 @@ const CvFrom = () => {
                                             <button
                                                 type="button"
                                                 onClick={() => removeProject(index)}
-                                                className="text-red-500 hover:text-red-400 text-[10px] font-black uppercase tracking-widest"
+                                                className="text-red-500 hover:text-red-400 text-xs font-black uppercase tracking-widest"
                                             >
                                                 Remove
                                             </button>
@@ -300,7 +300,7 @@ const CvFrom = () => {
                                             <textarea
                                                 value={project.description}
                                                 onChange={(e) => handleProjectChange(index, 'description', e.target.value)}
-                                                className="w-full px-4 py-3 bg-black/20 border border-white/10 rounded-xl focus:border-indigo-500 focus:outline-none h-24 text-white text-sm font-inter"
+                                                className="w-full px-4 py-3 bg-black/20 border border-white/10 rounded-xl focus:border-indigo-500 focus:outline-none h-24 text-white text-sm"
                                             />
                                         </div>
                                         <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
@@ -374,7 +374,7 @@ const CvFrom = () => {
                             <textarea
                                 value={formData.certifications}
                                 onChange={(e) => setFormData(prev => ({ ...prev, certifications: e.target.value }))}
-                                className="w-full px-4 py-3 bg-white/5 border border-white/10 rounded-xl focus:border-indigo-500 focus:outline-none h-32 text-white text-sm font-inter"
+                                className="w-full px-4 py-3 bg-white/5 border border-white/10 rounded-xl focus:border-indigo-500 focus:outline-none h-32 text-white text-sm"
                                 placeholder="List your certifications..."
                             />
                         </section>
@@ -383,7 +383,7 @@ const CvFrom = () => {
                             <textarea
                                 value={formData.languages}
                                 onChange={(e) => setFormData(prev => ({ ...prev, languages: e.target.value }))}
-                                className="w-full px-4 py-3 bg-white/5 border border-white/10 rounded-xl focus:border-indigo-500 focus:outline-none h-32 text-white text-sm font-inter"
+                                className="w-full px-4 py-3 bg-white/5 border border-white/10 rounded-xl focus:border-indigo-500 focus:outline-none h-32 text-white text-sm"
                                 placeholder="English - Professional..."
                             />
                         </section>

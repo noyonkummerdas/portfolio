@@ -35,18 +35,18 @@ const Reviews = () => {
     };
 
     return (
-        <div className="pt-32 min-h-screen pb-20 bg-secondary text-white">
+        <div className="pt-32 min-h-screen pb-20 bg-slate-100 dark:bg-secondary text-slate-900 dark:text-white">
             <section className="px-6 max-w-7xl mx-auto mb-12 md:mb-16 text-center">
-                <div className="inline-block px-4 py-1.5 mb-6 md:mb-8 rounded-full border border-primary/30 bg-primary/10 text-primary text-[8px] md:text-[10px] font-black uppercase tracking-[0.3em] animate-fade-in">
+                <div className="inline-block px-4 py-1.5 mb-6 md:mb-8 rounded-full border border-primary/30 bg-primary/10 text-primary text-xs font-black uppercase tracking-[0.3em] animate-fade-in">
                     Social Proof
                 </div>
-                <h1 className="text-5xl sm:text-6xl md:text-8xl font-black font-poppins mb-6 md:mb-8 tracking-tighter text-white">
+                <h1 className="text-5xl sm:text-6xl md:text-8xl font-black mb-6 md:mb-8 tracking-tighter text-slate-900 dark:text-white">
                     Client Trust<span className="text-primary">.</span>
                 </h1>
 
                 <button
                     onClick={() => setIsFormOpen(!isFormOpen)}
-                    className="px-8 py-3 bg-primary text-secondary font-black rounded-full hover:bg-white transition-all shadow-lg shadow-primary/20 active:scale-95 text-[10px] md:text-xs uppercase tracking-widest"
+                    className="px-8 py-3 bg-primary text-secondary font-black rounded-full hover:bg-white transition-all shadow-lg shadow-primary/20 active:scale-95 text-xs uppercase tracking-widest"
                 >
                     {isFormOpen ? 'Close Form' : '+ Write a Review'}
                 </button>
@@ -55,14 +55,14 @@ const Reviews = () => {
             {/* Review Form */}
             {isFormOpen && (
                 <div className="max-w-2xl mx-auto px-4 sm:px-6 mb-16 md:mb-20 animate-fade-in">
-                    <div className="bg-surface/60 backdrop-blur-xl border border-white/5 p-6 md:p-8 rounded-2xl shadow-2xl">
-                        <h3 className="text-xl md:text-2xl font-bold font-poppins text-white mb-6">Share your experience</h3>
+                    <div className="bg-white dark:bg-surface/60 backdrop-blur-xl border border-slate-200 dark:border-white/5 p-6 md:p-8 rounded-2xl shadow-xl dark:shadow-none">
+                        <h3 className="text-xl md:text-2xl font-bold text-slate-900 dark:text-white mb-6">Share your experience</h3>
                         <form onSubmit={handleSubmit} className="space-y-4">
                             <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                                 <input
                                     type="text"
                                     placeholder="Your Name"
-                                    className="w-full bg-black/40 border border-white/5 rounded-xl px-4 py-3 text-white focus:border-primary focus:outline-none text-sm"
+                                    className="w-full bg-slate-50 dark:bg-black/40 border border-slate-300 dark:border-white/5 rounded-xl px-4 py-3 text-slate-800 dark:text-white focus:border-primary focus:outline-none text-sm"
                                     value={newReview.clientName}
                                     onChange={e => setNewReview({ ...newReview, clientName: e.target.value })}
                                     required
@@ -70,7 +70,7 @@ const Reviews = () => {
                                 <input
                                     type="text"
                                     placeholder="Role / Company"
-                                    className="w-full bg-black/40 border border-white/5 rounded-xl px-4 py-3 text-white focus:border-primary focus:outline-none text-sm"
+                                    className="w-full bg-slate-50 dark:bg-black/40 border border-slate-300 dark:border-white/5 rounded-xl px-4 py-3 text-slate-800 dark:text-white focus:border-primary focus:outline-none text-sm"
                                     value={newReview.position}
                                     onChange={e => setNewReview({ ...newReview, position: e.target.value })}
                                     required
@@ -80,13 +80,13 @@ const Reviews = () => {
                                 <input
                                     type="text"
                                     placeholder="Project Name"
-                                    className="w-full bg-black/40 border border-white/5 rounded-xl px-4 py-3 text-white focus:border-primary focus:outline-none text-sm"
+                                    className="w-full bg-slate-50 dark:bg-black/40 border border-slate-300 dark:border-white/5 rounded-xl px-4 py-3 text-slate-800 dark:text-white focus:border-primary focus:outline-none text-sm"
                                     value={newReview.project}
                                     onChange={e => setNewReview({ ...newReview, project: e.target.value })}
                                     required
                                 />
-                                <div className="flex gap-2 items-center bg-black/40 border border-white/5 rounded-xl px-4 py-3">
-                                    <span className="text-textMain/40 text-[8px] md:text-[10px] mr-2 font-black uppercase tracking-wide">Rating:</span>
+                                <div className="flex gap-2 items-center bg-slate-50 dark:bg-black/40 border border-slate-300 dark:border-white/5 rounded-xl px-4 py-3">
+                                    <span className="text-slate-400 dark:text-textMain/40 text-xs mr-2 font-black uppercase tracking-wide">Rating:</span>
                                     {[1, 2, 3, 4, 5].map((star) => (
                                         <button
                                             key={star}
@@ -102,7 +102,7 @@ const Reviews = () => {
                             <textarea
                                 placeholder="Your feedback..."
                                 rows="4"
-                                className="w-full bg-black/40 border border-white/5 rounded-xl px-4 py-3 text-white focus:border-primary focus:outline-none resize-none text-sm"
+                                className="w-full bg-slate-50 dark:bg-black/40 border border-slate-300 dark:border-white/5 rounded-xl px-4 py-3 text-slate-800 dark:text-white focus:border-primary focus:outline-none resize-none text-sm"
                                 value={newReview.content}
                                 onChange={e => setNewReview({ ...newReview, content: e.target.value })}
                                 required
@@ -118,13 +118,13 @@ const Reviews = () => {
             {/* Reviews Grid */}
             <div className="grid grid-cols-1 md:grid-cols-2 gap-6 md:gap-8 max-w-6xl mx-auto px-6">
                 {reviews.map((review) => (
-                    <div key={review.id} className="p-6 md:p-8 bg-surface/40 border border-white/5 rounded-2xl text-left backdrop-blur-md relative group hover:border-primary/30 transition-all duration-300 hover:-translate-y-1">
+                    <div key={review.id} className="p-6 md:p-8 bg-white dark:bg-surface/40 border border-slate-200 dark:border-white/5 rounded-2xl text-left backdrop-blur-md relative group hover:border-primary/30 transition-all duration-300 hover:-translate-y-1 shadow-sm dark:shadow-none">
                         <div className="text-primary mb-6 text-lg md:text-xl tracking-widest">
                             {[...Array(review.rating)].map((_, i) => (
                                 <span key={i}>★</span>
                             ))}
                         </div>
-                        <p className="text-base md:text-lg text-textMain/80 font-medium mb-8 leading-relaxed font-inter italic">
+                        <p className="text-base md:text-lg text-slate-700 dark:text-textMain/80 font-medium mb-8 leading-relaxed italic">
                             "{review.content}"
                         </p>
                         <div className="flex items-center gap-4">

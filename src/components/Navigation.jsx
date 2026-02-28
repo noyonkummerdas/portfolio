@@ -19,7 +19,7 @@ const Navigation = () => {
     return (
         <nav className="fixed top-0 w-full z-50 border-b border-white/5 dark:border-white/5 bg-slate-100/60 dark:bg-secondary/60 backdrop-blur-xl print:hidden transition-colors duration-300">
             <div className="max-w-7xl mx-auto px-4 sm:px-6 h-20 flex justify-between items-center">
-                <div className="flex items-center gap-3 sm:gap-4 font-poppins">
+                <div className="flex items-center gap-3 sm:gap-4">
                     {/* Mobile Menu Toggle - Left Side */}
                     <button
                         onClick={() => setIsMenuOpen(!isMenuOpen)}
@@ -59,7 +59,7 @@ const Navigation = () => {
 
                     <Link
                         to="/hire-me"
-                        className="hidden sm:inline-block px-6 py-2 bg-primary text-secondary text-[10px] font-black uppercase tracking-widest rounded-full hover:bg-white hover:text-primary dark:hover:bg-white dark:hover:text-secondary transition-all transform active:scale-95 shadow-lg shadow-primary/20"
+                        className="hidden sm:inline-block px-6 py-2 bg-primary text-secondary text-xs font-black uppercase tracking-widest rounded-full hover:bg-white hover:text-primary dark:hover:bg-white dark:hover:text-secondary transition-all transform active:scale-95 shadow-lg shadow-primary/20"
                     >
                         Hire Me
                     </Link>

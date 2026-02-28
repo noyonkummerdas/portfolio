@@ -19,12 +19,12 @@ const AdminDashboard = () => {
     return (
         <div className="pt-32 min-h-screen pb-20 px-6 max-w-7xl mx-auto">
             <div className="flex flex-col sm:flex-row justify-between items-center gap-6 mb-12 text-center sm:text-left">
-                <h1 className="text-3xl md:text-4xl font-black font-poppins text-slate-900 dark:text-white tracking-tighter">Inquiry Dashboard</h1>
+                <h1 className="text-3xl md:text-4xl font-black text-slate-900 dark:text-white tracking-tighter">Inquiry Dashboard</h1>
                 <div className="flex flex-wrap justify-center gap-4">
                     <Link to="/cv" className="px-6 py-2 bg-indigo-600 hover:bg-indigo-500 rounded-lg text-sm font-bold transition-all active:scale-95 text-white">
                         View CV
                     </Link>
-                    <button onClick={clearData} className="text-[10px] text-red-500 hover:text-red-400 font-bold uppercase tracking-widest transition-colors">
+                    <button onClick={clearData} className="text-xs text-red-500 hover:text-red-400 font-bold uppercase tracking-widest transition-colors">
                         Clear All Data
                     </button>
                 </div>
@@ -32,7 +32,7 @@ const AdminDashboard = () => {
 
             {submissions.length === 0 ? (
                 <div className="text-center py-20 bg-slate-100 dark:bg-white/5 rounded-3xl border border-slate-200 dark:border-white/5">
-                    <p className="text-slate-500 dark:text-gray-400 font-inter">No inquiries received yet.</p>
+                    <p className="text-slate-500 dark:text-gray-400">No inquiries received yet.</p>
                 </div>
             ) : (
                 <div className="grid gap-4">
@@ -48,7 +48,7 @@ const AdminDashboard = () => {
                             </div>
                             <div className="flex items-center justify-between md:justify-end gap-6">
                                 <div className="text-left md:text-right">
-                                    <div className="text-[10px] font-bold text-indigo-600 dark:text-indigo-400 uppercase tracking-widest mb-1">{item.projectType}</div>
+                                    <div className="text-xs font-bold text-indigo-600 dark:text-indigo-400 uppercase tracking-widest mb-1">{item.projectType}</div>
                                     <div className="text-xs text-slate-500 dark:text-gray-300">{new Date(item.createdAt).toLocaleDateString()}</div>
                                 </div>
                                 <div className="w-8 h-8 rounded-full bg-slate-100 dark:bg-white/5 flex items-center justify-center text-slate-400 dark:text-gray-400 group-hover:bg-indigo-600 group-hover:text-white transition-all transform group-hover:translate-x-1">

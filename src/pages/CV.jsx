@@ -287,7 +287,7 @@ const CV = () => {
                                         <div className="flex justify-between items-center">
                                             <div className="flex-1 min-w-0">
                                                 <div className="text-sm font-bold text-slate-900 dark:text-white truncate group-hover:text-primary transition-colors">{cv.title || 'Resume'}</div>
-                                                <div className="text-[10px] text-slate-500 dark:text-gray-500 font-bold uppercase tracking-tight mt-1">
+                                                <div className="text-xs text-slate-500 dark:text-gray-500 font-bold uppercase tracking-tight mt-1">
                                                     v{cv.version} • {new Date(cv.createdAt).toLocaleDateString()}
                                                 </div>
                                             </div>

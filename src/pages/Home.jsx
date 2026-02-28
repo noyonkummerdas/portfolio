@@ -9,15 +9,15 @@ const Home = () => {
             {/* Hero Section */}
             <section className="relative pt-12 md:pt-24 pb-20 md:pb-32 px-6 overflow-hidden">
                 <div className="relative z-10 max-w-7xl mx-auto text-center">
-                    <div className="inline-block px-4 py-1.5 mb-6 md:mb-8 rounded-full border border-primary/30 bg-primary/10 text-primary text-[8px] md:text-[10px] font-black uppercase tracking-[0.3em] animate-fade-in">
+                    <div className="inline-block px-4 py-1.5 mb-6 md:mb-8 rounded-full border border-primary/30 bg-primary/10 text-primary text-xs font-black uppercase tracking-[0.3em] animate-fade-in">
                         Top Rated Seller • Available for New Projects
                     </div>
-                    <h1 className="text-5xl sm:text-6xl md:text-8xl lg:text-9xl font-black font-poppins mb-6 md:mb-8 tracking-tighter leading-[0.9] text-slate-900 dark:text-white">
+                    <h1 className="text-5xl sm:text-6xl md:text-8xl lg:text-9xl font-black mb-6 md:mb-8 tracking-tighter leading-[0.9] text-slate-900 dark:text-white">
                         Crafting <br />
                         <span className="text-primary drop-shadow-[0_0_15px_rgba(56,189,248,0.3)]">Premium Digital</span><br />
                         Experiences
                     </h1>
-                    <p className="text-lg md:text-2xl text-slate-700 dark:text-textMain/60 max-w-3xl mx-auto leading-relaxed font-inter mb-10 md:mb-12">
+                    <p className="text-lg md:text-2xl text-slate-700 dark:text-textMain/60 max-w-3xl mx-auto leading-relaxed mb-10 md:mb-12">
                         Senior React & React Native Architect specializing in scalable B2B ecosystems and high-performance mobile applications.
                     </p>
                     <div className="flex flex-col sm:flex-row gap-4 justify-center items-center">
@@ -35,7 +35,7 @@ const Home = () => {
             <section className="py-16 md:py-24 px-6 bg-slate-100 dark:bg-surface/30 border-y border-slate-200 dark:border-white/5">
                 <div className="max-w-7xl mx-auto">
                     <div className="text-center mb-12 md:mb-20">
-                        <h2 className="text-3xl md:text-6xl font-black font-poppins text-slate-900 dark:text-white mb-4 tracking-tighter">
+                        <h2 className="text-3xl md:text-6xl font-black text-slate-900 dark:text-white mb-4 tracking-tighter">
                             Why Hire Me<span className="text-primary">.</span>
                         </h2>
                         <p className="text-slate-700 dark:text-textMain/50 max-w-2xl mx-auto text-sm md:text-base">
@@ -65,10 +65,10 @@ const Home = () => {
             <section className="py-16 md:py-24 px-6 max-w-7xl mx-auto">
                 <div className="flex flex-col md:flex-row md:justify-between md:items-end gap-6 mb-12 md:mb-20 text-center md:text-left">
                     <div>
-                        <h2 className="text-3xl md:text-6xl font-black font-poppins text-slate-900 dark:text-white mb-4 tracking-tighter">
+                        <h2 className="text-3xl md:text-6xl font-black text-slate-900 dark:text-white mb-4 tracking-tighter">
                             Featured Impact<span className="text-primary">.</span>
                         </h2>
-                        <p className="text-slate-600 dark:text-textMain/50 max-w-md font-inter mx-auto md:mx-0 text-sm md:text-base">
+                        <p className="text-slate-600 dark:text-textMain/50 max-w-md mx-auto md:mx-0 text-sm md:text-base">
                             High-stakes projects delivering real business value through React & React Native excellence.
                         </p>
                     </div>
@@ -89,7 +89,7 @@ const Home = () => {
                 <div className="max-w-7xl mx-auto">
                     <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 md:gap-20 items-center">
                         <div className="text-center lg:text-left">
-                            <h2 className="text-3xl md:text-6xl font-black font-poppins text-slate-900 dark:text-white mb-8 tracking-tighter">
+                            <h2 className="text-3xl md:text-6xl font-black text-slate-900 dark:text-white mb-8 tracking-tighter">
                                 Core Skills &<br />
                                 <span className="text-primary">Ecosystem Expertise.</span>
                             </h2>
@@ -104,11 +104,11 @@ const Home = () => {
                         <div className="grid grid-cols-2 gap-4">
                             <div className="p-6 md:p-8 rounded-2xl bg-white dark:bg-surface/50 border border-slate-200 dark:border-white/5 text-center shadow-sm dark:shadow-none">
                                 <span className="text-3xl md:text-4xl font-black text-primary">5+</span>
-                                <p className="text-[10px] text-slate-500 dark:text-textMain/40 uppercase tracking-widest mt-2">Years Exp.</p>
+                                <p className="text-xs text-slate-500 dark:text-textMain/40 uppercase tracking-widest mt-2">Years Exp.</p>
                             </div>
                             <div className="p-6 md:p-8 rounded-2xl bg-white dark:bg-surface/50 border border-slate-200 dark:border-white/5 text-center shadow-sm dark:shadow-none">
                                 <span className="text-3xl md:text-4xl font-black text-accent">50+</span>
-                                <p className="text-[10px] text-slate-500 dark:text-textMain/40 uppercase tracking-widest mt-2">Projects</p>
+                                <p className="text-xs text-slate-500 dark:text-textMain/40 uppercase tracking-widest mt-2">Projects</p>
                             </div>
                         </div>
                     </div>
