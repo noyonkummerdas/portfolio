@@ -17,6 +17,10 @@ import AdminCVForm from './pages/AdminCVForm';
 import AdminCVDetails from './pages/AdminCVDetails';
 import CvFrom from './pages/cvFrom';
 import ProfessionalCV from './pages/ProfessionalCV';
+import DevSettings from './pages/DevSettings';
+import DevTerminal from './pages/DevTerminal';
+import DevSocial from './pages/DevSocial';
+import PostProject from './pages/PostProject';
 
 // Routes Configuration
 function App() {
@@ -42,6 +46,10 @@ function App() {
             <Route path="/admin/cv" element={<AdminCVForm />} />
             <Route path="/cvFrom" element={<CvFrom />} />
             <Route path="/admin/cv/:id" element={<AdminCVDetails />} />
+            <Route path="/dev-settings" element={<DevSettings />} />
+            <Route path="/dev-terminal" element={<DevTerminal />} />
+            <Route path="/dev-social" element={<DevSocial />} />
+            <Route path="/post-project" element={<PostProject />} />
           </Routes>
         </main>
 

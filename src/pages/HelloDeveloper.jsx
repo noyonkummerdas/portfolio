@@ -1,11 +1,24 @@
 
 import React from 'react';
 import { motion } from 'framer-motion';
-import { FaGithub, FaLinkedin, FaEnvelope, FaReact, FaGitAlt } from 'react-icons/fa';
+import { useNavigate } from 'react-router-dom';
+import {
+    FaGithub, FaLinkedin, FaEnvelope, FaReact, FaGitAlt,
+    FaCheckCircle, FaBriefcase, FaGraduationCap, FaMapMarkerAlt,
+    FaGlobe, FaThumbsUp, FaComment, FaShare, FaEllipsisH,
+    FaCamera, FaUserPlus, FaFacebookMessenger, FaGlobeAmericas,
+    FaTerminal, FaCode, FaStackOverflow, FaLayerGroup, FaMapMarkedAlt,
+    FaRegImage, FaPlayCircle, FaSatelliteDish, FaLock, FaMicrochip,
+    FaPlus
+} from 'react-icons/fa';
+import { FaChevronRight } from 'react-icons/fa';
 import {
     SiReact, SiExpo, SiTailwindcss, SiRedux, SiJavascript,
     SiMongodb, SiPostgresql, SiBootstrap, SiNodedotjs,
-    SiFirebase, SiTypescript
+    SiFirebase, SiTypescript, SiGithub,
+    SiTravisci, SiPreact, SiWikipedia,
+    SiAdguard, SiMapbox,
+    SiOpenlayers, SiGitlab, SiMessenger
 } from 'react-icons/si';
 import Slider from "react-slick";
 import "slick-carousel/slick/slick.css";
@@ -16,36 +29,12 @@ import coverPhoto from '../assets/profile/coverPhoto.png';
 import profilePic from '../assets/profile/profilePic.png';
 
 // Project Assets
-import adminDashboard from '../assets/projectPic/adminDashboard.PNG';
-import buyerWishlist from '../assets/projectPic/buyerWishlist.PNG';
-import marketPleace from '../assets/projectPic/marketPleace.PNG';
+import projects from '../data/projects';
 
 const HelloDeveloper = () => {
-    // Sample Projects with multiple images
-    const projects = [
-        {
-            name: "Eco-Commerce Platform Stocklot",
-            description: "A sustainable shopping experience with high-performance product discovery and seamless checkout flow.",
-            techStack: "React, Redux Toolkit, Tailwind CSS, Stripe API",
-            images: [
-                marketPleace,
-                adminDashboard,
-                buyerWishlist
-            ],
-            link: "https://github.com/noyonkummerdas"
-        },
-        {
-            name: "Smart Inventory Manager",
-            description: "Enterprise-grade dashboard for real-time stock tracking and predictive supply chain analytics.",
-            techStack: "React Native, Node.js, MongoDB, Chart.js",
-            images: [
-                "https://images.unsplash.com/photo-1551288049-bebda4e38f71?q=80&w=2670&auto=format&fit=crop",
-                "https://images.unsplash.com/photo-1460925895917-afdab827c52f?q=80&w=2426&auto=format&fit=crop",
-                "https://images.unsplash.com/photo-1542744173-8e7e53415bb0?q=80&w=2070&auto=format&fit=crop"
-            ],
-            link: "https://github.com/noyonkummerdas"
-        }
-    ];
+    const navigate = useNavigate();
+    // Projects are now imported from ../data/projects.js
+
 
     const sliderSettings = {
         dots: true,
@@ -106,281 +95,346 @@ const HelloDeveloper = () => {
     };
 
     return (
-        <div className="bg-slate-100 dark:bg-secondary min-h-screen text-slate-900 dark:text-textMain font-poppins selection:bg-primary/30 overflow-x-hidden pt-20">
+        <div className="bg-[#f6f8fa] min-h-screen text-[#1f2328] font-inter selection:bg-blue-100 overflow-x-hidden pb-20 pt-20">
             <style dangerouslySetInnerHTML={{
                 __html: `
+                @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=JetBrains+Mono:wght@400;700&display=swap');
+                .font-inter { font-family: 'Inter', sans-serif; }
+                .font-mono { font-family: 'JetBrains Mono', monospace; }
+                .dev-card {
+                    background: #ffffff;
+                    border: 1px solid #d0d7de;
+                    box-shadow: 0 1px 3px rgba(31,35,40,0.06);
+                    border-radius: 12px;
+                }
+                .terminal-input {
+                    background: #f6f8fa;
+                    border: 1px solid #d0d7de;
+                    color: #57606a;
+                    font-family: 'JetBrains Mono', monospace;
+                }
+                .terminal-input:focus-within {
+                    border-color: #0969da;
+                    box-shadow: 0 0 0 3px rgba(9,105,218,0.1);
+                }
+                .status-badge {
+                    background: #dafbe1;
+                    color: #1a7f37;
+                    border: 1px solid rgba(26,127,55,0.2);
+                }
+                /* Slick custom */
                 .slick-dots li button:before { display: none; }
-                .slick-dots li.slick-active div { background-color: #38BDF8 !important; width: 24px; }
+                .slick-dots li.slick-active div { background-color: #0969da !important; width: 24px; }
             `}} />
 
-            {/* Hero / Header Section */}
-            <section className="relative h-[60vh] sm:h-[70vh] md:h-[80vh] flex flex-col items-center justify-center overflow-hidden">
-                {/* Cover Background */}
-                <div className="absolute inset-0 z-0">
-                    {/* Subtle Overlay to ensure text readability */}
-                    <div className="absolute inset-0 bg-slate-100/40 dark:bg-secondary/40 z-10"></div>
+            {/* Header Section (GitHub Light Style Facebook Layout) */}
+            <div className="max-w-6xl mx-auto bg-white border border-[#d0d7de] rounded-b-xl overflow-hidden shadow-sm">
+                {/* Cover Photo */}
+                <div className="relative h-48 sm:h-64 md:h-80 w-full bg-[#f6f8fa] overflow-hidden">
                     <img
                         src={coverPhoto}
-                        alt="Profile Cover"
-                        className="w-full h-full object-cover"
+                        alt="Cover"
+                        className="w-full h-full object-cover transition-transform duration-1000 hover:scale-105"
                     />
-                    <div className="absolute inset-0 bg-gradient-to-b from-transparent via-transparent to-slate-100 dark:to-secondary z-20"></div>
-                </div>
-
-                <div className="relative z-30 flex flex-col items-center text-center px-4 sm:px-6">
-                    {/* Profile Photo Container */}
-                    <motion.div
-                        initial={{ opacity: 0, scale: 0.5 }}
-                        animate={{ opacity: 1, scale: 1 }}
-                        transition={{ duration: 0.8, type: "spring" }}
-                        className="w-28 h-28 sm:w-32 sm:h-32 md:w-40 md:h-40 rounded-full border-4 border-primary p-1 bg-slate-100 dark:bg-secondary mb-8 overflow-hidden shadow-2xl shadow-primary/20"
-                    >
-                        <div className="w-full h-full rounded-full bg-slate-200 dark:bg-surface flex items-center justify-center overflow-hidden">
-                            <img
-                                src={profilePic}
-                                alt="NK Noyon"
-                                className="w-full h-full object-cover"
-                            />
-                        </div>
-                    </motion.div>
-
-                    <motion.div
-                        initial={{ opacity: 0, y: 20 }}
-                        animate={{ opacity: 1, y: 0 }}
-                        transition={{ duration: 0.8, delay: 0.2 }}
-                    >
-                        <h1 className="text-4xl sm:text-5xl md:text-8xl font-black mb-4 tracking-tighter text-slate-900 dark:text-white leading-tight">
-                            Hello <span className="text-primary">Developer</span>
-                        </h1>
-                        <p className="text-base sm:text-lg md:text-xl text-slate-600 dark:text-textMain/80 font-medium mb-10 max-w-2xl mx-auto px-4">
-                            I’m <span className="text-slate-900 dark:text-white font-bold">NK Noyon</span>, <br className="md:hidden" />
-                            React & React Native Developer
-                        </p>
-                    </motion.div>
-
-                    <motion.div
-                        initial={{ opacity: 0, y: 20 }}
-                        animate={{ opacity: 1, y: 0 }}
-                        transition={{ delay: 0.4, duration: 0.5 }}
-                        className="flex flex-col md:flex-row gap-4 justify-center items-center"
-                    >
-                        <a href="#projects" className="px-8 py-4 bg-primary text-secondary font-black rounded-xl transition-all duration-300 transform hover:scale-105 shadow-xl shadow-primary/20 hover:bg-white min-w-[180px]">
-                            View Projects
-                        </a>
-                        <a href="#contact" className="px-8 py-4 bg-white/5 hover:bg-white/10 text-white font-bold rounded-xl border border-white/10 backdrop-blur-md transition-all duration-300 min-w-[180px]">
-                            Contact Me
-                        </a>
-                    </motion.div>
-                </div>
-            </section>
-
-            {/* About Section */}
-            <section className="py-24 px-6 max-w-5xl mx-auto">
-                <motion.div
-                    initial="hidden"
-                    whileInView="visible"
-                    viewport={{ once: true }}
-                    variants={containerVariants}
-                    className="text-center"
-                >
-                    <motion.h2 variants={itemVariants} className="text-xs font-black text-primary uppercase tracking-[0.4em] mb-6">About Work</motion.h2>
-                    <motion.h3 variants={itemVariants} className="text-3xl md:text-5xl font-bold text-slate-900 dark:text-white mb-8 tracking-tight">Crafting Digital Excellence.</motion.h3>
-                    <motion.p variants={itemVariants} className="text-base sm:text-lg text-slate-600 dark:text-textMain/60 leading-relaxed">
-                        I am a dedicated React and React Native Developer with a passion for building high-performance, scalable applications. My work approach is rooted in clean code, architectural integrity, and a deep understanding of the client's business goals. I specialize in turning complex requirements into intuitive user experiences that drive real results.
-                    </motion.p>
-                </motion.div>
-            </section>
-
-            {/* Skills Section */}
-            <section className="py-24 px-6 bg-surface/30 border-y border-white/5">
-                <div className="max-w-7xl mx-auto">
-                    <div className="text-center mb-16">
-                        <h2 className="text-xs font-black text-primary uppercase tracking-[0.4em] mb-4">Technical Arsenal</h2>
-                        <h3 className="text-3xl md:text-5xl font-black text-slate-900 dark:text-white tracking-tighter">Skills & Expertise<span className="text-primary">.</span></h3>
-                    </div>
-
-                    <motion.div
-                        initial="hidden"
-                        whileInView="visible"
-                        viewport={{ once: true }}
-                        variants={containerVariants}
-                        className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8"
-                    >
-                        {skills.map((skill, idx) => (
-                            <motion.div
-                                key={idx}
-                                variants={itemVariants}
-                                whileHover={{ y: -5, scale: 1.02 }}
-                                className="p-8 rounded-2xl bg-white dark:bg-secondary/50 border border-slate-200 dark:border-white/5 hover:border-primary/30 transition-all group shadow-sm dark:shadow-none"
-                            >
-                                <div className="flex justify-between items-center mb-6">
-                                    <div className="flex items-center gap-4">
-                                        <div className={`text-4xl ${skill.color === 'primary' ? 'text-primary' : 'text-accent'} group-hover:scale-110 transition-transform`}>
-                                            {skill.icon}
-                                        </div>
-                                        <span className="font-bold text-slate-900 dark:text-white text-lg">{skill.name}</span>
-                                    </div>
-                                    <span className={`text-[10px] font-black tracking-widest ${skill.color === 'primary' ? 'text-primary' : 'text-accent'}`}>{skill.level}%</span>
-                                </div>
-                                <div className="h-1.5 bg-slate-100 dark:bg-black/40 rounded-full overflow-hidden border border-slate-200 dark:border-white/5">
-                                    <motion.div
-                                        initial={{ width: 0 }}
-                                        whileInView={{ width: `${skill.level}%` }}
-                                        transition={{ duration: 1.5, ease: "easeOut" }}
-                                        viewport={{ once: true }}
-                                        className={`h-full rounded-full shadow-[0_0_15px_rgba(56,189,248,0.3)] ${skill.color === 'primary' ? 'bg-primary' : 'bg-accent'
-                                            }`}
-                                    ></motion.div>
-                                </div>
-                            </motion.div>
-                        ))}
-                    </motion.div>
-                </div>
-            </section>
-
-
-            {/* Why Hire Me Section */}
-            <section className="py-24 px-6">
-                <div className="max-w-7xl mx-auto">
-                    <div className="text-center mb-20">
-                        <h2 className="text-xs font-black text-primary uppercase tracking-[0.4em] mb-6">The Value</h2>
-                        <h3 className="text-3xl md:text-6xl font-black text-slate-900 dark:text-white tracking-tighter">Why Hire Me<span className="text-primary">.</span></h3>
-                    </div>
-
-                    <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-                        {hireMePoints.map((point, idx) => (
-                            <motion.div
-                                key={idx}
-                                initial={{ opacity: 0, scale: 0.95 }}
-                                whileInView={{ opacity: 1, scale: 1 }}
-                                transition={{ delay: idx * 0.1 }}
-                                viewport={{ once: true }}
-                                className="p-10 rounded-2xl bg-white dark:bg-surface/50 border border-slate-200 dark:border-white/5 hover:border-primary/30 transition-all group shadow-sm dark:shadow-none"
-                            >
-                                <div className="w-12 h-12 rounded-xl bg-primary/10 flex items-center justify-center mb-6 group-hover:bg-primary group-hover:text-secondary transition-all">
-                                    <span className="text-xl font-black text-primary group-hover:text-white">0{idx + 1}</span>
-                                </div>
-                                <h4 className="text-xl font-bold text-slate-900 dark:text-white mb-4">{point.title}</h4>
-                                <p className="text-slate-600 dark:text-textMain/50 text-sm leading-relaxed">{point.desc}</p>
-                            </motion.div>
-                        ))}
-                    </div>
-                </div>
-            </section>
-            {/* Work Completed Section */}
-            <section id="projects" className="py-32 px-6">
-                <div className="max-w-7xl mx-auto">
-                    <div className="text-center mb-20">
-                        <motion.h2
-                            initial={{ opacity: 0 }}
-                            whileInView={{ opacity: 1 }}
-                            className="text-4xl md:text-7xl font-black text-slate-900 dark:text-white mb-6 tracking-tighter"
+                    <div className="absolute inset-0 bg-gradient-to-t from-white/40 to-transparent"></div>
+                    <div className="absolute bottom-4 right-4">
+                        <button
+                            onClick={() => navigate('/dev-settings')}
+                            className="flex items-center gap-2 px-4 py-2 bg-white/90 backdrop-blur-sm hover:bg-white text-[#24292f] text-xs font-bold border border-[#d0d7de] rounded-md transition-all shadow-sm active:scale-95"
                         >
-                            🏆 Work <span className="text-primary">Completed</span>
-                        </motion.h2>
-                        <p className="text-base sm:text-xl text-slate-600 dark:text-textMain/60 max-w-2xl mx-auto">
-                            Explore a selection of high-impact products I've engineered from concept to production.
-                        </p>
+                            <FaTerminal className="text-[#0969da]" /> repository_settings
+                        </button>
+                    </div>
+                </div>
+
+                {/* Profile Pix & Info Overlap */}
+                <div className="px-4 sm:px-10 pb-6 relative">
+                    <div className="flex flex-col md:flex-row-reverse items-center md:items-end -mt-16 sm:-mt-20 md:mt-[-81px] gap-6">
+                        {/* Profile Picture */}
+                        <div className="relative group">
+                            <div className="w-32 h-32 sm:w-40 sm:h-40 md:w-44 md:h-44 rounded-full p-1 bg-white shadow-xl">
+                                <div className="w-full h-full rounded-full overflow-hidden border-4 border-white">
+                                    <img
+                                        src={profilePic}
+                                        alt="Profile"
+                                        className="w-full h-full object-cover"
+                                    />
+                                </div>
+                            </div>
+                            <div className="absolute bottom-3 right-3 p-2.5 bg-[#0969da] text-white rounded-full shadow-lg border-4 border-white">
+                                <FaReact className="animate-spin-slow text-sm" />
+                            </div>
+                        </div>
+
+                        {/* Name & Technical Bio */}
+                        <div className="flex-1 text-center md:text-right pt-4 md:pb-2">
+                            <div className="flex flex-col md:flex-row-reverse items-center gap-3 mb-2">
+                                <h1 className="text-3xl md:text-4xl font-extrabold text-[#1f2328]">
+                                    NK Noyon
+                                </h1>
+                                <div className="hidden md:block text-[#57606a] font-mono text-sm">/ fullstack-architect</div>
+                                <span className="status-badge px-3 py-0.5 rounded-full text-[10px] font-bold uppercase tracking-tight">
+                                    active_now
+                                </span>
+                            </div>
+                            <div className="text-[#57606a] font-mono text-sm mb-4 flex flex-wrap justify-center md:justify-end gap-4">
+                                <span className="hover:text-[#0969da] cursor-pointer transition-colors font-bold flex items-center gap-1">
+                                    <SiGithub className="text-xs" /> 2.5k forks
+                                </span>
+                                <span className="text-gray-300">|</span>
+                                <span className="hover:text-[#0969da] cursor-pointer transition-colors font-bold">1.2k following</span>
+                                <span className="text-gray-300">|</span>
+                                <span className="text-[#0969da] font-bold leading-none">@noyon_dev</span>
+                            </div>
+                        </div>
+
+                        {/* Action Buttons */}
+                        <div className="flex gap-2 mb-4 w-full md:w-auto justify-center">
+                            <button
+                                onClick={() => navigate('/post-project')}
+                                className="flex items-center gap-2 px-4 py-2 bg-[#0969da] hover:bg-[#0860ca] text-white font-bold rounded-md transition-all shadow-sm active:scale-95 text-sm"
+                                title="Upload Project"
+                            >
+                                <FaPlus />
+                            </button>
+                            <a
+                                href="tel:+8801700000000"
+                                className="flex items-center gap-2 px-6 py-2 bg-[#f6f8fa] hover:bg-[#ebeff2] text-[#24292f] font-bold rounded-md transition-all border border-[#d0d7de] text-sm"
+                            >
+                                <SiMessenger className="text-[#0969da]" /> chat
+                            </a>
+                        </div>
                     </div>
 
-                    <div className="space-y-32">
+                    {/* Navigation Tabs */}
+                    <div className="mt-4 border-t border-[#d0d7de] flex overflow-x-auto whitespace-nowrap scrollbar-hide px-2">
+                        {[
+                            { name: 'Overview', icon: <FaCode />, path: '/hello-developer' },
+                            { name: 'Repositories', icon: <SiGithub />, path: '/projects' },
+                            { name: 'Terminal', icon: <FaTerminal />, path: '/dev-terminal' },
+                            { name: 'Settings', icon: <SiTravisci />, path: '/dev-settings' },
+                            { name: 'CV', icon: <FaThumbsUp />, path: '/cv' }
+                        ].map((tab, idx) => (
+                            <button
+                                key={tab.name}
+                                onClick={() => navigate(tab.path)}
+                                className={`flex items-center gap-2 px-4 py-4 text-sm font-medium transition-all border-b-2 ${idx === 0 ? 'border-[#fd8c73] text-[#1f2328]' : 'border-transparent text-[#57606a] hover:border-[#d0d7de] hover:text-[#1f2328]'}`}
+                            >
+                                <span className="text-sm opacity-70">{tab.icon}</span> {tab.name}
+                            </button>
+                        ))}
+                    </div>
+                </div>
+            </div>
+
+            {/* Content Body */}
+            <div className="max-w-6xl mx-auto mt-6 px-4">
+                <div className="grid grid-cols-1 lg:grid-cols-12 gap-6 items-start">
+
+                    {/* Left Side: Intro & Stats */}
+                    <div className="lg:col-span-4 space-y-4 lg:sticky lg:top-24">
+                        <div className="dev-card p-5">
+                            <h3 className="text-base font-bold text-[#1f2328] mb-4">Professional Overview</h3>
+                            <div className="space-y-4">
+                                <p className="text-sm text-[#1f2328] leading-relaxed font-inter">
+                                    Fullstack Architect specializing in <span className="text-[#0969da] font-bold">Scalable SaaS Ecosystems</span>. I bridge the gap between complex engineering requirements and elegant user experiences.
+                                </p>
+
+                                <div className="space-y-3 pt-2">
+                                    <div className="flex items-center justify-between text-sm">
+                                        <div className="flex items-center gap-3">
+                                            <FaBriefcase className="text-[#57606a]" />
+                                            <span className="text-[#1f2328]">Active Since</span>
+                                        </div>
+                                        <span className="font-mono text-[#57606a]">2021_Q4</span>
+                                    </div>
+                                    <div className="flex items-center justify-between text-sm">
+                                        <div className="flex items-center gap-3">
+                                            <FaCode className="text-[#57606a]" />
+                                            <span className="text-[#1f2328]">Build Success</span>
+                                        </div>
+                                        <span className="font-bold text-[#1a7f37]">99.8%</span>
+                                    </div>
+                                    <div className="flex items-center justify-between text-sm">
+                                        <div className="flex items-center gap-3">
+                                            <FaTerminal className="text-[#57606a]" />
+                                            <span className="text-[#1f2328]">Avg. Velocity</span>
+                                        </div>
+                                        <span className="text-[#0969da] font-mono whitespace-nowrap">12_commits/day</span>
+                                    </div>
+                                </div>
+                                <div className="pt-4 border-t border-[#f0f2f5]">
+                                    <h4 className="text-[10px] font-black text-[#57606a] uppercase tracking-widest mb-3">Live Tech Health</h4>
+                                    <div className="space-y-3">
+                                        <div className="flex items-center justify-between">
+                                            <div className="flex items-center gap-2">
+                                                <div className="w-1.5 h-1.5 rounded-full bg-[#1a7f37] animate-pulse"></div>
+                                                <span className="text-xs text-[#1f2328]">React / Next.js</span>
+                                            </div>
+                                            <span className="text-[10px] text-[#1a7f37] font-bold">Stable</span>
+                                        </div>
+                                        <div className="flex items-center justify-between">
+                                            <div className="flex items-center gap-2">
+                                                <div className="w-1.5 h-1.5 rounded-full bg-[#1a7f37] animate-pulse"></div>
+                                                <span className="text-xs text-[#1f2328]">Python / FastAPI</span>
+                                            </div>
+                                            <span className="text-[10px] text-[#1a7f37] font-bold">Optimized</span>
+                                        </div>
+                                        <div className="flex items-center justify-between">
+                                            <div className="flex items-center gap-2">
+                                                <div className="w-1.5 h-1.5 rounded-full bg-[#0969da] animate-pulse"></div>
+                                                <span className="text-xs text-[#1f2328]">Cloud / S3</span>
+                                            </div>
+                                            <span className="text-[10px] text-[#0969da] font-bold">Escalating</span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        {/* Tech Stack Dependencies */}
+                        <div className="dev-card p-5">
+                            <div className="flex justify-between items-center mb-4">
+                                <h3 className="text-base font-bold text-[#1f2328]">Technical Dependencies</h3>
+                                <button
+                                    onClick={() => navigate('/dev-settings')}
+                                    className="text-[10px] font-mono text-[#0969da] hover:underline"
+                                >
+                                    view_lock
+                                </button>
+                            </div>
+                            <div className="grid grid-cols-4 gap-2">
+                                {skills.map((skill, idx) => (
+                                    <div key={idx} className="aspect-square bg-[#f6f8fa] border border-[#d0d7de] rounded-lg flex items-center justify-center transition-all hover:bg-white hover:shadow-md group" title={skill.name}>
+                                        <div className="text-xl text-[#57606a] group-hover:text-[#0969da] transition-colors">{skill.icon}</div>
+                                    </div>
+                                ))}
+                            </div>
+                        </div>
+                    </div>
+
+                    {/* Right Side: Timeline/Projects */}
+                    <div className="lg:col-span-8 space-y-4">
+
+                        {/* Status/Commit Input */}
+                        <div className="dev-card p-4">
+                            <div className="flex gap-4 items-start border-b border-[#f0f2f5] pb-4">
+                                <div className="w-10 h-10 rounded-full overflow-hidden border border-[#d0d7de]">
+                                    <img src={profilePic} className="w-full h-full object-cover" alt="" />
+                                </div>
+                                <div
+                                    onClick={() => navigate('/dev-terminal')}
+                                    className="flex-1 bg-[#f0f2f5] hover:bg-[#e4e6eb] rounded-3xl px-4 py-2.5 text-sm text-[#57606a] cursor-pointer transition-all flex items-center gap-2 group"
+                                >
+                                    <span className="group-hover:text-[#1f2328]">What's on your mind, developer?</span>
+                                    <span className="w-[1px] h-4 bg-[#57606a]/30 animate-pulse"></span>
+                                </div>
+                            </div>
+                            <div className="pt-3 flex items-center justify-between">
+                                <div className="flex items-center gap-1 sm:gap-2">
+                                    <button onClick={() => navigate('/dev-terminal')} className="flex items-center gap-2 px-3 py-2 hover:bg-[#f2f3f5] rounded-lg transition-colors text-xs font-bold text-[#57606a]">
+                                        <FaPlayCircle className="text-[#f02849] text-lg" /> <span className="hidden sm:inline">Live Rebuild</span>
+                                    </button>
+                                    <button onClick={() => navigate('/dev-terminal')} className="flex items-center gap-2 px-3 py-2 hover:bg-[#f2f3f5] rounded-lg transition-colors text-xs font-bold text-[#57606a]">
+                                        <FaRegImage className="text-[#45bd62] text-lg" /> <span className="hidden sm:inline">Repo Assets</span>
+                                    </button>
+                                    <button onClick={() => navigate('/dev-terminal')} className="flex items-center gap-2 px-3 py-2 hover:bg-[#f2f3f5] rounded-lg transition-colors text-xs font-bold text-[#57606a]">
+                                        <FaSatelliteDish className="text-[#eab308] text-lg" /> <span className="hidden sm:inline">Deploy Now</span>
+                                    </button>
+                                </div>
+                                <button
+                                    onClick={() => navigate('/dev-terminal')}
+                                    className="px-6 py-1.5 bg-[#0969da] hover:bg-[#0860ca] text-white font-bold rounded-md text-xs transition-all shadow-sm active:scale-95"
+                                >
+                                    Commit
+                                </button>
+                            </div>
+                        </div>
+
+                        {/* Project Revisions */}
                         {projects.map((project, idx) => (
-                            <div key={idx} className={`flex flex-col ${idx % 2 === 0 ? 'lg:flex-row' : 'lg:flex-row-reverse'} gap-12 lg:gap-20 items-center`}>
-                                {/* Project Image Slider */}
-                                <div className="w-full lg:w-1/2">
-                                    <motion.div
-                                        initial={{ opacity: 0, x: idx % 2 === 0 ? -50 : 50 }}
-                                        whileInView={{ opacity: 1, x: 0 }}
-                                        viewport={{ once: true }}
-                                        className="relative rounded-3xl overflow-hidden shadow-2xl shadow-primary/10 group cursor-grab active:cursor-grabbing"
-                                    >
-                                        <Slider {...sliderSettings}>
-                                            {project.images.map((img, imgIdx) => (
-                                                <div key={imgIdx} className="outline-none">
-                                                    <img
-                                                        src={img}
-                                                        alt={`${project.name} screenshot ${imgIdx + 1}`}
-                                                        className="w-full aspect-video object-cover"
-                                                    />
-                                                </div>
-                                            ))}
-                                        </Slider>
-                                        <div className="absolute inset-0 border-2 border-white/5 pointer-events-none rounded-3xl"></div>
-                                    </motion.div>
+                            <div key={idx} className="dev-card overflow-hidden group/project hover:shadow-md transition-shadow">
+                                {/* Post Header */}
+                                <div className="p-4 flex justify-between items-start bg-[#f6f8fa]/50">
+                                    <div className="flex gap-3">
+                                        <div className="w-10 h-10 rounded-lg overflow-hidden border border-[#d0d7de]">
+                                            <img src={profilePic} className="w-full h-full object-cover" alt="" />
+                                        </div>
+                                        <div>
+                                            <h4 className="text-sm font-bold text-[#1f2328] hover:text-[#0969da] cursor-pointer">
+                                                noyon-dev / <span className="underline decoration-[#d0d7de]">{project.name.toLowerCase().replace(/\s+/g, '-')}</span>
+                                            </h4>
+                                            <div className="flex items-center gap-2 mt-0.5">
+                                                <span className="status-badge px-2 py-0.5 rounded-full text-[9px] font-bold">Stable Release</span>
+                                                <span className="text-[10px] font-mono text-[#57606a]">#PR-{1024 + idx} • {idx === 0 ? 'just now' : 'stable build'}</span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <button className="text-gray-400 hover:text-gray-900"><FaEllipsisH /></button>
                                 </div>
 
-                                {/* Project Info */}
-                                <motion.div
-                                    initial={{ opacity: 0, x: idx % 2 === 0 ? 50 : -50 }}
-                                    whileInView={{ opacity: 1, x: 0 }}
-                                    viewport={{ once: true }}
-                                    className="w-full lg:w-1/2 space-y-8 text-center lg:text-left"
-                                >
-                                    <div className="space-y-4">
-                                        <h3 className="text-3xl md:text-5xl font-black text-slate-900 dark:text-white tracking-tight">{project.name}</h3>
-                                        <p className="text-base sm:text-xl text-slate-600 dark:text-textMain/70 leading-relaxed">{project.description}</p>
+                                {/* Project Details */}
+                                <div className="px-5 py-4">
+                                    <p className="text-sm text-[#1f2328] mb-4 leading-relaxed font-inter">
+                                        {project.description}
+                                    </p>
+                                    <div className="flex flex-wrap gap-2">
+                                        {(Array.isArray(project.techStack) ? project.techStack : project.techStack.split(',')).map((tech, tIdx) => (
+                                            <span key={tIdx} className="text-[10px] font-bold text-[#57606a] bg-[#f6f8fa] px-2 py-1 rounded border border-[#d0d7de]">
+                                                {tech.trim()}
+                                            </span>
+                                        ))}
                                     </div>
+                                </div>
 
-                                    <div className="space-y-4 pt-4">
-                                        <p className="text-[10px] font-black text-primary uppercase tracking-[0.4em]">Tech Stack</p>
-                                        <p className="text-sm font-bold text-slate-900 dark:text-white bg-slate-200/50 dark:bg-white/5 px-6 py-3 rounded-xl border border-slate-300 dark:border-white/10 inline-block">
-                                            {project.techStack}
-                                        </p>
+                                {/* Project Visuals */}
+                                <div className="border-y border-[#d0d7de] bg-gray-50">
+                                    <Slider {...sliderSettings}>
+                                        {project.images.map((img, imgIdx) => (
+                                            <div key={imgIdx} className="outline-none">
+                                                <img
+                                                    src={img}
+                                                    alt={project.name}
+                                                    className="w-full aspect-video object-cover hover:brightness-105 transition-all"
+                                                />
+                                            </div>
+                                        ))}
+                                    </Slider>
+                                </div>
+
+                                {/* Feed Footer (Interactive) */}
+                                <div className="p-1 px-3">
+                                    <div className="flex items-center justify-between py-2 border-b border-[#f6f8fa] text-[10px] font-bold text-[#57606a] uppercase">
+                                        <div className="flex gap-4">
+                                            <span className="hover:text-[#0969da] cursor-pointer">★ {120 + idx * 10} Stars</span>
+                                            <span className="hover:text-[#0969da] cursor-pointer">⑂ {idx + 5} Forks</span>
+                                        </div>
+                                        <span className="text-[#1a7f37]">Active Deployment</span>
                                     </div>
-
-                                    <div className="pt-8 flex justify-center lg:justify-start">
-                                        <a
-                                            href={project.link}
-                                            target="_blank"
-                                            rel="noopener noreferrer"
-                                            className="inline-flex items-center gap-3 px-8 py-4 bg-primary text-secondary font-black rounded-xl hover:bg-slate-900 hover:text-white dark:hover:bg-white dark:hover:text-primary hover:scale-105 transition-all duration-300 shadow-xl shadow-primary/20"
+                                    <div className="flex items-center justify-between py-1">
+                                        <button
+                                            onClick={() => navigate('/dev-terminal')}
+                                            className="flex items-center gap-2 px-4 py-2.5 text-[#57606a] hover:bg-[#f3f4f6] rounded-md transition-all flex-1 justify-center text-xs font-bold"
                                         >
-                                            View Project <FaGithub className="text-xl" />
+                                            <SiTravisci className="text-base text-gray-400" /> Re-trigger Build
+                                        </button>
+                                        <a href={project.link} target="_blank" rel="noopener noreferrer" className="flex items-center gap-2 px-4 py-2.5 text-[#57606a] hover:bg-[#f3f4f6] rounded-md transition-all flex-1 justify-center text-xs font-bold">
+                                            <SiPreact className="text-base text-[#0969da]" /> Inspect Source
                                         </a>
+                                        <button
+                                            onClick={() => navigate('/dev-terminal')}
+                                            className="flex items-center gap-2 px-4 py-2.5 text-[#57606a] hover:bg-[#f3f4f6] rounded-md transition-all flex-1 justify-center text-xs font-bold"
+                                        >
+                                            <SiGitlab className="text-base text-orange-400" /> Sync Repo
+                                        </button>
                                     </div>
-                                </motion.div>
+                                </div>
                             </div>
                         ))}
                     </div>
                 </div>
-            </section>
-
-            {/* Contact Section */}
-            <section id="contact" className="py-32 px-6 border-t border-white/5 bg-surface/20">
-                <div className="max-w-7xl mx-auto text-center">
-                    <motion.div
-                        initial={{ opacity: 0, y: 20 }}
-                        whileInView={{ opacity: 1, y: 0 }}
-                        viewport={{ once: true }}
-                    >
-                        <h2 className="text-4xl md:text-7xl font-black text-slate-900 dark:text-white mb-8 tracking-tighter">
-                            Let’s build <br />
-                            <span className="text-primary">something great</span> together!
-                        </h2>
-                        <div className="flex flex-col md:flex-row gap-8 justify-center items-center mt-12">
-                            <a href="mailto:nknoyon01936@gmail.com" className="group flex items-center gap-4 text-slate-500 dark:text-textMain/60 hover:text-primary transition-all text-xl font-bold">
-                                <div className="w-12 h-12 rounded-full border border-slate-300 dark:border-white/10 flex items-center justify-center group-hover:border-primary group-hover:bg-primary/10 group-hover:text-primary transition-all">
-                                    <FaEnvelope />
-                                </div>
-                                Email
-                            </a>
-                            <a href="https://github.com/noyonkummerdas" target="_blank" rel="noopener noreferrer" className="group flex items-center gap-4 text-slate-500 dark:text-textMain/60 hover:text-primary transition-all text-xl font-bold">
-                                <div className="w-12 h-12 rounded-full border border-slate-300 dark:border-white/10 flex items-center justify-center group-hover:border-primary group-hover:bg-primary/10 group-hover:text-primary transition-all">
-                                    <FaGithub />
-                                </div>
-                                GitHub
-                            </a>
-                            <a href="https://linkedin.com/in/noyon" target="_blank" rel="noopener noreferrer" className="group flex items-center gap-4 text-slate-500 dark:text-textMain/60 hover:text-primary transition-all text-xl font-bold">
-                                <div className="w-12 h-12 rounded-full border border-slate-300 dark:border-white/10 flex items-center justify-center group-hover:border-primary group-hover:bg-primary/10 group-hover:text-primary transition-all">
-                                    <FaLinkedin />
-                                </div>
-                                LinkedIn
-                            </a>
-                        </div>
-                    </motion.div>
-                </div>
-            </section>
-        </div>
+            </div>
+        </div >
     );
 };
 

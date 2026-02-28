@@ -23,19 +23,19 @@ const Card = ({ project }) => {
 
                 {/* Tagline */}
                 <p className="text-base sm:text-lg text-slate-800 dark:text-textMain/90 font-medium mb-6 leading-relaxed">
-                    {project.tagline}
+                    {project?.tagline || project?.description}
                 </p>
 
                 {/* Challenge & Solution */}
                 <div className="space-y-6 mb-8">
                     <div>
                         <h4 className="text-xs font-black text-primary uppercase tracking-[0.2em] mb-2">Challenge</h4>
-                        <p className="text-xs sm:text-sm text-slate-700 dark:text-textMain/60 leading-relaxed line-clamp-2">{project.problem}</p>
+                        <p className="text-xs sm:text-sm text-slate-700 dark:text-textMain/60 leading-relaxed line-clamp-2">{project?.problem || "Optimizing performance and scalability."}</p>
                     </div>
                     <div>
                         <h4 className="text-xs font-black text-primary uppercase tracking-[0.2em] mb-2">Impact Strategy</h4>
                         <ul className="space-y-2">
-                            {project.features.slice(0, 2).map((feature, idx) => (
+                            {(project?.features || []).slice(0, 2).map((feature, idx) => (
                                 <li key={idx} className="text-xs sm:text-sm text-slate-700 dark:text-textMain/80 flex items-start gap-3">
                                     <span className="text-accent mt-1">
                                         <svg className="w-3 h-3" fill="currentColor" viewBox="0 0 20 20"><path fillRule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clipRule="evenodd" /></svg>
@@ -49,7 +49,7 @@ const Card = ({ project }) => {
 
                 {/* Tech Stack */}
                 <div className="flex flex-wrap gap-2 mb-8">
-                    {project.techStack.map((tech, idx) => (
+                    {(project?.techStack || []).map((tech, idx) => (
                         <span
                             key={idx}
                             className="text-xs font-bold py-1 px-3 bg-slate-100 dark:bg-white/5 text-slate-600 dark:text-textMain/50 rounded-full border border-slate-200 dark:border-white/10 uppercase tracking-widest"
