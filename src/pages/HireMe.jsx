@@ -94,12 +94,12 @@ const HireMe = () => {
                         {/* Client Info */}
                         <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                             <div className="space-y-2">
-                                <label className="text-[14px] uppercase tracking-widest font-bold text-gray-400">Name</label>
-                                <input type="text" name="name" value={formData.name} onChange={handleChange} className="w-full bg-white/30 border border-gray-200 rounded-xl px-4 py-3 text-white focus:outline-none focus:border-indigo-500 placeholder-gray-300 transition-colors text-sm" placeholder="John Doe" required />
+                                <label className="text-[14px] uppercase tracking-widest font-bold text-slate-700 dark:text-gray-400">Name</label>
+                                <input type="text" name="name" value={formData.name} onChange={handleChange} className="w-full bg-white/50 dark:bg-white/30 border border-slate-300 dark:border-white/10 rounded-xl px-4 py-3 text-slate-800 dark:text-white focus:outline-none focus:border-indigo-500 placeholder-slate-400 dark:placeholder-gray-300 transition-colors text-sm" placeholder="John Doe" required />
                             </div>
                             <div className="space-y-2">
-                                <label className="text-[10px] uppercase tracking-widest font-bold text-gray-400">Email</label>
-                                <input type="email" name="email" value={formData.email} onChange={handleChange} className="w-full bg-white/30 border border-gray-200 rounded-xl px-4 py-3 text-white focus:outline-none focus:border-indigo-500 placeholder-gray-300 transition-colors text-sm" placeholder="john@example.com" required />
+                                <label className="text-[10px] uppercase tracking-widest font-bold text-slate-700 dark:text-gray-400">Email</label>
+                                <input type="email" name="email" value={formData.email} onChange={handleChange} className="w-full bg-white/50 dark:bg-white/30 border border-slate-300 dark:border-white/10 rounded-xl px-4 py-3 text-slate-800 dark:text-white focus:outline-none focus:border-indigo-500 placeholder-slate-400 dark:placeholder-gray-300 transition-colors text-sm" placeholder="john@example.com" required />
                             </div>
                         </div>
 
@@ -107,7 +107,7 @@ const HireMe = () => {
                         <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
 
                             <div className="space-y-2">
-                                <label className="text-[12px] uppercase tracking-widest font-bold text-gray-400">
+                                <label className="text-[12px] uppercase tracking-widest font-bold text-slate-700 dark:text-gray-400">
                                     Project Type
                                 </label>
 
@@ -116,32 +116,32 @@ const HireMe = () => {
                                         name="projectType"
                                         value={formData.projectType}
                                         onChange={handleChange}
-                                        className="w-full bg-white/30 border border-gray-200 rounded-xl px-4 py-3 
-                 text-white focus:outline-none transition-colors 
+                                        className="w-full bg-white/50 dark:bg-white/30 border border-slate-300 dark:border-white/10 rounded-xl px-4 py-3 
+                 text-slate-800 dark:text-white focus:outline-none transition-colors 
                  appearance-none cursor-pointer text-sm pr-10"
                                     >
-                                        <option className="bg-slate-800 text-gray-300">Web Application</option>
-                                        <option className="bg-slate-800 text-gray-300">Mobile App (React Native)</option>
-                                        <option className="bg-slate-800 text-gray-300">Marketing Website</option>
-                                        <option className="bg-slate-800 text-gray-300">Consulting / Audit</option>
+                                        <option className="bg-slate-100 text-slate-800">Web Application</option>
+                                        <option className="bg-slate-100 text-slate-800">Mobile App (React Native)</option>
+                                        <option className="bg-slate-100 text-slate-800">Marketing Website</option>
+                                        <option className="bg-slate-100 text-slate-800">Consulting / Audit</option>
                                     </select>
 
                                     {/* Down Arrow */}
                                     <ChevronDownIcon
-                                        className="absolute right-3 top-1/2 -translate-y-1/2 h-5 w-5 text-gray-400 pointer-events-none"
+                                        className="absolute right-3 top-1/2 -translate-y-1/2 h-5 w-5 text-slate-400 dark:text-gray-400 pointer-events-none"
                                     />
                                 </div>
                             </div>
 
                             <div className="space-y-2">
-                                <label className="text-[10px] uppercase tracking-widest font-bold text-gray-400">Target Timeline</label>
-                                <select name="timeline" value={formData.timeline} onChange={handleChange} className="w-full bg-white/30 border border-gray-200 rounded-xl px-4 py-3 text-white focus:outline-none focus:border-indigo-500 placeholder-gray-300 transition-colors appearance-none cursor-pointer text-sm">
-                                    <option>&lt; 1 Month</option>
-                                    <option>1 - 3 Months</option>
-                                    <option>3 - 6 Months</option>
-                                    <option>6+ Months</option>
-                                    <option>1 year</option>
-                                    <option>Valuable Project</option>
+                                <label className="text-[10px] uppercase tracking-widest font-bold text-slate-700 dark:text-gray-400">Target Timeline</label>
+                                <select name="timeline" value={formData.timeline} onChange={handleChange} className="w-full bg-white/50 dark:bg-white/30 border border-slate-300 dark:border-white/10 rounded-xl px-4 py-3 text-slate-800 dark:text-white focus:outline-none focus:border-indigo-500 transition-colors appearance-none cursor-pointer text-sm">
+                                    <option className="bg-slate-100 text-slate-800">&lt; 1 Month</option>
+                                    <option className="bg-slate-100 text-slate-800">1 - 3 Months</option>
+                                    <option className="bg-slate-100 text-slate-800">3 - 6 Months</option>
+                                    <option className="bg-slate-100 text-slate-800">6+ Months</option>
+                                    <option className="bg-slate-100 text-slate-800">1 year</option>
+                                    <option className="bg-slate-100 text-slate-800">Valuable Project</option>
                                 </select>
                             </div>
                         </div>
@@ -165,13 +165,13 @@ const HireMe = () => {
 
                         {/* Details */}
                         <div className="space-y-2">
-                            <label className="text-[10px] uppercase tracking-widest font-bold text-gray-400">Project Goals & Requirements</label>
+                            <label className="text-[10px] uppercase tracking-widest font-bold text-slate-700 dark:text-gray-400">Project Goals & Requirements</label>
                             <textarea
                                 name="details"
                                 value={formData.details}
                                 onChange={handleChange}
                                 rows="5"
-                                className="w-full bg-black/20 border border-white/10 rounded-xl px-4 py-3 text-white focus:outline-none focus:border-indigo-500 transition-colors resize-none text-sm placeholder:text-gray-600"
+                                className="w-full bg-white/50 dark:bg-black/20 border border-slate-300 dark:border-white/10 rounded-xl px-4 py-3 text-slate-800 dark:text-white focus:outline-none focus:border-indigo-500 transition-colors resize-none text-sm placeholder:text-slate-400 dark:placeholder:text-gray-600"
                                 placeholder="Describe the problem you're solving..."
                             ></textarea>
                         </div>

@@ -17,7 +17,7 @@ const Home = () => {
                         <span className="text-primary drop-shadow-[0_0_15px_rgba(56,189,248,0.3)]">Premium Digital</span><br />
                         Experiences
                     </h1>
-                    <p className="text-lg md:text-2xl text-slate-600 dark:text-textMain/60 max-w-3xl mx-auto leading-relaxed font-inter mb-10 md:mb-12">
+                    <p className="text-lg md:text-2xl text-slate-700 dark:text-textMain/60 max-w-3xl mx-auto leading-relaxed font-inter mb-10 md:mb-12">
                         Senior React & React Native Architect specializing in scalable B2B ecosystems and high-performance mobile applications.
                     </p>
                     <div className="flex flex-col sm:flex-row gap-4 justify-center items-center">
@@ -38,7 +38,7 @@ const Home = () => {
                         <h2 className="text-3xl md:text-6xl font-black font-poppins text-slate-900 dark:text-white mb-4 tracking-tighter">
                             Why Hire Me<span className="text-primary">.</span>
                         </h2>
-                        <p className="text-slate-600 dark:text-textMain/50 max-w-2xl mx-auto text-sm md:text-base">
+                        <p className="text-slate-700 dark:text-textMain/50 max-w-2xl mx-auto text-sm md:text-base">
                             Strategically driving value through technical excellence and client-focused solutions.
                         </p>
                     </div>
@@ -53,8 +53,8 @@ const Home = () => {
                                 <div className="w-10 h-10 md:w-12 md:h-12 rounded-xl bg-primary/10 flex items-center justify-center mb-6">
                                     <div className="w-2 h-2 rounded-full bg-primary" />
                                 </div>
-                                <h3 className="text-lg md:text-xl font-bold text-slate-900 dark:text-white mb-4">{item.title}</h3>
-                                <p className="text-slate-600 dark:text-textMain/60 text-xs md:text-sm leading-relaxed">{item.desc}</p>
+                                <h3 className="text-lg md:text-xl font-bold text-slate-800 dark:text-white mb-4">{item.title}</h3>
+                                <p className="text-slate-700 dark:text-textMain/60 text-xs md:text-sm leading-relaxed">{item.desc}</p>
                             </div>
                         ))}
                     </div>

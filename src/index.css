@@ -15,7 +15,7 @@
     margin: 0;
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
-    @apply bg-slate-50 text-slate-900 dark:bg-secondary dark:text-textMain;
+    @apply bg-slate-100 text-slate-900 dark:bg-secondary dark:text-textMain;
     overflow-x: hidden;
     transition: background-color 0.3s ease, color 0.3s ease;
   }

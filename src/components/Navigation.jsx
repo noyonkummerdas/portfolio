@@ -17,7 +17,7 @@ const Navigation = () => {
     ];
 
     return (
-        <nav className="fixed top-0 w-full z-50 border-b border-white/5 dark:border-white/5 bg-white/60 dark:bg-secondary/60 backdrop-blur-xl print:hidden transition-colors duration-300">
+        <nav className="fixed top-0 w-full z-50 border-b border-white/5 dark:border-white/5 bg-slate-100/60 dark:bg-secondary/60 backdrop-blur-xl print:hidden transition-colors duration-300">
             <div className="max-w-7xl mx-auto px-4 sm:px-6 h-20 flex justify-between items-center">
                 <div className="flex items-center gap-3 sm:gap-4 font-poppins">
                     {/* Mobile Menu Toggle - Left Side */}
