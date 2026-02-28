@@ -13,7 +13,7 @@ const HireMe = () => {
     const [formData, setFormData] = useState({
         name: '', email: '', company: '',
         projectType: 'Web Application',
-        budget: '$5k - $10k',
+        budget: '$5k-$10k',
         timeline: '1 - 3 Months',
         details: ''
     });
@@ -24,7 +24,7 @@ const HireMe = () => {
             setFormData({
                 name: '', email: '', company: '',
                 projectType: 'Web Application',
-                budget: '$5k - $10k',
+                budget: '$5k-$10k',
                 timeline: '1 - 3 Months',
                 details: ''
             });
@@ -94,7 +94,7 @@ const HireMe = () => {
                         {/* Client Info */}
                         <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                             <div className="space-y-2">
-                                <label className="text-[14px] uppercase tracking-widest font-bold text-black-500">Name</label>
+                                <label className="text-[14px] uppercase tracking-widest font-bold text-gray-400">Name</label>
                                 <input type="text" name="name" value={formData.name} onChange={handleChange} className="w-full bg-white/30 border border-gray-200 rounded-xl px-4 py-3 text-white focus:outline-none focus:border-indigo-500 placeholder-gray-300 transition-colors text-sm" placeholder="John Doe" required />
                             </div>
                             <div className="space-y-2">
@@ -105,10 +105,9 @@ const HireMe = () => {
 
                         {/* Project Scope */}
                         <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
-                            import {ChevronDownIcon} from "@heroicons/react/24/solid";
 
                             <div className="space-y-2">
-                                <label className="text-[12px] uppercase tracking-widest font-bold text-black-400">
+                                <label className="text-[12px] uppercase tracking-widest font-bold text-gray-400">
                                     Project Type
                                 </label>
 
@@ -117,14 +116,14 @@ const HireMe = () => {
                                         name="projectType"
                                         value={formData.projectType}
                                         onChange={handleChange}
-                                        className="w-full bg-black border border-gray-200 rounded-xl px-4 py-3 
-                 text-gray-200 focus:outline-none transition-colors 
+                                        className="w-full bg-white/30 border border-gray-200 rounded-xl px-4 py-3 
+                 text-white focus:outline-none transition-colors 
                  appearance-none cursor-pointer text-sm pr-10"
                                     >
-                                        <option className="bg-black text-gray-300">Web Application</option>
-                                        <option className="bg-black text-gray-300">Mobile App (React Native)</option>
-                                        <option className="bg-black text-gray-300">Marketing Website</option>
-                                        <option className="bg-black text-gray-300">Consulting / Audit</option>
+                                        <option className="bg-slate-800 text-gray-300">Web Application</option>
+                                        <option className="bg-slate-800 text-gray-300">Mobile App (React Native)</option>
+                                        <option className="bg-slate-800 text-gray-300">Marketing Website</option>
+                                        <option className="bg-slate-800 text-gray-300">Consulting / Audit</option>
                                     </select>
 
                                     {/* Down Arrow */}
