@@ -160,7 +160,7 @@ const AdminCVForm = () => {
     };
 
     return (
-        <div className="min-h-screen pt-24 pb-12 px-4 sm:px-6">
+        <div className="min-h-screen pt-24 pb-12 px-4 sm:px-6 bg-slate-100 dark:bg-secondary">
             <div className="max-w-5xl mx-auto">
                 <div className="flex flex-col sm:flex-row justify-between items-center gap-6 mb-8 text-center sm:text-left">
                     <div>
@@ -212,8 +212,8 @@ const AdminCVForm = () => {
                                 />
                             </div>
                             <div>
-                                <label className="block text-xs font-black uppercase tracking-widest mb-2 text-gray-400">PDF File</label>
-                                <div className="bg-black/20 border border-white/10 rounded-xl px-4 py-2">
+                                <label className="block text-xs font-black uppercase tracking-widest mb-2 text-slate-500 dark:text-gray-400">PDF File</label>
+                                <div className="bg-slate-50 dark:bg-black/20 border border-slate-200 dark:border-white/10 rounded-xl px-4 py-2">
                                     <input
                                         type="file"
                                         accept="application/pdf"
@@ -224,8 +224,8 @@ const AdminCVForm = () => {
                                 </div>
                             </div>
                             <div>
-                                <label className="block text-xs font-black uppercase tracking-widest mb-2 text-gray-400">Profile Image</label>
-                                <div className="bg-black/20 border border-white/10 rounded-xl px-4 py-2">
+                                <label className="block text-xs font-black uppercase tracking-widest mb-2 text-slate-500 dark:text-gray-400">Profile Image</label>
+                                <div className="bg-slate-50 dark:bg-black/20 border border-slate-200 dark:border-white/10 rounded-xl px-4 py-2">
                                     <input
                                         type="file"
                                         accept="image/*"
@@ -325,7 +325,7 @@ const AdminCVForm = () => {
                                             <button
                                                 type="button"
                                                 onClick={() => removeExperience(index)}
-                                                className="text-red-500 hover:text-red-400 text-[10px] font-black uppercase tracking-widest"
+                                                className="text-red-500 hover:text-red-400 text-xs font-black uppercase tracking-widest"
                                             >
                                                 Remove
                                             </button>
@@ -333,30 +333,30 @@ const AdminCVForm = () => {
                                     </div>
                                     <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                                         <div>
-                                            <label className="block text-[10px] font-black uppercase tracking-widest mb-2 text-slate-700 dark:text-gray-400">Job Title</label>
+                                            <label className="block text-xs font-black uppercase tracking-widest mb-2 text-slate-700 dark:text-gray-400">Job Title</label>
                                             <input
                                                 type="text"
                                                 value={exp.title}
                                                 onChange={(e) => handleExperienceChange(index, 'title', e.target.value)}
-                                                className="w-full px-4 py-3 bg-white/50 dark:bg-black/20 border border-slate-300 dark:border-white/10 rounded-xl focus:border-indigo-500 focus:outline-none text-slate-800 dark:text-white text-sm"
+                                                className="w-full px-4 py-3 bg-slate-50 dark:bg-black/20 border border-slate-300 dark:border-white/10 rounded-xl focus:border-indigo-500 focus:outline-none text-slate-800 dark:text-white text-sm"
                                             />
                                         </div>
                                         <div>
-                                            <label className="block text-[10px] font-black uppercase tracking-widest mb-2 text-slate-700 dark:text-gray-400">Company</label>
+                                            <label className="block text-xs font-black uppercase tracking-widest mb-2 text-slate-700 dark:text-gray-400">Company</label>
                                             <input
                                                 type="text"
                                                 value={exp.company}
                                                 onChange={(e) => handleExperienceChange(index, 'company', e.target.value)}
-                                                className="w-full px-4 py-3 bg-white/50 dark:bg-black/20 border border-slate-300 dark:border-white/10 rounded-xl focus:border-indigo-500 focus:outline-none text-slate-800 dark:text-white text-sm"
+                                                className="w-full px-4 py-3 bg-slate-50 dark:bg-black/20 border border-slate-300 dark:border-white/10 rounded-xl focus:border-indigo-500 focus:outline-none text-slate-800 dark:text-white text-sm"
                                             />
                                         </div>
                                         <div className="md:col-span-2">
-                                            <label className="block text-[10px] font-black uppercase tracking-widest mb-2 text-slate-700 dark:text-gray-400">Duration</label>
+                                            <label className="block text-xs font-black uppercase tracking-widest mb-2 text-slate-700 dark:text-gray-400">Duration</label>
                                             <input
                                                 type="text"
                                                 value={exp.duration}
                                                 onChange={(e) => handleExperienceChange(index, 'duration', e.target.value)}
-                                                className="w-full px-4 py-3 bg-white/50 dark:bg-black/20 border border-slate-300 dark:border-white/10 rounded-xl focus:border-indigo-500 focus:outline-none text-slate-800 dark:text-white text-sm"
+                                                className="w-full px-4 py-3 bg-slate-50 dark:bg-black/20 border border-slate-300 dark:border-white/10 rounded-xl focus:border-indigo-500 focus:outline-none text-slate-800 dark:text-white text-sm"
                                                 placeholder="e.g., 2020 - 2022"
                                             />
                                         </div>
@@ -404,12 +404,12 @@ const AdminCVForm = () => {
                                     </div>
                                     <div className="space-y-6">
                                         <div>
-                                            <label className="block text-[10px] font-black uppercase tracking-widest mb-2 text-slate-700 dark:text-gray-400">Project Name</label>
+                                            <label className="block text-xs font-black uppercase tracking-widest mb-2 text-slate-700 dark:text-gray-400">Project Name</label>
                                             <input
                                                 type="text"
                                                 value={project.name}
                                                 onChange={(e) => handleProjectChange(index, 'name', e.target.value)}
-                                                className="w-full px-4 py-3 bg-white/50 dark:bg-black/20 border border-slate-300 dark:border-white/10 rounded-xl focus:border-indigo-500 focus:outline-none text-slate-800 dark:text-white text-sm"
+                                                className="w-full px-4 py-3 bg-slate-50 dark:bg-black/20 border border-slate-300 dark:border-white/10 rounded-xl focus:border-indigo-500 focus:outline-none text-slate-800 dark:text-white text-sm"
                                             />
                                         </div>
                                         <div>
@@ -422,22 +422,22 @@ const AdminCVForm = () => {
                                         </div>
                                         <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                                             <div>
-                                                <label className="block text-[10px] font-black uppercase tracking-widest mb-2 text-slate-700 dark:text-gray-400">Technologies</label>
+                                                <label className="block text-xs font-black uppercase tracking-widest mb-2 text-slate-700 dark:text-gray-400">Technologies</label>
                                                 <input
                                                     type="text"
                                                     value={project.tech}
                                                     onChange={(e) => handleProjectChange(index, 'tech', e.target.value)}
-                                                    className="w-full px-4 py-3 bg-white/50 dark:bg-black/20 border border-slate-300 dark:border-white/10 rounded-xl focus:border-indigo-500 focus:outline-none text-slate-800 dark:text-white text-sm"
+                                                    className="w-full px-4 py-3 bg-slate-50 dark:bg-black/20 border border-slate-300 dark:border-white/10 rounded-xl focus:border-indigo-500 focus:outline-none text-slate-800 dark:text-white text-sm"
                                                     placeholder="React, Node.js, MongoDB"
                                                 />
                                             </div>
                                             <div>
-                                                <label className="block text-[10px] font-black uppercase tracking-widest mb-2 text-slate-700 dark:text-gray-400">Result/Impact</label>
+                                                <label className="block text-xs font-black uppercase tracking-widest mb-2 text-slate-700 dark:text-gray-400">Result/Impact</label>
                                                 <input
                                                     type="text"
                                                     value={project.result}
                                                     onChange={(e) => handleProjectChange(index, 'result', e.target.value)}
-                                                    className="w-full px-4 py-3 bg-white/50 dark:bg-black/20 border border-slate-300 dark:border-white/10 rounded-xl focus:border-indigo-500 focus:outline-none text-slate-800 dark:text-white text-sm"
+                                                    className="w-full px-4 py-3 bg-slate-50 dark:bg-black/20 border border-slate-300 dark:border-white/10 rounded-xl focus:border-indigo-500 focus:outline-none text-slate-800 dark:text-white text-sm"
                                                     placeholder="e.g. Improved Performance by 40%"
                                                 />
                                             </div>

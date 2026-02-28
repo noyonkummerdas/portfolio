@@ -113,16 +113,16 @@ const CvFrom = () => {
     };
 
     return (
-        <div className="min-h-screen pt-24 pb-12 px-4 sm:px-6">
+        <div className="min-h-screen pt-24 pb-12 px-4 sm:px-6 bg-slate-100 dark:bg-secondary">
             <div className="max-w-5xl mx-auto">
                 <div className="flex flex-col sm:flex-row justify-between items-center gap-6 mb-8 text-center sm:text-left">
                     <div>
-                        <h1 className="text-3xl md:text-4xl font-black mb-2 text-white">CV Management</h1>
-                        <p className="text-sm text-gray-400">Create and manage your CV versions</p>
+                        <h1 className="text-3xl md:text-4xl font-black mb-2 text-slate-900 dark:text-white">CV Management</h1>
+                        <p className="text-sm text-slate-500 dark:text-gray-400">Create and manage your CV versions</p>
                     </div>
                 </div>
 
-                <form onSubmit={handleSubmit} className="bg-white/5 rounded-2xl border border-white/10 p-6 sm:p-8 space-y-8">
+                <form onSubmit={handleSubmit} className="bg-white dark:bg-white/5 rounded-2xl border border-slate-200 dark:border-white/10 p-6 sm:p-8 space-y-8 shadow-xl dark:shadow-none">
                     {/* Personal Information */}
                     <section className="space-y-6">
                         <h2 className="text-xl md:text-2xl font-black text-indigo-400 uppercase tracking-widest text-xs">Personal Information</h2>
@@ -208,7 +208,7 @@ const CvFrom = () => {
                                             <button
                                                 type="button"
                                                 onClick={() => removeExperience(index)}
-                                                className="text-red-500 hover:text-red-400 text-[10px] font-black uppercase tracking-widest"
+                                                className="text-red-500 hover:text-red-400 text-xs font-black uppercase tracking-widest"
                                             >
                                                 Remove
                                             </button>
@@ -221,7 +221,7 @@ const CvFrom = () => {
                                                 type="text"
                                                 value={exp.title}
                                                 onChange={(e) => handleExperienceChange(index, 'title', e.target.value)}
-                                                className="w-full px-4 py-3 bg-black/20 border border-white/10 rounded-xl focus:border-indigo-500 focus:outline-none text-white text-sm"
+                                                className="w-full px-4 py-3 bg-slate-50 dark:bg-black/20 border border-slate-300 dark:border-white/10 rounded-xl focus:border-indigo-500 focus:outline-none text-slate-800 dark:text-white text-sm"
                                             />
                                         </div>
                                         <div>
@@ -230,7 +230,7 @@ const CvFrom = () => {
                                                 type="text"
                                                 value={exp.company}
                                                 onChange={(e) => handleExperienceChange(index, 'company', e.target.value)}
-                                                className="w-full px-4 py-3 bg-black/20 border border-white/10 rounded-xl focus:border-indigo-500 focus:outline-none text-white text-sm"
+                                                className="w-full px-4 py-3 bg-slate-50 dark:bg-black/20 border border-slate-300 dark:border-white/10 rounded-xl focus:border-indigo-500 focus:outline-none text-slate-800 dark:text-white text-sm"
                                             />
                                         </div>
                                         <div className="md:col-span-2">
@@ -239,7 +239,7 @@ const CvFrom = () => {
                                                 type="text"
                                                 value={exp.duration}
                                                 onChange={(e) => handleExperienceChange(index, 'duration', e.target.value)}
-                                                className="w-full px-4 py-3 bg-black/20 border border-white/10 rounded-xl focus:border-indigo-500 focus:outline-none text-white text-sm"
+                                                className="w-full px-4 py-3 bg-slate-50 dark:bg-black/20 border border-slate-300 dark:border-white/10 rounded-xl focus:border-indigo-500 focus:outline-none text-slate-800 dark:text-white text-sm"
                                                 placeholder="e.g., 2020 - 2022"
                                             />
                                         </div>
@@ -248,7 +248,7 @@ const CvFrom = () => {
                                             <textarea
                                                 value={exp.responsibilities}
                                                 onChange={(e) => handleExperienceChange(index, 'responsibilities', e.target.value)}
-                                                className="w-full px-4 py-3 bg-black/20 border border-white/10 rounded-xl focus:border-indigo-500 focus:outline-none h-32 text-white text-sm"
+                                                className="w-full px-4 py-3 bg-slate-50 dark:bg-black/20 border border-slate-300 dark:border-white/10 rounded-xl focus:border-indigo-500 focus:outline-none h-32 text-slate-800 dark:text-white text-sm"
                                                 placeholder="List your key responsibilities..."
                                             />
                                         </div>
@@ -292,7 +292,7 @@ const CvFrom = () => {
                                                 type="text"
                                                 value={project.name}
                                                 onChange={(e) => handleProjectChange(index, 'name', e.target.value)}
-                                                className="w-full px-4 py-3 bg-black/20 border border-white/10 rounded-xl focus:border-indigo-500 focus:outline-none text-white text-sm"
+                                                className="w-full px-4 py-3 bg-slate-50 dark:bg-black/20 border border-slate-300 dark:border-white/10 rounded-xl focus:border-indigo-500 focus:outline-none text-slate-800 dark:text-white text-sm"
                                             />
                                         </div>
                                         <div>
@@ -300,7 +300,7 @@ const CvFrom = () => {
                                             <textarea
                                                 value={project.description}
                                                 onChange={(e) => handleProjectChange(index, 'description', e.target.value)}
-                                                className="w-full px-4 py-3 bg-black/20 border border-white/10 rounded-xl focus:border-indigo-500 focus:outline-none h-24 text-white text-sm"
+                                                className="w-full px-4 py-3 bg-slate-50 dark:bg-black/20 border border-slate-300 dark:border-white/10 rounded-xl focus:border-indigo-500 focus:outline-none h-24 text-slate-800 dark:text-white text-sm"
                                             />
                                         </div>
                                         <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
@@ -310,7 +310,7 @@ const CvFrom = () => {
                                                     type="text"
                                                     value={project.tech}
                                                     onChange={(e) => handleProjectChange(index, 'tech', e.target.value)}
-                                                    className="w-full px-4 py-3 bg-black/20 border border-white/10 rounded-xl focus:border-indigo-500 focus:outline-none text-white text-sm"
+                                                    className="w-full px-4 py-3 bg-slate-50 dark:bg-black/20 border border-slate-300 dark:border-white/10 rounded-xl focus:border-indigo-500 focus:outline-none text-slate-800 dark:text-white text-sm"
                                                     placeholder="React, Node.js, MongoDB"
                                                 />
                                             </div>
@@ -320,7 +320,7 @@ const CvFrom = () => {
                                                     type="text"
                                                     value={project.result}
                                                     onChange={(e) => handleProjectChange(index, 'result', e.target.value)}
-                                                    className="w-full px-4 py-3 bg-black/20 border border-white/10 rounded-xl focus:border-indigo-500 focus:outline-none text-white text-sm"
+                                                    className="w-full px-4 py-3 bg-slate-50 dark:bg-black/20 border border-slate-300 dark:border-white/10 rounded-xl focus:border-indigo-500 focus:outline-none text-slate-800 dark:text-white text-sm"
                                                     placeholder="e.g. Improved Performance by 40%"
                                                 />
                                             </div>

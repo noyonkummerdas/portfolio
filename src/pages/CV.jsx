@@ -190,7 +190,7 @@ const CV = () => {
                                 <h3 className="text-xl sm:text-2xl font-bold mb-6 text-indigo-600 dark:text-indigo-400 print:text-gray-900 flex items-center gap-3">
                                     <span className="w-8 h-px bg-indigo-600/30 dark:bg-indigo-400/30"></span> Skills
                                 </h3>
-                                <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+                                <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
                                     {displayData.skills.frontend && (
                                         <div className="p-4 rounded-xl bg-slate-50 dark:bg-white/5 border border-slate-200 dark:border-white/5">
                                             <h4 className="font-bold mb-2 text-slate-900 dark:text-white print:text-gray-900">Frontend Development</h4>
@@ -213,6 +213,18 @@ const CV = () => {
                                         <div className="p-4 rounded-xl bg-slate-50 dark:bg-white/5 border border-slate-200 dark:border-white/5">
                                             <h4 className="font-bold mb-2 text-slate-900 dark:text-white print:text-gray-900">Backend & APIs</h4>
                                             <p className="text-slate-600 dark:text-gray-300 print:text-gray-700 text-sm">{displayData.skills.backend}</p>
+                                        </div>
+                                    )}
+                                    {displayData.skills.tools && (
+                                        <div className="p-4 rounded-xl bg-slate-50 dark:bg-white/5 border border-slate-200 dark:border-white/5">
+                                            <h4 className="font-bold mb-2 text-slate-900 dark:text-white print:text-gray-900">Tools & Workflow</h4>
+                                            <p className="text-slate-600 dark:text-gray-300 print:text-gray-700 text-sm">{displayData.skills.tools}</p>
+                                        </div>
+                                    )}
+                                    {displayData.skills.other && (
+                                        <div className="p-4 rounded-xl bg-slate-50 dark:bg-white/5 border border-slate-200 dark:border-white/5">
+                                            <h4 className="font-bold mb-2 text-slate-900 dark:text-white print:text-gray-900">Other Expertise</h4>
+                                            <p className="text-slate-600 dark:text-gray-300 print:text-gray-700 text-sm">{displayData.skills.other}</p>
                                         </div>
                                     )}
                                 </div>
@@ -249,6 +261,80 @@ const CV = () => {
                                     ))}
                                 </section>
                             )}
+
+                            {/* Key Projects */}
+                            {displayData.projects && displayData.projects.length > 0 && (
+                                <section className="mb-10">
+                                    <h3 className="text-xl sm:text-2xl font-bold mb-6 text-indigo-600 dark:text-indigo-400 print:text-gray-900 flex items-center gap-3">
+                                        <span className="w-8 h-px bg-indigo-600/30 dark:bg-indigo-400/30"></span> Projects
+                                    </h3>
+                                    <div className="grid grid-cols-1 gap-6">
+                                        {displayData.projects.map((project, index) => (
+                                            project.name && (
+                                                <div key={index} className="p-6 rounded-xl bg-slate-50 dark:bg-white/5 border border-slate-200 dark:border-white/5">
+                                                    <div className="flex flex-col sm:flex-row justify-between items-start mb-4 gap-2">
+                                                        <h4 className="text-lg font-bold text-slate-900 dark:text-white print:text-gray-900">{project.name}</h4>
+                                                        {project.tech && (
+                                                            <span className="px-3 py-1 bg-indigo-100 dark:bg-indigo-500/10 text-indigo-600 dark:text-indigo-400 text-xs font-bold rounded-full">{project.tech}</span>
+                                                        )}
+                                                    </div>
+                                                    <p className="text-slate-600 dark:text-gray-300 print:text-gray-700 text-sm mb-4 leading-relaxed">{project.description}</p>
+                                                    {project.result && (
+                                                        <div className="flex items-center gap-2 text-indigo-600 dark:text-indigo-400 font-bold text-xs uppercase tracking-wider">
+                                                            <span className="w-1.5 h-1.5 rounded-full bg-indigo-600 dark:bg-indigo-400"></span>
+                                                            {project.result}
+                                                        </div>
+                                                    )}
+                                                </div>
+                                            )
+                                        ))}
+                                    </div>
+                                </section>
+                            )}
+
+                            {/* Education */}
+                            {displayData.education && displayData.education.degree && (
+                                <section className="mb-10">
+                                    <h3 className="text-xl sm:text-2xl font-bold mb-6 text-indigo-600 dark:text-indigo-400 print:text-gray-900 flex items-center gap-3">
+                                        <span className="w-8 h-px bg-indigo-600/30 dark:bg-indigo-400/30"></span> Education
+                                    </h3>
+                                    <div className="p-6 rounded-xl bg-slate-50 dark:bg-white/5 border border-slate-200 dark:border-white/5">
+                                        <div className="flex flex-col sm:flex-row justify-between items-start gap-2">
+                                            <div>
+                                                <h4 className="text-lg font-bold text-slate-900 dark:text-white print:text-gray-900">{displayData.education.degree}</h4>
+                                                <p className="text-indigo-600 dark:text-indigo-300 print:text-gray-600 font-medium">{displayData.education.university}</p>
+                                            </div>
+                                            <span className="text-slate-500 dark:text-gray-500 text-xs font-bold uppercase tracking-wider print:text-gray-600">{displayData.education.duration}</span>
+                                        </div>
+                                    </div>
+                                </section>
+                            )}
+
+                            <div className="grid grid-cols-1 md:grid-cols-2 gap-10">
+                                {/* Certifications */}
+                                {displayData.certifications && (
+                                    <section>
+                                        <h3 className="text-xl font-bold mb-4 text-indigo-600 dark:text-indigo-400 print:text-gray-900 flex items-center gap-3">
+                                            <span className="w-6 h-px bg-indigo-600/30 dark:bg-indigo-400/30"></span> Certifications
+                                        </h3>
+                                        <ul className="list-disc list-outside ml-4 text-slate-600 dark:text-gray-300 space-y-2 print:text-gray-700 text-sm">
+                                            {displayData.certifications.split('\n').filter(c => c.trim()).map((cert, i) => (
+                                                <li key={i}>{cert}</li>
+                                            ))}
+                                        </ul>
+                                    </section>
+                                )}
+
+                                {/* Languages */}
+                                {displayData.languages && (
+                                    <section>
+                                        <h3 className="text-xl font-bold mb-4 text-indigo-600 dark:text-indigo-400 print:text-gray-900 flex items-center gap-3">
+                                            <span className="w-6 h-px bg-indigo-600/30 dark:bg-indigo-400/30"></span> Languages
+                                        </h3>
+                                        <p className="text-slate-600 dark:text-gray-300 print:text-gray-700 text-sm leading-relaxed whitespace-pre-line">{displayData.languages}</p>
+                                    </section>
+                                )}
+                            </div>
 
                             {/* Signature Section */}
                             <div className="mt-20 flex flex-col sm:flex-row justify-between items-center sm:items-end border-t border-slate-200 dark:border-white/5 pt-12 print:border-gray-200 gap-12 sm:gap-0">
