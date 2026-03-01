@@ -1,23 +1,13 @@
 import React, { useState, useEffect, useRef } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { FaTimes, FaPaperPlane, FaRobot, FaUserCircle } from 'react-icons/fa';
-
-const backendResponses = [
-    "I'm NK's AI assistant. He specializes in React, Node.js, and cloud architecture. How can I help you?",
-    "NK has led teams to build scalable SaaS applications handling thousands of concurrent users.",
-    "His primary tech stack includes React, Next.js, FastAPI, Node.js, PostgreSQL, and MongoDB.",
-    "NK is always open to discussing new and exciting architectural challenges. Do you have a project in mind?",
-    "You can view his recent commits and projects in the Repositories tab!",
-    "NK's typical response time is under 12 hours. If you leave your email, I'll make sure he gets it.",
-    "He usually prefers working within a monorepo setup using tools like Turborepo or Nx for large scale applications."
-];
+import { useDispatch, useSelector } from 'react-redux';
+import { sendMessage } from '../features/chatbot/chatbotSlice';
 
 const Chatbot = ({ isOpen, onClose }) => {
-    const [messages, setMessages] = useState([
-        { id: 1, text: "Hi! I'm NK Noyon's AI proxy. I pull data directly from his professional graph. What would you like to know about his experience?", sender: 'bot' }
-    ]);
+    const dispatch = useDispatch();
+    const { messages, loading: isTyping } = useSelector((state) => state.chatbot);
     const [inputValue, setInputValue] = useState('');
-    const [isTyping, setIsTyping] = useState(false);
     const messagesEndRef = useRef(null);
 
     const scrollToBottom = () => {
@@ -28,37 +18,12 @@ const Chatbot = ({ isOpen, onClose }) => {
         scrollToBottom();
     }, [messages, isTyping]);
 
-    const handleSendMessage = async (e) => {
+    const handleSendMessage = (e) => {
         e.preventDefault();
         if (!inputValue.trim()) return;
 
-        const newUserMessage = { id: Date.now(), text: inputValue, sender: 'user' };
-        setMessages((prev) => [...prev, newUserMessage]);
+        dispatch(sendMessage(inputValue));
         setInputValue('');
-        setIsTyping(true);
-        try {
-            const response = await fetch('http://localhost:5000/api/chatbot/message', {
-                method: 'POST',
-                headers: {
-                    'Content-Type': 'application/json'
-                },
-                body: JSON.stringify({ message: inputValue })
-            });
-
-            if (!response.ok) {
-                throw new Error("Failed connecting to backend");
-            }
-
-            const data = await response.json();
-            const newBotMessage = { id: Date.now() + 1, text: data.reply, sender: 'bot' };
-            setMessages((prev) => [...prev, newBotMessage]);
-            setIsTyping(false);
-        } catch (error) {
-            console.error("Chatbot Error:", error);
-            const errorMsg = { id: Date.now() + 1, text: "Sorry, I am currently disconnected from NK's backend server.", sender: 'bot' };
-            setMessages((prev) => [...prev, errorMsg]);
-            setIsTyping(false);
-        }
     };
 
     return (

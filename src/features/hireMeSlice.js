@@ -1,20 +1,18 @@
 
 import { createSlice, createAsyncThunk } from '@reduxjs/toolkit';
-import axios from 'axios';
-
-const API_URL = 'http://localhost:5000/api/hire-me';
+import axiosInstance from '../api/axiosInstance';
 
 export const fetchSubmissions = createAsyncThunk('hireMe/fetchSubmissions', async () => {
-    const response = await axios.get(API_URL);
+    const response = await axiosInstance.get('/hire-me');
     return response.data;
 });
 
 export const submitHireMe = createAsyncThunk('hireMe/submitHireMe', async (formData, { rejectWithValue }) => {
     try {
-        const response = await axios.post(`${API_URL}/submit`, formData);
+        const response = await axiosInstance.post('/hire-me/submit', formData);
         return response.data;
     } catch (error) {
-        return rejectWithValue(error.response.data.error || error.message);
+        return rejectWithValue(error.response?.data?.error || error.message);
     }
 });
 

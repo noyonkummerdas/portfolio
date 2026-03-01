@@ -1,51 +1,43 @@
-
 import { createSlice, createAsyncThunk } from '@reduxjs/toolkit';
-import axios from 'axios';
-
-// Define base URL
-const API_URL = 'http://localhost:5000/api/cvs';
+import axiosInstance from '../../api/axiosInstance';
 
 // Async thunk for fetching CVs
 export const fetchCvs = createAsyncThunk('cv/fetchCvs', async () => {
-    const response = await axios.get(API_URL);
+    const response = await axiosInstance.get('/cvs');
     return response.data;
 });
 
 // Async thunk for uploading a CV
 export const uploadCv = createAsyncThunk('cv/uploadCv', async (cvData, { rejectWithValue }) => {
     try {
-        const response = await axios.post(`${API_URL}/upload`, cvData, {
+        const response = await axiosInstance.post('/cvs/upload', cvData, {
             headers: {
                 'Content-Type': 'multipart/form-data',
             },
         });
         return response.data; // Backend returns the full new CV object
     } catch (error) {
-        if (error.response && error.response.data.error) {
-            return rejectWithValue(error.response.data.error);
-        } else {
-            return rejectWithValue(error.message);
-        }
+        return rejectWithValue(error.response?.data?.error || error.message);
     }
 });
 
 // Async thunk for fetching a single CV by ID
 export const fetchCvById = createAsyncThunk('cv/fetchCvById', async (id, { rejectWithValue }) => {
     try {
-        const response = await axios.get(`${API_URL}/${id}`);
+        const response = await axiosInstance.get(`/cvs/${id}`);
         return response.data;
     } catch (error) {
-        return rejectWithValue(error.response.data.error || error.message);
+        return rejectWithValue(error.response?.data?.error || error.message);
     }
 });
 
 // Async thunk for deleting a CV
 export const deleteCv = createAsyncThunk('cv/deleteCv', async (id, { rejectWithValue }) => {
     try {
-        await axios.delete(`${API_URL}/${id}`);
+        await axiosInstance.delete(`/cvs/${id}`);
         return id;
     } catch (error) {
-        return rejectWithValue(error.response.data.error || error.message);
+        return rejectWithValue(error.response?.data?.error || error.message);
     }
 });
 
