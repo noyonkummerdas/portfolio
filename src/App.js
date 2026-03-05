@@ -21,6 +21,8 @@ import DevSettings from './pages/DevSettings';
 import DevTerminal from './pages/DevTerminal';
 import DevSocial from './pages/DevSocial';
 import PostProject from './pages/PostProject';
+import ChatManagement from './pages/ChatManagement';
+import Login from './pages/Login';
 
 // Routes Configuration
 function App() {
@@ -34,6 +36,7 @@ function App() {
         <main>
           <Routes>
             <Route path="/" element={<Home />} />
+            <Route path="/login" element={<Login />} />
             <Route path="/projects" element={<Projects />} />
             <Route path="/projects/:id" element={<ProjectDetails />} />
             <Route path="/reviews" element={<Reviews />} />
@@ -46,6 +49,7 @@ function App() {
             <Route path="/admin/cv" element={<AdminCVForm />} />
             <Route path="/cvFrom" element={<CvFrom />} />
             <Route path="/admin/cv/:id" element={<AdminCVDetails />} />
+            <Route path="/admin/chats" element={<ChatManagement />} />
             <Route path="/dev-settings" element={<DevSettings />} />
             <Route path="/dev-terminal" element={<DevTerminal />} />
             <Route path="/dev-social" element={<DevSocial />} />

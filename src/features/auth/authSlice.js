@@ -7,7 +7,7 @@ export const login = createAsyncThunk('auth/login', async (credentials, { reject
         localStorage.setItem('token', response.data.token);
         return response.data;
     } catch (error) {
-        return rejectWithValue(error.response?.data?.message || 'Login failed');
+        return rejectWithValue(error.response?.data?.error || 'Login failed');
     }
 });
 

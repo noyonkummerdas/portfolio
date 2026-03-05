@@ -1,19 +1,33 @@
-
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 import { fetchSubmissions } from '../features/hireMeSlice';
 import { fetchCvs } from '../features/cv/cvSlice';
-import { FaFileAlt, FaArrowRight } from 'react-icons/fa';
+import { logout } from '../features/auth/authSlice';
+import { FaFileAlt, FaArrowRight, FaRobot, FaSignOutAlt } from 'react-icons/fa';
+import Chatbot from '../components/Chatbot';
+import { useNavigate } from 'react-router-dom';
 
 const AdminDashboard = () => {
     const dispatch = useDispatch();
+    const navigate = useNavigate();
     const { cvs } = useSelector((state) => state.cv);
+    const { token } = useSelector((state) => state.auth);
+    const [isChatOpen, setIsChatOpen] = useState(false);
 
     useEffect(() => {
-        dispatch(fetchSubmissions());
-        dispatch(fetchCvs());
-    }, [dispatch]);
+        if (!token) {
+            navigate('/login');
+        } else {
+            dispatch(fetchSubmissions());
+            dispatch(fetchCvs());
+        }
+    }, [dispatch, token, navigate]);
+
+    const handleLogout = () => {
+        dispatch(logout());
+        navigate('/login');
+    }
 
     const clearData = () => {
         alert("Clear All Data is disabled. Submissions are preserved in database.");
@@ -24,10 +38,16 @@ const AdminDashboard = () => {
             <div className="flex flex-col sm:flex-row justify-between items-center gap-6 mb-12 text-center sm:text-left">
                 <h1 className="text-3xl md:text-4xl font-black text-slate-900 dark:text-white tracking-tighter">Inquiry Dashboard</h1>
                 <div className="flex flex-wrap justify-center gap-4">
+                    <Link to="/admin/chats" className="px-6 py-2 bg-slate-900 dark:bg-white dark:text-slate-900 text-white rounded-lg text-sm font-bold transition-all active:scale-95 flex items-center gap-2">
+                        <FaRobot size={14} /> Manage AI Chats
+                    </Link>
                     <Link to="/cv" className="px-6 py-2 bg-indigo-600 hover:bg-indigo-500 rounded-lg text-sm font-bold transition-all active:scale-95 text-white">
                         View CV
                     </Link>
-                    <button onClick={clearData} className="text-xs text-red-500 hover:text-red-400 font-bold uppercase tracking-widest transition-colors">
+                    <button onClick={handleLogout} className="px-6 py-2 bg-red-600/10 text-red-600 border border-red-600/20 rounded-lg text-sm font-bold transition-all active:scale-95 flex items-center gap-2 hover:bg-red-600 hover:text-white">
+                        <FaSignOutAlt size={14} /> Logout
+                    </button>
+                    <button onClick={clearData} className="text-xs text-slate-500 hover:text-red-400 font-bold uppercase tracking-widest transition-colors">
                         Clear All Data
                     </button>
                 </div>
@@ -69,6 +89,15 @@ const AdminDashboard = () => {
                     </div>
                 )}
             </div>
+            {/* Floating Chat Button */}
+            <button
+                onClick={() => setIsChatOpen(true)}
+                className="fixed bottom-6 right-6 w-14 h-14 bg-indigo-600 text-white rounded-full shadow-2xl flex items-center justify-center hover:bg-indigo-500 transition-all active:scale-95 z-40"
+            >
+                <FaRobot size={24} />
+            </button>
+
+            <Chatbot isOpen={isChatOpen} onClose={() => setIsChatOpen(false)} />
         </div>
     );
 };
