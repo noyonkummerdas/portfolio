@@ -25,6 +25,46 @@ const Login = () => {
     const [showPass, setShowPass] = useState(false);
     const [isHovered, setIsHovered] = useState(false);
     const [currentPlanetIndex, setCurrentPlanetIndex] = useState(0);
+    const [celestialState, setCelestialState] = useState({
+        ratio: 0, // 0 = Pure Sun, 1 = Pure Moon
+        isDay: true
+    });
+
+    useEffect(() => {
+        const calculateCelestial = () => {
+            const now = new Date();
+            const hours = now.getHours();
+            const minutes = now.getMinutes();
+            const totalMinutes = hours * 60 + minutes;
+
+            let ratio;
+            // User Logic: 
+            // PM Suro (12:00) -> Sun (0)
+            // PM progresses -> fades to Moon (1)
+            // AM Suro (00:00) -> Moon (1)
+
+            if (hours >= 12) {
+                // PM: 12 PM (60*12=720) to 12 AM (1440)
+                // Total PM duration = 720 mins
+                const pmMinutes = totalMinutes - 720;
+                ratio = pmMinutes / 720;
+            } else {
+                // AM: 12 AM (0) to 12 PM (720)
+                // Stays as Moon but prepares to transition back to Sun at 12 PM
+                // To make it smooth: 12 AM is 1.0, 11:59 AM is 0.0
+                ratio = 1 - (totalMinutes / 720);
+            }
+
+            setCelestialState({
+                ratio: ratio,
+                isDay: ratio < 0.5
+            });
+        };
+
+        calculateCelestial();
+        const timer = setInterval(calculateCelestial, 60000);
+        return () => clearInterval(timer);
+    }, []);
 
     const planets = [
         { name: 'Mercury', size: 'w-4 h-4', texture: 'bg-gradient-to-br from-gray-400 to-gray-600', glow: 'shadow-gray-500/30', radius: 250, speed: 1000, delay: 0 },
@@ -81,7 +121,12 @@ const Login = () => {
 
 
     return (
-        <div className="min-h-screen relative flex items-start justify-end bg-[#05070a] p-10 pt-[52px] pr-12 font-inter overflow-hidden">
+        <div
+            className="min-h-screen relative flex items-start justify-end p-10 pt-[52px] pr-12 font-inter overflow-hidden transition-colors duration-[2000ms]"
+            style={{
+                backgroundColor: celestialState.ratio > 0.5 ? '#020408' : '#0a0d14'
+            }}
+        >
             {/* Dynamic Background */}
             <div className="absolute inset-0 z-0 overflow-hidden">
                 <div
@@ -90,52 +135,105 @@ const Login = () => {
                 />
                 <div className="absolute inset-0 bg-gradient-to-t from-[#05070a] via-transparent to-[#05070a]/30" />
 
-                {/* Hyper-Realistic Radiant Sun (Solar Engine) - Centered & Fixed Visibility */}
+                {/* Dynamic Celestial Core (Sun/Moon Controller) */}
                 <div className="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 z-10 pointer-events-none w-0 h-0">
-                    {/* Primary Solar Radiation (Massive Light Wash) */}
-                    <div className="absolute w-[1200px] h-[1200px] bg-[radial-gradient(circle,rgba(253,186,11,0.2)_0%,rgba(249,115,22,0.1)_50%,transparent_80%)] -translate-x-1/2 -translate-y-1/2 blur-[140px]" />
 
-                    {/* Outer Corona (Soft Fire Glow) */}
-                    <motion.div
-                        animate={{
-                            scale: [1, 1.1, 1],
-                            opacity: [0.4, 0.6, 0.4]
+                    {/* Atmospheric Glow (Adaptive) */}
+                    <div
+                        className="absolute w-[1500px] h-[1500px] -translate-x-1/2 -translate-y-1/2 blur-[160px] transition-all duration-[3000ms]"
+                        style={{
+                            background: `radial-gradient(circle, ${celestialState.ratio < 0.5
+                                    ? 'rgba(253,186,11,0.15) 0%, rgba(249,115,22,0.05) 50%'
+                                    : 'rgba(147,197,253,0.08) 0%, rgba(30,58,138,0.03) 60%'
+                                }, transparent 80%)`
                         }}
-                        transition={{ duration: 8, repeat: Infinity, ease: "easeInOut" }}
-                        className="absolute w-[700px] h-[700px] bg-gradient-to-r from-orange-600/40 via-red-600/20 to-transparent rounded-full blur-[110px] -translate-x-1/2 -translate-y-1/2"
                     />
 
-                    {/* Solar Flares & Magnetic Loops (Dynamic Light Rays) */}
-                    <div className="absolute flex items-center justify-center -translate-x-1/2 -translate-y-1/2">
-                        <motion.div
-                            animate={{ rotate: 360 }}
-                            transition={{ duration: 120, repeat: Infinity, ease: "linear" }}
-                            className="w-[550px] h-[550px] border-[50px] border-orange-500/10 rounded-full blur-[50px] border-t-orange-500/30 border-l-yellow-500/20"
-                        />
-                    </div>
+                    {/* Core Corona / Lunar Aura */}
+                    <motion.div
+                        animate={{
+                            scale: [1, 1.05, 1],
+                            opacity: celestialState.ratio < 0.5 ? [0.4, 0.6, 0.4] : [0.2, 0.4, 0.2]
+                        }}
+                        transition={{ duration: 10, repeat: Infinity, ease: "easeInOut" }}
+                        className="absolute w-[800px] h-[800px] rounded-full blur-[120px] -translate-x-1/2 -translate-y-1/2 transition-all duration-[5000ms]"
+                        style={{
+                            background: celestialState.ratio < 0.5
+                                ? 'linear-gradient(to right, rgba(234,88,12,0.3), rgba(249,115,22,0.1))'
+                                : 'linear-gradient(to right, rgba(147,197,253,0.2), rgba(30,58,138,0.1))'
+                        }}
+                    />
 
-                    {/* The Sun Core (Intense Heat) */}
+                    {/* Magnetic Loops (Only active in Sun mode) */}
+                    {celestialState.ratio < 0.4 && (
+                        <div className="absolute flex items-center justify-center -translate-x-1/2 -translate-y-1/2">
+                            <motion.div
+                                animate={{ rotate: 360, opacity: 1 - celestialState.ratio * 2 }}
+                                transition={{ duration: 120, repeat: Infinity, ease: "linear" }}
+                                className="w-[600px] h-[600px] border-[50px] border-orange-500/10 rounded-full blur-[60px] border-t-orange-500/20 border-l-yellow-500/10"
+                            />
+                        </div>
+                    )}
+
+                    {/* Celestial Body Core */}
                     <div className="absolute flex items-center justify-center -translate-x-1/2 -translate-y-1/2">
                         <motion.div
                             animate={{
-                                boxShadow: [
-                                    "0 0 100px rgba(249,115,22,0.6)",
-                                    "0 0 150px rgba(234,88,12,0.9)",
-                                    "0 0 100px rgba(249,115,22,0.6)"
-                                ]
+                                scale: 1,
+                                boxShadow: celestialState.ratio < 0.5
+                                    ? ["0 0 100px rgba(249,115,22,0.5)", "0 0 140px rgba(234,88,12,0.7)", "0 0 100px rgba(249,115,22,0.5)"]
+                                    : ["0 0 60px rgba(147,197,253,0.3)", "0 0 90px rgba(147,197,253,0.5)", "0 0 60px rgba(147,197,253,0.3)"]
                             }}
-                            transition={{ duration: 4, repeat: Infinity, ease: "easeInOut" }}
-                            className="w-96 h-96 bg-[radial-gradient(circle_at_center,#fff_0%,#fbbf24_20%,#f59e0b_40%,#ea580c_70%,#7c2d12_100%)] rounded-full shadow-[0_0_120px_rgba(251,191,36,0.7)] border-4 border-white/20"
+                            transition={{ duration: 6, repeat: Infinity, ease: "easeInOut" }}
+                            className="w-[350px] h-[350px] rounded-full transition-all duration-[5000ms] border-4 border-white/10"
+                            style={{
+                                background: celestialState.ratio < 0.5
+                                    ? 'radial-gradient(circle at center, #fff 0%, #fbbf24 20%, #f59e0b 40%, #ea580c 70%, #7c2d12 100%)' // Sun
+                                    : 'radial-gradient(circle at center, #f8fafc 0%, #cbd5e1 30%, #94a3b8 60%, #475569 100%)' // Moon
+                            }}
                         >
-                            {/* Surface Texture Simulation */}
-                            <div className="absolute inset-0 rounded-full opacity-40 bg-[radial-gradient(circle,rgba(255,255,255,0.2)_1px,transparent_1px)] bg-[size:10px_10px] mix-blend-overlay" />
-                            <div className="absolute inset-0 rounded-full bg-[radial-gradient(circle_at_30%_30%,rgba(255,255,255,0.5)_0%,transparent_60%)]" />
+                            {/* Moon Craters / Sun Texture Simulation */}
+                            <div
+                                className={`absolute inset-0 rounded-full opacity-30 mix-blend-overlay transition-opacity duration-[5000ms] ${celestialState.ratio > 0.5 ? 'bg-[radial-gradient(circle,rgba(0,0,0,0.4)_2px,transparent_6px)] bg-[size:40px_35px]' : 'bg-[radial-gradient(circle,rgba(255,255,255,0.2)_1px,transparent_1px)] bg-[size:10px_10px]'}`}
+                            />
+
+                            {/* Reflection Glow */}
+                            <div className="absolute inset-0 rounded-full bg-[radial-gradient(circle_at_30%_30%,rgba(255,255,255,0.4)_0%,transparent_60%)]" />
                         </motion.div>
                     </div>
 
-                    {/* Lens Flare Spots (Realistic Camera Effect) */}
-                    <div className="absolute left-[350px] top-[150px] w-6 h-6 bg-orange-500/20 rounded-full blur-sm" />
-                    <div className="absolute -left-[450px] -bottom-[250px] w-4 h-4 bg-yellow-500/10 rounded-full blur-[3px]" />
+                    {/* Star Field (Active in Moon Mode) */}
+                    <AnimatePresence>
+                        {celestialState.ratio > 0.6 && (
+                            <motion.div
+                                initial={{ opacity: 0 }}
+                                animate={{ opacity: 0.4 }}
+                                exit={{ opacity: 0 }}
+                                className="absolute inset-0 w-[2000px] h-[2000px] -translate-x-1/2 -translate-y-1/2 pointer-events-none"
+                            >
+                                {[...Array(50)].map((_, i) => (
+                                    <div
+                                        key={i}
+                                        className="absolute w-1 h-1 bg-white rounded-full animate-pulse"
+                                        style={{
+                                            left: `${(i * 17) % 100}%`,
+                                            top: `${(i * 23) % 100}%`,
+                                            animationDelay: `${(i * 0.1)}s`,
+                                            opacity: 0.2 + Math.random() * 0.5
+                                        }}
+                                    />
+                                ))}
+                            </motion.div>
+                        )}
+                    </AnimatePresence>
+
+                    {/* Lens Flare Spots */}
+                    {celestialState.ratio < 0.3 && (
+                        <>
+                            <div className="absolute left-[350px] top-[150px] w-6 h-6 bg-orange-500/10 rounded-full blur-sm" />
+                            <div className="absolute -left-[450px] -bottom-[250px] w-4 h-4 bg-yellow-500/05 rounded-full blur-[3px]" />
+                        </>
+                    )}
                 </div>
 
                 {/* Centered Orbital System (Solar System Algorithm) */}
@@ -258,9 +356,17 @@ const Login = () => {
                                                     repeat: Infinity,
                                                     ease: "linear"
                                                 }}
-                                                className={`${planet.size} ${planet.texture} rounded-full shadow-[0_0_25px] ${planet.glow} relative z-10`}
+                                                className={`${planet.size} ${planet.texture} rounded-full shadow-[0_0_25px] ${planet.glow} relative z-10 transition-all duration-[2000ms]`}
                                             >
-                                                <div className="absolute inset-0 rounded-full bg-[radial-gradient(circle_at_30%_30%,transparent_0%,rgba(0,0,0,0.6)_100%)] shadow-inner" />
+                                                {/* Light/Shadow Simulation based on Celestial Mode */}
+                                                <div
+                                                    className="absolute inset-0 rounded-full transition-all duration-[3000ms]"
+                                                    style={{
+                                                        background: celestialState.ratio < 0.5
+                                                            ? 'radial-gradient(circle at 30% 30%, transparent 0%, rgba(0,0,0,0.7) 100%)' // Hard Sun shadow
+                                                            : 'radial-gradient(circle at center, transparent 0%, rgba(0,0,0,0.2) 100%)' // Soft Moon glow
+                                                    }}
+                                                />
                                             </motion.div>
                                         </div>
                                     </div>
