@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { useParams, useNavigate, Link } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 import { FaTrash, FaDownload } from 'react-icons/fa';
-import { fetchCvs, fetchCvById, deleteCv } from '../features/cv/cvSlice';
+import { fetchCvs, fetchCvById, deleteCv, setPrimaryCv } from '../features/cv/cvSlice';
 
 const AdminCVDetails = () => {
     const { id } = useParams();
@@ -22,6 +22,11 @@ const AdminCVDetails = () => {
             await dispatch(deleteCv(id));
             navigate('/admin');
         }
+    };
+
+    const handleSetPrimary = async () => {
+        await dispatch(setPrimaryCv(id));
+        dispatch(fetchCvById(id)); // Refresh status
     };
 
     const handlePrint = () => {
@@ -95,6 +100,14 @@ const AdminCVDetails = () => {
                         >
                             <FaTrash /> Delete
                         </button>
+                        {!cvData.isPrimary && (
+                            <button
+                                onClick={handleSetPrimary}
+                                className="w-full sm:w-auto px-6 py-3 bg-green-600 hover:bg-green-500 text-white rounded-xl font-bold flex items-center justify-center gap-2 transition-all active:scale-95 text-sm"
+                            >
+                                ★ Set as Primary Profile
+                            </button>
+                        )}
                         <Link
                             to="/admin"
                             className="w-full sm:w-auto px-6 py-3 bg-white/5 hover:bg-white/10 text-white rounded-xl font-bold border border-white/10 transition-all text-center text-sm"
@@ -109,7 +122,14 @@ const AdminCVDetails = () => {
                         <header className="mb-10 pb-8 border-b border-slate-200 dark:border-white/10">
                             <div className="flex flex-col sm:flex-row justify-between items-start gap-6 sm:gap-4 mb-6">
                                 <div>
-                                    <h1 className="text-3xl sm:text-5xl font-black mb-2 print:text-black text-slate-900 dark:text-white leading-tight">{cvData.personalInfo.name}</h1>
+                                    <div className="flex items-center gap-3 mb-2">
+                                        <h1 className="text-3xl sm:text-5xl font-black mb-2 print:text-black text-slate-900 dark:text-white leading-tight">{cvData.personalInfo.name}</h1>
+                                        {cvData.isPrimary && (
+                                            <span className="px-3 py-1 bg-green-500 text-white text-[10px] font-black uppercase tracking-widest rounded-full shadow-lg shadow-green-500/20">
+                                                Primary
+                                            </span>
+                                        )}
+                                    </div>
                                     <h2 className="text-lg sm:text-2xl text-indigo-600 dark:text-indigo-400 font-bold print:text-gray-700">
                                         {cvData.personalInfo.title}
                                     </h2>

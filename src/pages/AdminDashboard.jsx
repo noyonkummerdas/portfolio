@@ -79,7 +79,14 @@ const AdminDashboard = () => {
                                         <FaFileAlt />
                                     </div>
                                     <div>
-                                        <h3 className="font-bold text-slate-900 dark:text-white">{cv.version}</h3>
+                                        <div className="flex items-center gap-2">
+                                            <h3 className="font-bold text-slate-900 dark:text-white">{cv.version}</h3>
+                                            {cv.isPrimary && (
+                                                <span className="px-2 py-0.5 bg-green-500/10 text-green-500 text-[10px] font-black uppercase tracking-tighter rounded-md border border-green-500/20">
+                                                    Primary
+                                                </span>
+                                            )}
+                                        </div>
                                         <p className="text-xs text-slate-500 dark:text-gray-400">{new Date(cv.createdAt).toLocaleDateString()}</p>
                                     </div>
                                 </div>

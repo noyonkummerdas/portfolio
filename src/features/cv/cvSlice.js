@@ -1,10 +1,26 @@
 import { createSlice, createAsyncThunk } from '@reduxjs/toolkit';
 import axiosInstance from '../../api/axiosInstance';
 
-// Async thunk for fetching CVs
+// Async thunk for fetching all CVs
 export const fetchCvs = createAsyncThunk('cv/fetchCvs', async () => {
     const response = await axiosInstance.get('/cvs');
     return response.data;
+});
+
+// Async thunk for fetching ONLY the primary CV for public view
+export const fetchPrimaryCv = createAsyncThunk('cv/fetchPrimaryCv', async () => {
+    const response = await axiosInstance.get('/cvs/primary');
+    return response.data;
+});
+
+// Async thunk for setting an existing CV as primary
+export const setPrimaryCv = createAsyncThunk('cv/setPrimaryCv', async (id, { rejectWithValue }) => {
+    try {
+        const response = await axiosInstance.patch(`/cvs/${id}/set-primary`);
+        return response.data.cv;
+    } catch (error) {
+        return rejectWithValue(error.response?.data?.error || error.message);
+    }
 });
 
 // Async thunk for uploading a CV
@@ -45,6 +61,7 @@ const cvSlice = createSlice({
     name: 'cv',
     initialState: {
         cvs: [],
+        primaryCv: null, // New state for primary CV
         currentCv: null,
         loading: false,
         error: null,
@@ -90,6 +107,36 @@ const cvSlice = createSlice({
             .addCase(uploadCv.rejected, (state, action) => {
                 state.uploadLoading = false;
                 state.uploadError = action.payload || action.error.message;
+            })
+            // Fetch Primary CV
+            .addCase(fetchPrimaryCv.pending, (state) => {
+                state.loading = true;
+                state.error = null;
+            })
+            .addCase(fetchPrimaryCv.fulfilled, (state, action) => {
+                state.loading = false;
+                state.primaryCv = action.payload;
+            })
+            .addCase(fetchPrimaryCv.rejected, (state, action) => {
+                state.loading = false;
+                state.error = action.error.message;
+            })
+            // Set Primary CV
+            .addCase(setPrimaryCv.pending, (state) => {
+                state.loading = true;
+            })
+            .addCase(setPrimaryCv.fulfilled, (state, action) => {
+                state.loading = false;
+                state.primaryCv = action.payload;
+                // Update the list to reflect which one is primary
+                state.cvs = state.cvs.map(cv => ({
+                    ...cv,
+                    isPrimary: cv._id === action.payload._id
+                }));
+            })
+            .addCase(setPrimaryCv.rejected, (state, action) => {
+                state.loading = false;
+                state.error = action.payload;
             })
             // Fetch CV by ID
             .addCase(fetchCvById.pending, (state) => {

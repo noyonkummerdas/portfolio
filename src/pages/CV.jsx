@@ -2,15 +2,16 @@ import React, { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { FaGithub, FaLinkedin, FaEnvelope, FaDownload, FaEdit } from 'react-icons/fa';
 import { Link } from 'react-router-dom';
-import { fetchCvs } from '../features/cv/cvSlice';
+import { fetchCvs, fetchPrimaryCv } from '../features/cv/cvSlice';
 import profilePic from '../assets/profile/profilePic.png';
 
 const CV = () => {
     const dispatch = useDispatch();
-    const { cvs, loading } = useSelector((state) => state.cv);
+    const { cvs, primaryCv, loading } = useSelector((state) => state.cv);
 
     useEffect(() => {
         dispatch(fetchCvs());
+        dispatch(fetchPrimaryCv());
     }, [dispatch]);
 
     const handlePrint = () => {
@@ -82,22 +83,23 @@ const CV = () => {
     // we use the default data for the "View" part, but use the Redux list for "Versions" and "Download".
     // If there is a latest CV with a PDF, we use that link.
 
-    // Sort CVs by createdAt desc if not already sorted
+    // Sort CVs by createdAt desc for the sidebar
     const sortedCvs = [...cvs].sort((a, b) => new Date(b.createdAt) - new Date(a.createdAt));
-    const latestCv = sortedCvs.length > 0 ? sortedCvs[0] : null;
 
-    // Merge default data with latest CV data if available
-    const displayData = latestCv ? {
+    // Use primaryCv as display data, fallback to defaultData
+    const displayData = primaryCv ? {
         ...defaultData,
-        personalInfo: latestCv.personalInfo ? (typeof latestCv.personalInfo === 'string' ? JSON.parse(latestCv.personalInfo) : latestCv.personalInfo) : defaultData.personalInfo,
-        summary: latestCv.summary || defaultData.summary,
-        skills: latestCv.skills ? (typeof latestCv.skills === 'string' ? JSON.parse(latestCv.skills) : latestCv.skills) : defaultData.skills,
-        experience: latestCv.experience ? (typeof latestCv.experience === 'string' ? JSON.parse(latestCv.experience) : latestCv.experience) : defaultData.experience,
-        projects: latestCv.projects ? (typeof latestCv.projects === 'string' ? JSON.parse(latestCv.projects) : latestCv.projects) : defaultData.projects,
-        education: latestCv.education ? (typeof latestCv.education === 'string' ? JSON.parse(latestCv.education) : latestCv.education) : defaultData.education,
-        certifications: latestCv.certifications || defaultData.certifications,
-        languages: latestCv.languages || defaultData.languages,
-        imageUrl: latestCv.imageUrl // New field from backend
+        personalInfo: primaryCv.personalInfo ? (typeof primaryCv.personalInfo === 'string' ? JSON.parse(primaryCv.personalInfo) : primaryCv.personalInfo) : defaultData.personalInfo,
+        summary: primaryCv.summary || defaultData.summary,
+        skills: primaryCv.skills ? (typeof primaryCv.skills === 'string' ? JSON.parse(primaryCv.skills) : primaryCv.skills) : defaultData.skills,
+        experience: primaryCv.experience ? (typeof primaryCv.experience === 'string' ? JSON.parse(primaryCv.experience) : primaryCv.experience) : defaultData.experience,
+        projects: primaryCv.projects ? (typeof primaryCv.projects === 'string' ? JSON.parse(primaryCv.projects) : primaryCv.projects) : defaultData.projects,
+        education: primaryCv.education ? (typeof primaryCv.education === 'string' ? JSON.parse(primaryCv.education) : primaryCv.education) : defaultData.education,
+        certifications: primaryCv.certifications || defaultData.certifications,
+        languages: primaryCv.languages || defaultData.languages,
+        imageUrl: primaryCv.imageUrl,
+        pdfUrl: primaryCv.pdfUrl,
+        version: primaryCv.version
     } : defaultData;
 
     return (
@@ -108,14 +110,14 @@ const CV = () => {
                     <div className="bg-white dark:bg-white/5 rounded-2xl border border-slate-200 dark:border-white/10 overflow-hidden shadow-2xl">
                         {/* Action Buttons */}
                         <div className="p-6 border-b border-white/10 print:hidden flex flex-col sm:flex-row gap-4">
-                            {latestCv ? (
+                            {displayData.pdfUrl ? (
                                 <a
-                                    href={latestCv.pdfUrl}
+                                    href={displayData.pdfUrl}
                                     target="_blank"
                                     rel="noopener noreferrer"
                                     className="px-6 py-3 bg-indigo-600 hover:bg-indigo-500 text-white font-bold rounded-xl transition-all duration-300 flex items-center justify-center gap-2 transform active:scale-95 shadow-lg shadow-indigo-500/20"
                                 >
-                                    <FaDownload /> Download Latest PDF ({latestCv.version})
+                                    <FaDownload /> Download Primary CV ({displayData.version})
                                 </a>
                             ) : (
                                 <button

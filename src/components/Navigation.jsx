@@ -1,13 +1,24 @@
 import { useState } from 'react';
-import { Link, useLocation } from 'react-router-dom';
+import { Link, useLocation, useNavigate } from 'react-router-dom';
+import { useDispatch, useSelector } from 'react-redux';
 import { useTheme } from '../context/ThemeContext';
-import { FaSun, FaMoon, FaBars, FaTimes } from 'react-icons/fa';
+import { FaSun, FaMoon, FaBars, FaTimes, FaUserAlt, FaSignOutAlt } from 'react-icons/fa';
 import { motion, AnimatePresence } from 'framer-motion';
+import { logout } from '../features/auth/authSlice';
 
 const Navigation = () => {
     const location = useLocation();
+    const navigate = useNavigate();
+    const dispatch = useDispatch();
     const { isDarkMode, toggleTheme } = useTheme();
     const [isMenuOpen, setIsMenuOpen] = useState(false);
+    const { token } = useSelector((state) => state.auth);
+
+    const handleLogout = () => {
+        dispatch(logout());
+        navigate('/login');
+        setIsMenuOpen(false);
+    };
 
     const navLinks = [
         { name: 'Home', path: '/' },
@@ -48,7 +59,7 @@ const Navigation = () => {
                     <a href="#contact" className="hover:text-primary transition-colors">Contact</a>
                 </div>
 
-                <div className="flex items-center gap-3 sm:gap-4">
+                <div className="flex items-center gap-2 sm:gap-4">
                     <button
                         onClick={toggleTheme}
                         className="p-2 sm:p-2.5 rounded-lg sm:rounded-xl bg-secondary/5 dark:bg-white/5 text-secondary dark:text-white hover:bg-secondary/10 dark:hover:bg-white/10 transition-all border border-secondary/10 dark:border-white/10"
@@ -57,12 +68,30 @@ const Navigation = () => {
                         {isDarkMode ? <FaSun className="text-yellow-400" /> : <FaMoon className="text-indigo-600" />}
                     </button>
 
-                    <Link
-                        to="/hire-me"
-                        className="hidden sm:inline-block px-6 py-2 bg-primary text-secondary text-xs font-black uppercase tracking-widest rounded-full hover:bg-white hover:text-primary dark:hover:bg-white dark:hover:text-secondary transition-all transform active:scale-95 shadow-lg shadow-primary/20"
-                    >
-                        Hire Me
-                    </Link>
+                    <div className="flex items-center gap-2">
+                        {token ? (
+                            <button
+                                onClick={handleLogout}
+                                className="hidden sm:flex items-center gap-2 px-5 py-2 bg-red-500/10 text-red-500 text-[10px] font-black uppercase tracking-widest rounded-full border border-red-500/20 hover:bg-red-500 hover:text-white transition-all transform active:scale-95"
+                            >
+                                <FaSignOutAlt /> Logout
+                            </button>
+                        ) : (
+                            <Link
+                                to="/login"
+                                className="hidden sm:flex items-center gap-2 px-5 py-2 bg-indigo-600/10 text-indigo-600 text-[10px] font-black uppercase tracking-widest rounded-full border border-indigo-600/20 hover:bg-indigo-600 hover:text-white transition-all transform active:scale-95"
+                            >
+                                <FaUserAlt size={10} /> Login
+                            </Link>
+                        )}
+
+                        <Link
+                            to="/hire-me"
+                            className="hidden sm:inline-block px-6 py-2 bg-primary text-secondary text-[10px] font-black uppercase tracking-widest rounded-full hover:bg-white hover:text-primary dark:hover:bg-white dark:hover:text-secondary transition-all transform active:scale-95 shadow-lg shadow-primary/20"
+                        >
+                            Hire Me
+                        </Link>
+                    </div>
                 </div>
             </div>
 
@@ -87,13 +116,33 @@ const Navigation = () => {
                                 </Link>
                             ))}
                             <a href="#contact" onClick={() => setIsMenuOpen(false)} className="hover:text-primary transition-colors">Contact</a>
-                            <Link
-                                to="/hire-me"
-                                onClick={() => setIsMenuOpen(false)}
-                                className="w-full text-center px-6 py-4 bg-primary text-secondary rounded-xl font-black"
-                            >
-                                Hire Me
-                            </Link>
+
+                            <div className="flex flex-col gap-3">
+                                <Link
+                                    to="/hire-me"
+                                    onClick={() => setIsMenuOpen(false)}
+                                    className="w-full text-center px-6 py-3 bg-primary text-secondary rounded-xl font-black text-xs uppercase tracking-widest"
+                                >
+                                    Hire Me
+                                </Link>
+
+                                {token ? (
+                                    <button
+                                        onClick={handleLogout}
+                                        className="w-full text-center px-6 py-3 bg-red-500/10 text-red-500 border border-red-500/20 rounded-xl font-black text-xs uppercase tracking-widest"
+                                    >
+                                        Logout
+                                    </button>
+                                ) : (
+                                    <Link
+                                        to="/login"
+                                        onClick={() => setIsMenuOpen(false)}
+                                        className="w-full text-center px-6 py-3 bg-indigo-500/10 text-indigo-500 border border-indigo-500/20 rounded-xl font-black text-xs uppercase tracking-widest"
+                                    >
+                                        Login
+                                    </Link>
+                                )}
+                            </div>
                         </div>
                     </motion.div>
                 )}
