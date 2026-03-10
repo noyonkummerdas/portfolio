@@ -67,15 +67,15 @@ const Login = () => {
     }, []);
 
     const planets = [
-        { name: 'Mercury', size: 'w-4 h-4', texture: 'bg-gradient-to-br from-gray-400 to-gray-600', glow: 'shadow-gray-500/30', radius: 250, speed: 1000, delay: 0 },
-        { name: 'Venus', size: 'w-8 h-8', texture: 'bg-gradient-to-br from-orange-200 to-orange-500', glow: 'shadow-orange-400/30', radius: 380, speed: 1400, delay: 50 },
-        { name: 'Earth', size: 'w-10 h-10', texture: 'bg-[radial-gradient(circle_at_30%_30%,#3b82f6,#1d4ed8_70%,#065f46_90%)]', glow: 'shadow-blue-500/40', radius: 520, speed: 1800, delay: 100 },
-        { name: 'Mars', size: 'w-7 h-7', texture: 'bg-gradient-to-br from-red-400 to-red-800', glow: 'shadow-red-600/30', radius: 680, speed: 2200, delay: 150 },
-        { name: 'Jupiter', size: 'w-24 h-24', texture: 'bg-[repeating-linear-gradient(0deg,#d97706,#b45309_10px,#92400e_20px)]', glow: 'shadow-orange-700/20', radius: 900, speed: 3500, delay: 200 },
-        { name: 'Saturn', size: 'w-20 h-20', texture: 'bg-gradient-to-br from-yellow-100 to-yellow-500', glow: 'shadow-yellow-400/20', radius: 1150, speed: 5000, delay: 250, hasRings: true },
-        { name: 'Uranus', size: 'w-16 h-16', texture: 'bg-gradient-to-br from-cyan-200 to-cyan-500', glow: 'shadow-cyan-400/30', radius: 1400, speed: 7000, delay: 300 },
-        { name: 'Neptune', size: 'w-14 h-14', texture: 'bg-gradient-to-br from-blue-400 to-blue-800', glow: 'shadow-blue-600/30', radius: 1650, speed: 9000, delay: 350 },
-        { name: 'Pluto', size: 'w-4 h-4', texture: 'bg-gradient-to-br from-slate-400 to-slate-600', glow: 'shadow-slate-500/20', radius: 1850, speed: 12000, delay: 400 },
+        { name: 'Surya (Sun)', size: 'w-8 h-8', texture: 'bg-gradient-to-br from-yellow-400 via-orange-500 to-red-600', glow: 'shadow-orange-500/60', radius: 85, speed: 2000, delay: 0 },
+        { name: 'Chandra (Moon)', size: 'w-7 h-7', texture: 'bg-gradient-to-br from-slate-100 to-indigo-100', glow: 'shadow-white/50', radius: 135, speed: 1200, delay: 40 },
+        { name: 'Mangala (Mars)', size: 'w-6 h-6', texture: 'bg-gradient-to-br from-red-500 to-red-900', glow: 'shadow-red-600/40', radius: 185, speed: 2500, delay: 80 },
+        { name: 'Budha (Mercury)', size: 'w-5 h-5', texture: 'bg-gradient-to-br from-emerald-400 to-emerald-700', glow: 'shadow-emerald-500/40', radius: 235, speed: 1000, delay: 120 },
+        { name: 'Brihaspati (Jupiter)', size: 'w-16 h-16', texture: 'bg-[repeating-linear-gradient(0deg,#fbbf24,#f59e0b_10px,#d97706_20px)]', glow: 'shadow-yellow-600/40', radius: 295, speed: 5000, delay: 160 },
+        { name: 'Shukra (Venus)', size: 'w-8 h-8', texture: 'bg-gradient-to-br from-white via-indigo-50 to-blue-200', glow: 'shadow-blue-200/40', radius: 355, speed: 1800, delay: 200 },
+        { name: 'Shani (Saturn)', size: 'w-14 h-14', texture: 'bg-gradient-to-br from-slate-700 via-indigo-950 to-black', glow: 'shadow-purple-900/40', radius: 425, speed: 12000, delay: 240, hasRings: true },
+        { name: 'Rahu', size: 'w-11 h-11', texture: 'bg-gradient-to-br from-gray-800 via-zinc-900 to-black', glow: 'shadow-gray-900/50', radius: 500, speed: 8000, delay: 280, isRetrograde: true },
+        { name: 'Ketu', size: 'w-10 h-10', texture: 'bg-gradient-to-br from-stone-600 to-stone-900', glow: 'shadow-stone-800/40', radius: 580, speed: 9500, delay: 320, isRetrograde: true }
     ];
 
     useEffect(() => {
@@ -122,7 +122,7 @@ const Login = () => {
 
     return (
         <div
-            className="min-h-screen relative flex items-start justify-end p-10 pt-[52px] pr-12 font-inter overflow-hidden transition-colors duration-[2000ms]"
+            className="min-h-screen relative flex items-center justify-end p-10 pr-24 font-inter overflow-hidden transition-colors duration-[2000ms]"
             style={{
                 backgroundColor: celestialState.ratio > 0.5 ? '#020408' : '#0a0d14'
             }}
@@ -130,21 +130,21 @@ const Login = () => {
             {/* Dynamic Background */}
             <div className="absolute inset-0 z-0 overflow-hidden">
                 <div
-                    className="absolute inset-0 bg-cover bg-center opacity-60"
-                    style={{ backgroundImage: `url('/login_bg.png')` }}
+                    className="absolute inset-0 bg-cover bg-center opacity-80"
+                    style={{ backgroundImage: `url('/navagraha_bg.png')` }}
                 />
                 <div className="absolute inset-0 bg-gradient-to-t from-[#05070a] via-transparent to-[#05070a]/30" />
 
-                {/* Dynamic Celestial Core (Sun/Moon Controller) */}
+                {/* Dynamic Celestial Core (Sun/Moon Controller) - Central Brahma Light */}
                 <div className="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 z-10 pointer-events-none w-0 h-0">
 
                     {/* Atmospheric Glow (Adaptive) */}
                     <div
-                        className="absolute w-[1500px] h-[1500px] -translate-x-1/2 -translate-y-1/2 blur-[160px] transition-all duration-[3000ms]"
+                        className="absolute w-[1200px] h-[1200px] -translate-x-1/2 -translate-y-1/2 blur-[140px] transition-all duration-[3000ms]"
                         style={{
                             background: `radial-gradient(circle, ${celestialState.ratio < 0.5
-                                    ? 'rgba(253,186,11,0.15) 0%, rgba(249,115,22,0.05) 50%'
-                                    : 'rgba(147,197,253,0.08) 0%, rgba(30,58,138,0.03) 60%'
+                                ? 'rgba(253,186,11,0.15) 0%, rgba(249,115,22,0.05) 50%'
+                                : 'rgba(147,197,253,0.08) 0%, rgba(30,58,138,0.03) 60%'
                                 }, transparent 80%)`
                         }}
                     />
@@ -164,76 +164,24 @@ const Login = () => {
                         }}
                     />
 
-                    {/* Magnetic Loops (Only active in Sun mode) */}
-                    {celestialState.ratio < 0.4 && (
-                        <div className="absolute flex items-center justify-center -translate-x-1/2 -translate-y-1/2">
-                            <motion.div
-                                animate={{ rotate: 360, opacity: 1 - celestialState.ratio * 2 }}
-                                transition={{ duration: 120, repeat: Infinity, ease: "linear" }}
-                                className="w-[600px] h-[600px] border-[50px] border-orange-500/10 rounded-full blur-[60px] border-t-orange-500/20 border-l-yellow-500/10"
-                            />
-                        </div>
-                    )}
-
-                    {/* Celestial Body Core */}
+                    {/* Celestial Body Core (Brahma / Cosmic Core) */}
                     <div className="absolute flex items-center justify-center -translate-x-1/2 -translate-y-1/2">
                         <motion.div
                             animate={{
                                 scale: 1,
                                 boxShadow: celestialState.ratio < 0.5
-                                    ? ["0 0 100px rgba(249,115,22,0.5)", "0 0 140px rgba(234,88,12,0.7)", "0 0 100px rgba(249,115,22,0.5)"]
-                                    : ["0 0 60px rgba(147,197,253,0.3)", "0 0 90px rgba(147,197,253,0.5)", "0 0 60px rgba(147,197,253,0.3)"]
+                                    ? ["0 0 120px rgba(249,115,22,0.5)", "0 0 180px rgba(234,88,12,0.7)", "0 0 120px rgba(249,115,22,0.5)"]
+                                    : ["0 0 80px rgba(147,197,253,0.3)", "0 0 130px rgba(147,197,253,0.5)", "0 0 80px rgba(147,197,253,0.3)"]
                             }}
                             transition={{ duration: 6, repeat: Infinity, ease: "easeInOut" }}
-                            className="w-[350px] h-[350px] rounded-full transition-all duration-[5000ms] border-4 border-white/10"
+                            className="w-[350px] h-[350px] rounded-full transition-all duration-[5000ms] border-2 border-white/5"
                             style={{
                                 background: celestialState.ratio < 0.5
-                                    ? 'radial-gradient(circle at center, #fff 0%, #fbbf24 20%, #f59e0b 40%, #ea580c 70%, #7c2d12 100%)' // Sun
-                                    : 'radial-gradient(circle at center, #f8fafc 0%, #cbd5e1 30%, #94a3b8 60%, #475569 100%)' // Moon
+                                    ? 'radial-gradient(circle at center, #fff 0%, #fbbf24 30%, #f59e0b 60%, transparent 100%)' // Core Light
+                                    : 'radial-gradient(circle at center, #f8fafc 0%, #cbd5e1 30%, #94a3b8 60%, transparent 100%)' // Core Moon Light
                             }}
-                        >
-                            {/* Moon Craters / Sun Texture Simulation */}
-                            <div
-                                className={`absolute inset-0 rounded-full opacity-30 mix-blend-overlay transition-opacity duration-[5000ms] ${celestialState.ratio > 0.5 ? 'bg-[radial-gradient(circle,rgba(0,0,0,0.4)_2px,transparent_6px)] bg-[size:40px_35px]' : 'bg-[radial-gradient(circle,rgba(255,255,255,0.2)_1px,transparent_1px)] bg-[size:10px_10px]'}`}
-                            />
-
-                            {/* Reflection Glow */}
-                            <div className="absolute inset-0 rounded-full bg-[radial-gradient(circle_at_30%_30%,rgba(255,255,255,0.4)_0%,transparent_60%)]" />
-                        </motion.div>
+                        />
                     </div>
-
-                    {/* Star Field (Active in Moon Mode) */}
-                    <AnimatePresence>
-                        {celestialState.ratio > 0.6 && (
-                            <motion.div
-                                initial={{ opacity: 0 }}
-                                animate={{ opacity: 0.4 }}
-                                exit={{ opacity: 0 }}
-                                className="absolute inset-0 w-[2000px] h-[2000px] -translate-x-1/2 -translate-y-1/2 pointer-events-none"
-                            >
-                                {[...Array(50)].map((_, i) => (
-                                    <div
-                                        key={i}
-                                        className="absolute w-1 h-1 bg-white rounded-full animate-pulse"
-                                        style={{
-                                            left: `${(i * 17) % 100}%`,
-                                            top: `${(i * 23) % 100}%`,
-                                            animationDelay: `${(i * 0.1)}s`,
-                                            opacity: 0.2 + Math.random() * 0.5
-                                        }}
-                                    />
-                                ))}
-                            </motion.div>
-                        )}
-                    </AnimatePresence>
-
-                    {/* Lens Flare Spots */}
-                    {celestialState.ratio < 0.3 && (
-                        <>
-                            <div className="absolute left-[350px] top-[150px] w-6 h-6 bg-orange-500/10 rounded-full blur-sm" />
-                            <div className="absolute -left-[450px] -bottom-[250px] w-4 h-4 bg-yellow-500/05 rounded-full blur-[3px]" />
-                        </>
-                    )}
                 </div>
 
                 {/* Centered Orbital System (Solar System Algorithm) */}
@@ -250,18 +198,28 @@ const Login = () => {
                     >
                         {planets.map((planet, idx) => (
                             <React.Fragment key={idx}>
-                                {/* Wide Orbital Path Line centered on the Sun */}
+                                {/* Wide Orbital Path Line centered on the Core */}
                                 <div
-                                    className="absolute border border-white/10 rounded-full z-0"
+                                    className="absolute border border-white/10 rounded-full z-0 pointer-events-none"
                                     style={{
-                                        width: planet.radius * 3.5,
-                                        height: planet.radius * 3.5,
+                                        width: planet.radius * 2,
+                                        height: planet.radius * 2,
+                                        borderColor: idx === 0 ? 'rgba(251,191,36,0.12)' : // Sun
+                                            idx === 1 ? 'rgba(248,fafc,0.12)' : // Moon
+                                                idx === 2 ? 'rgba(239,68,68,0.12)' : // Mars
+                                                    idx === 3 ? 'rgba(52,211,153,0.12)' : // Mercury
+                                                        idx === 4 ? 'rgba(245,158,11,0.12)' : // Jupiter
+                                                            idx === 5 ? 'rgba(147,197,253,0.12)' : // Venus
+                                                                idx === 6 ? 'rgba(129,140,248,0.12)' : // Saturn
+                                                                    idx === 7 ? 'rgba(156,163,175,0.12)' : // Rahu
+                                                                        'rgba(168,162,158,0.12)', // Ketu
+                                        boxShadow: `0 0 8px currentColor`
                                     }}
                                 />
 
-                                {/* Rotating Orbit Container centered on the Sun */}
+                                {/* Rotating Orbit Container centered on the Core */}
                                 <motion.div
-                                    animate={{ rotate: 360 }}
+                                    animate={{ rotate: planet.isRetrograde ? -360 : 360 }}
                                     transition={{
                                         duration: planet.speed * 1.5,
                                         repeat: Infinity,
@@ -270,8 +228,8 @@ const Login = () => {
                                     }}
                                     className="absolute z-0 flex items-center justify-center"
                                     style={{
-                                        width: planet.radius * 3.5,
-                                        height: planet.radius * 3.5,
+                                        width: planet.radius * 2,
+                                        height: planet.radius * 2,
                                         transformStyle: "preserve-3d"
                                     }}
                                 >
@@ -434,14 +392,14 @@ const Login = () => {
                     ) : (
                         <motion.div
                             key="login-form"
-                            initial={{ opacity: 0, y: 20 }}
-                            animate={{ opacity: 1, y: 0 }}
+                            initial={{ opacity: 0, x: 100 }}
+                            animate={{ opacity: 1, x: 0 }}
                             exit={{ opacity: 0, scale: 0.95 }}
-                            className="bg-indigo-950/30 backdrop-blur-xl border border-indigo-500/30 rounded-[32px] p-2 pr-6 shadow-[0_0_50px_rgba(79,70,229,0.15)] relative group max-w-[950px] w-screen"
+                            className="bg-transparent backdrop-blur-[2px] border border-white/10 rounded-[32px] p-8 relative group max-w-[420px] w-full"
                         >
                             <div className="absolute top-0 left-0 w-full h-[1px] bg-gradient-to-r from-transparent via-indigo-500/40 to-transparent" />
 
-                            <form onSubmit={handleSubmit} className="flex flex-col lg:flex-row items-center gap-6">
+                            <form onSubmit={handleSubmit} className="flex flex-col gap-8">
                                 {/* Error Message */}
                                 {error && (
                                     <motion.div
