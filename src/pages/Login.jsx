@@ -27,21 +27,21 @@ const Login = () => {
     const [currentPlanetIndex, setCurrentPlanetIndex] = useState(0);
 
     const planets = [
-        { name: 'Mercury', size: 'w-4 h-4', texture: 'bg-gradient-to-br from-gray-400 to-gray-600', glow: 'shadow-gray-500/30', radius: 180, speed: 20, delay: 0 },
-        { name: 'Venus', size: 'w-8 h-8', texture: 'bg-gradient-to-br from-orange-200 to-orange-500', glow: 'shadow-orange-400/30', radius: 260, speed: 25, delay: 5 },
-        { name: 'Earth', size: 'w-10 h-10', texture: 'bg-[radial-gradient(circle_at_30%_30%,#3b82f6,#1d4ed8_70%,#065f46_90%)]', glow: 'shadow-blue-500/40', radius: 360, speed: 35, delay: 10 },
-        { name: 'Mars', size: 'w-7 h-7', texture: 'bg-gradient-to-br from-red-400 to-red-800', glow: 'shadow-red-600/30', radius: 460, speed: 40, delay: 15 },
-        { name: 'Jupiter', size: 'w-24 h-24', texture: 'bg-[repeating-linear-gradient(0deg,#d97706,#b45309_10px,#92400e_20px)]', glow: 'shadow-orange-700/20', radius: 600, speed: 60, delay: 20 },
-        { name: 'Saturn', size: 'w-20 h-20', texture: 'bg-gradient-to-br from-yellow-100 to-yellow-500', glow: 'shadow-yellow-400/20', radius: 750, speed: 75, delay: 25, hasRings: true },
-        { name: 'Uranus', size: 'w-16 h-16', texture: 'bg-gradient-to-br from-cyan-200 to-cyan-500', glow: 'shadow-cyan-400/30', radius: 900, speed: 90, delay: 30 },
-        { name: 'Neptune', size: 'w-14 h-14', texture: 'bg-gradient-to-br from-blue-400 to-blue-800', glow: 'shadow-blue-600/30', radius: 1050, speed: 105, delay: 35 },
-        { name: 'Pluto', size: 'w-4 h-4', texture: 'bg-gradient-to-br from-slate-400 to-slate-600', glow: 'shadow-slate-500/20', radius: 1200, speed: 130, delay: 40 },
+        { name: 'Mercury', size: 'w-4 h-4', texture: 'bg-gradient-to-br from-gray-400 to-gray-600', glow: 'shadow-gray-500/30', radius: 250, speed: 1000, delay: 0 },
+        { name: 'Venus', size: 'w-8 h-8', texture: 'bg-gradient-to-br from-orange-200 to-orange-500', glow: 'shadow-orange-400/30', radius: 380, speed: 1400, delay: 50 },
+        { name: 'Earth', size: 'w-10 h-10', texture: 'bg-[radial-gradient(circle_at_30%_30%,#3b82f6,#1d4ed8_70%,#065f46_90%)]', glow: 'shadow-blue-500/40', radius: 520, speed: 1800, delay: 100 },
+        { name: 'Mars', size: 'w-7 h-7', texture: 'bg-gradient-to-br from-red-400 to-red-800', glow: 'shadow-red-600/30', radius: 680, speed: 2200, delay: 150 },
+        { name: 'Jupiter', size: 'w-24 h-24', texture: 'bg-[repeating-linear-gradient(0deg,#d97706,#b45309_10px,#92400e_20px)]', glow: 'shadow-orange-700/20', radius: 900, speed: 3500, delay: 200 },
+        { name: 'Saturn', size: 'w-20 h-20', texture: 'bg-gradient-to-br from-yellow-100 to-yellow-500', glow: 'shadow-yellow-400/20', radius: 1150, speed: 5000, delay: 250, hasRings: true },
+        { name: 'Uranus', size: 'w-16 h-16', texture: 'bg-gradient-to-br from-cyan-200 to-cyan-500', glow: 'shadow-cyan-400/30', radius: 1400, speed: 7000, delay: 300 },
+        { name: 'Neptune', size: 'w-14 h-14', texture: 'bg-gradient-to-br from-blue-400 to-blue-800', glow: 'shadow-blue-600/30', radius: 1650, speed: 9000, delay: 350 },
+        { name: 'Pluto', size: 'w-4 h-4', texture: 'bg-gradient-to-br from-slate-400 to-slate-600', glow: 'shadow-slate-500/20', radius: 1850, speed: 12000, delay: 400 },
     ];
 
     useEffect(() => {
         const interval = setInterval(() => {
             setCurrentPlanetIndex((prev) => (prev + 1) % planets.length);
-        }, 1500);
+        }, 15000); // 15 seconds per popup for an ultra-calm experience
         return () => clearInterval(interval);
     }, [planets.length]);
 
@@ -81,54 +81,99 @@ const Login = () => {
 
 
     return (
-        <div className="min-h-screen relative flex items-center justify-center lg:justify-start bg-[#05070a] px-6 lg:pl-32 font-inter overflow-hidden">
+        <div className="min-h-screen relative flex items-start justify-end bg-[#05070a] p-10 pt-[52px] pr-12 font-inter overflow-hidden">
             {/* Dynamic Background */}
             <div className="absolute inset-0 z-0 overflow-hidden">
                 <div
-                    className="absolute inset-0 bg-cover bg-center opacity-40 mix-blend-overlay"
+                    className="absolute inset-0 bg-cover bg-center opacity-60"
                     style={{ backgroundImage: `url('/login_bg.png')` }}
                 />
-                <div className="absolute inset-0 bg-gradient-to-b from-transparent via-[#05070a]/50 to-[#05070a]" />
+                <div className="absolute inset-0 bg-gradient-to-t from-[#05070a] via-transparent to-[#05070a]/30" />
 
-                {/* Central Glow (Sun) */}
-                <div className="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 w-32 h-32 bg-indigo-600/10 blur-[100px] rounded-full" />
+                {/* Hyper-Realistic Radiant Sun (Solar Engine) - Centered & Fixed Visibility */}
+                <div className="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 z-10 pointer-events-none w-0 h-0">
+                    {/* Primary Solar Radiation (Massive Light Wash) */}
+                    <div className="absolute w-[1200px] h-[1200px] bg-[radial-gradient(circle,rgba(253,186,11,0.2)_0%,rgba(249,115,22,0.1)_50%,transparent_80%)] -translate-x-1/2 -translate-y-1/2 blur-[140px]" />
 
-                {/* 9 Animated Planets with Vertical Orbital System */}
+                    {/* Outer Corona (Soft Fire Glow) */}
+                    <motion.div
+                        animate={{
+                            scale: [1, 1.1, 1],
+                            opacity: [0.4, 0.6, 0.4]
+                        }}
+                        transition={{ duration: 8, repeat: Infinity, ease: "easeInOut" }}
+                        className="absolute w-[700px] h-[700px] bg-gradient-to-r from-orange-600/40 via-red-600/20 to-transparent rounded-full blur-[110px] -translate-x-1/2 -translate-y-1/2"
+                    />
+
+                    {/* Solar Flares & Magnetic Loops (Dynamic Light Rays) */}
+                    <div className="absolute flex items-center justify-center -translate-x-1/2 -translate-y-1/2">
+                        <motion.div
+                            animate={{ rotate: 360 }}
+                            transition={{ duration: 120, repeat: Infinity, ease: "linear" }}
+                            className="w-[550px] h-[550px] border-[50px] border-orange-500/10 rounded-full blur-[50px] border-t-orange-500/30 border-l-yellow-500/20"
+                        />
+                    </div>
+
+                    {/* The Sun Core (Intense Heat) */}
+                    <div className="absolute flex items-center justify-center -translate-x-1/2 -translate-y-1/2">
+                        <motion.div
+                            animate={{
+                                boxShadow: [
+                                    "0 0 100px rgba(249,115,22,0.6)",
+                                    "0 0 150px rgba(234,88,12,0.9)",
+                                    "0 0 100px rgba(249,115,22,0.6)"
+                                ]
+                            }}
+                            transition={{ duration: 4, repeat: Infinity, ease: "easeInOut" }}
+                            className="w-96 h-96 bg-[radial-gradient(circle_at_center,#fff_0%,#fbbf24_20%,#f59e0b_40%,#ea580c_70%,#7c2d12_100%)] rounded-full shadow-[0_0_120px_rgba(251,191,36,0.7)] border-4 border-white/20"
+                        >
+                            {/* Surface Texture Simulation */}
+                            <div className="absolute inset-0 rounded-full opacity-40 bg-[radial-gradient(circle,rgba(255,255,255,0.2)_1px,transparent_1px)] bg-[size:10px_10px] mix-blend-overlay" />
+                            <div className="absolute inset-0 rounded-full bg-[radial-gradient(circle_at_30%_30%,rgba(255,255,255,0.5)_0%,transparent_60%)]" />
+                        </motion.div>
+                    </div>
+
+                    {/* Lens Flare Spots (Realistic Camera Effect) */}
+                    <div className="absolute left-[350px] top-[150px] w-6 h-6 bg-orange-500/20 rounded-full blur-sm" />
+                    <div className="absolute -left-[450px] -bottom-[250px] w-4 h-4 bg-yellow-500/10 rounded-full blur-[3px]" />
+                </div>
+
+                {/* Centered Orbital System (Solar System Algorithm) */}
                 <div
                     className="absolute inset-0 flex items-center justify-center z-0 pointer-events-none"
-                    style={{ perspective: "2000px" }}
+                    style={{ perspective: "2500px" }}
                 >
                     <div
                         className="relative w-full h-full flex items-center justify-center"
                         style={{
-                            transform: "rotateY(-70deg)", // Side-view tilt
+                            transform: "rotateY(-15deg) rotateX(5deg)",
                             transformStyle: "preserve-3d"
                         }}
                     >
                         {planets.map((planet, idx) => (
                             <React.Fragment key={idx}>
-                                {/* Vertical Orbital Path Line */}
+                                {/* Wide Orbital Path Line centered on the Sun */}
                                 <div
-                                    className="absolute border border-white/5 rounded-full z-0"
+                                    className="absolute border border-white/10 rounded-full z-0"
                                     style={{
-                                        width: planet.radius * 2.5,
-                                        height: planet.radius * 2.5,
+                                        width: planet.radius * 3.5,
+                                        height: planet.radius * 3.5,
                                     }}
                                 />
 
-                                {/* Rotating Orbit Container */}
+                                {/* Rotating Orbit Container centered on the Sun */}
                                 <motion.div
                                     animate={{ rotate: 360 }}
                                     transition={{
-                                        duration: planet.speed,
+                                        duration: planet.speed * 1.5,
                                         repeat: Infinity,
                                         ease: "linear",
                                         delay: -planet.delay
                                     }}
                                     className="absolute z-0 flex items-center justify-center"
                                     style={{
-                                        width: planet.radius * 2.5,
-                                        height: planet.radius * 2.5,
+                                        width: planet.radius * 3.5,
+                                        height: planet.radius * 3.5,
                                         transformStyle: "preserve-3d"
                                     }}
                                 >
@@ -140,35 +185,66 @@ const Login = () => {
                                         <div
                                             className="relative"
                                             style={{
-                                                transform: "rotateY(70deg)", // Counter-tilt
+                                                transform: "rotateY(15deg) rotateX(-5deg)", // Counter-tilt
                                                 transformStyle: "preserve-3d"
                                             }}
                                         >
-                                            {/* Sequential Name Popup over the active planet */}
+                                            {/* Advanced HUD Planetary Scanner Popup */}
                                             <AnimatePresence>
                                                 {currentPlanetIndex === idx && (
                                                     <motion.div
-                                                        initial={{ opacity: 0, y: 20, scale: 0.5 }}
-                                                        animate={{ opacity: 1, y: -60, scale: 1.2 }}
-                                                        exit={{ opacity: 0, y: -40, scale: 0.5 }}
-                                                        className="absolute left-1/2 -translate-x-1/2 whitespace-nowrap z-[100] pointer-events-none"
+                                                        initial={{ opacity: 0, scale: 0.4, y: 30 }}
+                                                        animate={{ opacity: 1, scale: 1.1, y: -80 }}
+                                                        exit={{ opacity: 0, scale: 0.4, y: -50 }}
+                                                        className="absolute left-1/2 -translate-x-1/2 z-[100] pointer-events-none"
                                                     >
-                                                        <div className="bg-indigo-700/90 backdrop-blur-md px-5 py-2 rounded-2xl border-2 border-white/40 shadow-[0_0_30px_rgba(79,70,229,0.8)] flex flex-col items-center gap-1 group">
-                                                            <div className="flex items-center gap-2">
-                                                                <div className="w-2 h-2 bg-white rounded-full animate-pulse shadow-[0_0_10px_white]" />
-                                                                <span className="text-[11px] font-black text-white uppercase tracking-[0.2em]">{planet.name}</span>
+                                                        <div className="relative group">
+                                                            <div className="absolute -top-1 -left-1 w-3 h-3 border-t-2 border-l-2 border-indigo-400 opacity-60" />
+                                                            <div className="absolute -top-1 -right-1 w-3 h-3 border-t-2 border-r-2 border-indigo-400 opacity-60" />
+                                                            <div className="absolute -bottom-1 -left-1 w-3 h-3 border-b-2 border-l-2 border-indigo-400 opacity-60" />
+                                                            <div className="absolute -bottom-1 -right-1 w-3 h-3 border-b-2 border-r-2 border-indigo-400 opacity-60" />
+
+                                                            <div className="bg-black/80 backdrop-blur-xl border border-white/10 p-4 rounded-xl shadow-[0_0_40px_rgba(0,0,0,0.8)] overflow-hidden min-w-[200px]">
+                                                                <div className="relative z-10">
+                                                                    <div className="flex items-center justify-between mb-3 border-b border-white/5 pb-2">
+                                                                        <div className="flex flex-col">
+                                                                            <span className="text-[8px] font-black text-indigo-400 uppercase tracking-[0.2em]">Scanner Unit-09</span>
+                                                                            <h2 className="text-lg font-black text-white tracking-widest uppercase">{planet.name}</h2>
+                                                                        </div>
+                                                                        <div className={`w-8 h-8 rounded-lg ${planet.texture} ${planet.glow} shadow-inner bg-opacity-80`} />
+                                                                    </div>
+                                                                    <div className="grid grid-cols-2 gap-3 mb-3">
+                                                                        <div className="flex flex-col">
+                                                                            <span className="text-[7px] text-gray-400 uppercase font-bold tracking-widest">Atmosphere</span>
+                                                                            <span className="text-[9px] font-mono text-indigo-300">STABLE-V3</span>
+                                                                        </div>
+                                                                        <div className="flex flex-col text-right">
+                                                                            <span className="text-[7px] text-gray-400 uppercase font-bold tracking-widest">Surface Temp</span>
+                                                                            <span className="text-[9px] font-mono text-indigo-300">482°K</span>
+                                                                        </div>
+                                                                    </div>
+                                                                    <div className="h-1 w-full bg-white/5 rounded-full overflow-hidden">
+                                                                        <motion.div
+                                                                            initial={{ width: 0 }}
+                                                                            animate={{ width: "100%" }}
+                                                                            transition={{ duration: 1.5, ease: "linear" }}
+                                                                            className="h-full bg-gradient-to-r from-indigo-500 to-blue-500"
+                                                                        />
+                                                                    </div>
+                                                                </div>
                                                             </div>
-                                                            <div className="text-[8px] font-bold text-indigo-200 tracking-[0.1em] opacity-80 uppercase">Detected</div>
+                                                            <div className="absolute top-full left-1/2 -translate-x-1/2 flex flex-col items-center">
+                                                                <div className="w-[1px] h-10 bg-gradient-to-b from-indigo-500 via-indigo-500/50 to-transparent" />
+                                                                <div className="w-2 h-2 rounded-full border border-indigo-400 animate-ping" />
+                                                            </div>
                                                         </div>
-                                                        {/* Connecting line/arrow */}
-                                                        <div className="w-[2px] h-8 bg-gradient-to-t from-transparent via-white/50 to-white mx-auto shadow-[0_0_10px_white]" />
                                                     </motion.div>
                                                 )}
                                             </AnimatePresence>
 
-                                            {/* Saturn's Rings */}
+                                            {/* Planet Rings (Saturn) */}
                                             {planet.hasRings && (
-                                                <div className="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 w-[240%] h-[40%] border-[4px] border-yellow-200/20 rounded-[100%] rotate-[15deg] shadow-[0_0_15px_rgba(253,224,71,0.1)]" />
+                                                <div className="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 w-[260%] h-[40%] border-[4px] border-yellow-200/20 rounded-[100%] rotate-[20deg] shadow-[0_0_20px_rgba(253,224,71,0.2)]" />
                                             )}
 
                                             {/* Planet Body */}
@@ -182,9 +258,9 @@ const Login = () => {
                                                     repeat: Infinity,
                                                     ease: "linear"
                                                 }}
-                                                className={`${planet.size} ${planet.texture} rounded-full shadow-[0_0_20px] ${planet.glow} relative z-10`}
+                                                className={`${planet.size} ${planet.texture} rounded-full shadow-[0_0_25px] ${planet.glow} relative z-10`}
                                             >
-                                                <div className="absolute inset-0 rounded-full bg-gradient-to-tr from-black/60 to-transparent shadow-inner" />
+                                                <div className="absolute inset-0 rounded-full bg-[radial-gradient(circle_at_30%_30%,transparent_0%,rgba(0,0,0,0.6)_100%)] shadow-inner" />
                                             </motion.div>
                                         </div>
                                     </div>
@@ -219,63 +295,15 @@ const Login = () => {
                 variants={containerVariants}
                 initial="hidden"
                 animate="visible"
-                className="relative z-10 w-full max-w-[440px]"
+                className="relative z-50"
             >
-                {/* Header Section */}
-                <div className="text-center mb-10">
-                    <motion.div
-                        initial={{ y: -20, opacity: 0 }}
-                        animate={{ y: 0, opacity: 1 }}
-                        transition={{ delay: 0.2 }}
-                        className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-indigo-500/10 border border-indigo-500/20 mb-6"
-                    >
-                        <span className="relative flex h-2 w-2">
-                            <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-indigo-400 opacity-75"></span>
-                            <span className="relative inline-flex rounded-full h-2 w-2 bg-indigo-500"></span>
-                        </span>
-                        <span className="text-[10px] font-bold text-indigo-400 uppercase tracking-[0.2em]">Secure Authentication System</span>
-                    </motion.div>
-
-                    <motion.div
-                        initial={{ scale: 0.8, opacity: 0 }}
-                        animate={{ scale: 1, opacity: 1 }}
-                        transition={{ delay: 0.3, type: "spring" }}
-                        className="relative mx-auto w-24 h-24 mb-6 group"
-                        onMouseEnter={() => setIsHovered(true)}
-                        onMouseLeave={() => setIsHovered(false)}
-                    >
-                        <div className="absolute inset-0 bg-indigo-600/30 blur-2xl group-hover:bg-indigo-600/50 transition-all duration-500 rounded-full" />
-                        <div className="relative w-full h-full bg-gradient-to-br from-indigo-600/80 to-blue-600/80 backdrop-blur-md rounded-3xl border border-white/20 flex items-center justify-center shadow-2xl overflow-hidden">
-                            <div className="absolute inset-0 bg-gradient-to-tr from-white/10 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
-                            <FaShieldAlt className={`text-4xl text-white transition-all duration-500 ${isHovered ? 'scale-110 rotate-12' : ''}`} />
-                        </div>
-                    </motion.div>
-
-                    <motion.h1
-                        initial={{ opacity: 0 }}
-                        animate={{ opacity: 1 }}
-                        transition={{ delay: 0.4 }}
-                        className="text-4xl font-black text-white tracking-tight mb-2"
-                    >
-                        Welcome <span className="bg-clip-text text-transparent bg-gradient-to-r from-indigo-400 to-blue-400">Back</span>
-                    </motion.h1>
-                    <motion.p
-                        initial={{ opacity: 0 }}
-                        animate={{ opacity: 1 }}
-                        transition={{ delay: 0.5 }}
-                        className="text-gray-400 text-sm font-medium"
-                    >
-                        Enter your credentials to access the console
-                    </motion.p>
-                </div>
-
                 <AnimatePresence mode='wait'>
                     {token ? (
                         <motion.div
                             key="success"
                             initial={{ opacity: 0, scale: 0.9 }}
                             animate={{ opacity: 1, scale: 1 }}
-                            className="bg-white/5 backdrop-blur-2xl border border-indigo-500/30 rounded-[32px] p-12 text-center"
+                            className="bg-white/5 backdrop-blur-3xl border border-indigo-500/30 rounded-[32px] p-12 text-center"
                         >
                             <div className="w-20 h-20 bg-green-500/20 rounded-full flex items-center justify-center mx-auto mb-6 border border-green-500/30">
                                 <motion.div
@@ -303,29 +331,29 @@ const Login = () => {
                             initial={{ opacity: 0, y: 20 }}
                             animate={{ opacity: 1, y: 0 }}
                             exit={{ opacity: 0, scale: 0.95 }}
-                            className="bg-white/5 backdrop-blur-2xl border border-white/10 rounded-[32px] p-8 shadow-[0_32px_64px_-16px_rgba(0,0,0,0.5)] relative overflow-hidden group"
+                            className="bg-indigo-950/30 backdrop-blur-xl border border-indigo-500/30 rounded-[32px] p-2 pr-6 shadow-[0_0_50px_rgba(79,70,229,0.15)] relative group max-w-[950px] w-screen"
                         >
-                            <div className="absolute top-0 left-0 w-full h-1 bg-gradient-to-r from-transparent via-indigo-500/50 to-transparent" />
+                            <div className="absolute top-0 left-0 w-full h-[1px] bg-gradient-to-r from-transparent via-indigo-500/40 to-transparent" />
 
-                            {error && (
-                                <motion.div
-                                    initial={{ opacity: 0, y: -20 }}
-                                    animate={{ opacity: 1, y: 0 }}
-                                    className="mb-8 p-4 bg-red-500/10 border border-red-500/20 rounded-2xl flex items-center gap-3"
-                                >
-                                    <div className="flex-shrink-0 w-8 h-8 bg-red-500/20 rounded-xl flex items-center justify-center">
-                                        <div className="w-2 h-2 rounded-full bg-red-500 animate-pulse" />
-                                    </div>
-                                    <p className="text-xs font-bold text-red-400 uppercase tracking-wider">{error}</p>
-                                </motion.div>
-                            )}
+                            <form onSubmit={handleSubmit} className="flex flex-col lg:flex-row items-center gap-6">
+                                {/* Error Message */}
+                                {error && (
+                                    <motion.div
+                                        initial={{ opacity: 0, scale: 0.5 }}
+                                        animate={{ opacity: 1, scale: 1 }}
+                                        className="absolute -top-16 right-0 p-3 bg-red-500/20 backdrop-blur-2xl border border-red-500/40 rounded-2xl flex items-center gap-3 z-50 min-w-[200px] justify-center shadow-xl"
+                                    >
+                                        <div className="w-1.5 h-1.5 rounded-full bg-red-500 animate-pulse" />
+                                        <p className="text-[10px] font-black text-red-400 uppercase tracking-widest">{error}</p>
+                                    </motion.div>
+                                )}
 
-                            <form onSubmit={handleSubmit} className="space-y-6">
-                                <div className="space-y-2">
-                                    <label className="text-[10px] font-black text-indigo-400/80 uppercase tracking-[0.2em] ml-1">Identity</label>
+                                {/* Identity Field */}
+                                <div className="flex-2 w-full lg:w-auto flex flex-col gap-1 p-2">
+                                    <label className="text-[9px] font-black text-indigo-300 uppercase tracking-[0.3em] ml-4 opacity-70">Identity Protocol</label>
                                     <div className="relative group/field">
                                         <div className="absolute left-4 top-1/2 -translate-y-1/2 w-8 h-8 rounded-xl bg-white/5 flex items-center justify-center group-focus-within/field:bg-indigo-500/20 transition-all duration-300">
-                                            <FaUser className="text-gray-500 group-focus-within/field:text-indigo-400 text-xs transition-colors" />
+                                            <FaUser className="text-indigo-400/50 group-focus-within/field:text-indigo-300 text-[10px] transition-colors" />
                                         </div>
                                         <input
                                             type="text"
@@ -333,17 +361,18 @@ const Login = () => {
                                             required
                                             value={credentials.username}
                                             onChange={handleChange}
-                                            placeholder="Admin Identifier"
-                                            className="w-full pl-14 pr-4 py-4 bg-white/5 border border-white/10 rounded-2xl text-sm text-white placeholder-gray-600 focus:outline-none focus:ring-4 focus:ring-indigo-500/10 focus:border-indigo-500/50 transition-all font-mono"
+                                            placeholder="UNITS_ID"
+                                            className="w-full pl-14 pr-4 py-4 bg-transparent border-b border-white/5 focus:border-indigo-400/50 text-sm text-indigo-50 placeholder-indigo-900/50 focus:outline-none transition-all font-mono tracking-widest"
                                         />
                                     </div>
                                 </div>
 
-                                <div className="space-y-2">
-                                    <label className="text-[10px] font-black text-indigo-400/80 uppercase tracking-[0.2em] ml-1">Security Key</label>
+                                {/* Security Key Field */}
+                                <div className="flex-2 w-full lg:w-auto flex flex-col gap-1 p-2">
+                                    <label className="text-[9px] font-black text-indigo-300 uppercase tracking-[0.3em] ml-4 opacity-70">Security Key</label>
                                     <div className="relative group/field">
                                         <div className="absolute left-4 top-1/2 -translate-y-1/2 w-8 h-8 rounded-xl bg-white/5 flex items-center justify-center group-focus-within/field:bg-indigo-500/20 transition-all duration-300">
-                                            <FaLock className="text-gray-500 group-focus-within/field:text-indigo-400 text-xs transition-colors" />
+                                            <FaLock className="text-indigo-400/50 group-focus-within/field:text-indigo-300 text-[10px] transition-colors" />
                                         </div>
                                         <input
                                             type={showPass ? "text" : "password"}
@@ -351,48 +380,34 @@ const Login = () => {
                                             required
                                             value={credentials.password}
                                             onChange={handleChange}
-                                            placeholder="••••••••••••"
-                                            className="w-full pl-14 pr-14 py-4 bg-white/5 border border-white/10 rounded-2xl text-sm text-white placeholder-gray-600 focus:outline-none focus:ring-4 focus:ring-indigo-500/10 focus:border-indigo-500/50 transition-all font-mono"
+                                            placeholder="••••••••"
+                                            className="w-full pl-14 pr-12 py-4 bg-transparent border-b border-white/5 focus:border-indigo-400/50 text-sm text-indigo-50 placeholder-indigo-900/50 focus:outline-none transition-all font-mono tracking-widest"
                                         />
                                         <button
                                             type="button"
                                             onClick={() => setShowPass(!showPass)}
-                                            className="absolute right-4 top-1/2 -translate-y-1/2 text-gray-500 hover:text-white transition-colors p-2"
+                                            className="absolute right-2 top-1/2 -translate-y-1/2 text-indigo-400/50 hover:text-indigo-300 transition-colors p-2"
                                         >
-                                            {showPass ? <FaEyeSlash className="text-indigo-400" /> : <FaEye />}
+                                            {showPass ? <FaEyeSlash className="text-xs" /> : <FaEye className="text-xs" />}
                                         </button>
                                     </div>
                                 </div>
 
-                                <div className="flex items-center justify-between px-1">
-                                    <label className="flex items-center gap-2 cursor-pointer group">
-                                        <div className="relative w-4 h-4 rounded-md border border-white/20 bg-white/5 group-hover:border-indigo-500/50 transition-all overflow-hidden flex items-center justify-center">
-                                            <input type="checkbox" className="peer absolute inset-0 opacity-0 cursor-pointer" />
-                                            <div className="w-2 h-2 rounded-sm bg-indigo-500 scale-0 peer-checked:scale-100 transition-transform duration-300" />
-                                        </div>
-                                        <span className="text-[10px] font-bold uppercase tracking-widest text-gray-500 group-hover:text-gray-300">Trust System</span>
-                                    </label>
-                                    <button type="button" className="text-[10px] font-bold uppercase tracking-widest text-indigo-400/80 hover:text-indigo-400 transition-colors">
-                                        Lost Protocol?
-                                    </button>
-                                </div>
-
+                                {/* Submit Button */}
                                 <motion.button
                                     type="submit"
                                     disabled={loading}
-                                    whileHover={{ scale: 1.02, y: -2 }}
-                                    whileTap={{ scale: 0.98 }}
-                                    className="relative w-full py-4 bg-gradient-to-r from-indigo-600 to-blue-600 rounded-2xl font-black text-xs text-white uppercase tracking-[0.3em] shadow-[0_8px_32px_-8px_rgba(79,70,229,0.5)] hover:shadow-indigo-500/50 transition-all border border-white/10 overflow-hidden"
+                                    whileHover={{ scale: 1.05, boxShadow: "0 0 30px rgba(79,70,229,0.4)" }}
+                                    whileTap={{ scale: 0.95 }}
+                                    className="h-14 px-10 bg-indigo-600/20 hover:bg-indigo-600/40 backdrop-blur-2xl rounded-2xl font-black text-[10px] text-white uppercase tracking-[0.4em] transition-all border border-indigo-500/40 flex items-center justify-center gap-3 min-w-[200px]"
                                 >
-                                    <div className="flex items-center justify-center gap-3">
-                                        {loading ? (
-                                            <FaSpinner className="animate-spin text-lg" />
-                                        ) : (
-                                            <>
-                                                Initialize Access <FaArrowRight className="group-hover:translate-x-1 transition-transform" />
-                                            </>
-                                        )}
-                                    </div>
+                                    {loading ? (
+                                        <FaSpinner className="animate-spin text-lg" />
+                                    ) : (
+                                        <>
+                                            INITIALIZE <FaArrowRight className="text-[10px] opacity-70" />
+                                        </>
+                                    )}
                                 </motion.button>
                             </form>
                         </motion.div>
