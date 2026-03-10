@@ -461,9 +461,22 @@ const Login = () => {
                                 <motion.button
                                     type="submit"
                                     disabled={loading}
-                                    whileHover={{ scale: 1.05, boxShadow: "0 0 30px rgba(79,70,229,0.4)" }}
+                                    whileHover={{
+                                        scale: 1.05,
+                                        boxShadow: celestialState.ratio < 0.5
+                                            ? "0 0 30px rgba(249,115,22,0.4)"
+                                            : "0 0 30px rgba(79,70,229,0.4)"
+                                    }}
                                     whileTap={{ scale: 0.95 }}
-                                    className="h-14 px-10 bg-indigo-600/20 hover:bg-indigo-600/40 backdrop-blur-2xl rounded-2xl font-black text-[10px] text-white uppercase tracking-[0.4em] transition-all border border-indigo-500/40 flex items-center justify-center gap-3 min-w-[200px]"
+                                    className="h-14 px-10 backdrop-blur-2xl rounded-2xl font-black text-[10px] text-white uppercase tracking-[0.4em] transition-all border flex items-center justify-center gap-3 min-w-[200px]"
+                                    style={{
+                                        backgroundColor: celestialState.ratio < 0.5
+                                            ? 'rgba(234, 88, 12, 0.2)' // Sun Orange
+                                            : 'rgba(79, 70, 229, 0.2)', // Moon Indigo
+                                        borderColor: celestialState.ratio < 0.5
+                                            ? 'rgba(249, 115, 22, 0.4)'
+                                            : 'rgba(99, 102, 241, 0.4)'
+                                    }}
                                 >
                                     {loading ? (
                                         <FaSpinner className="animate-spin text-lg" />
