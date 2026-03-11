@@ -58,14 +58,14 @@ const Login = () => {
     }, []);
 
     const planets = [
-        { name: 'Chandra (Moon)', size: 'w-10 h-10', texture: 'bg-gradient-to-br from-slate-100 to-indigo-100', glow: 'shadow-white/70', radius: 180, speed: 1200, delay: 0 },
-        { name: 'Mangala (Mars)', size: 'w-9 h-9', texture: 'bg-gradient-to-br from-red-500 to-red-900', glow: 'shadow-red-600/70', radius: 230, speed: 2500, delay: 40 },
-        { name: 'Budha (Mercury)', size: 'w-8 h-8', texture: 'bg-gradient-to-br from-emerald-400 to-emerald-700', glow: 'shadow-emerald-500/70', radius: 280, speed: 1000, delay: 80 },
-        { name: 'Brihaspati (Jupiter)', size: 'w-18 h-18', texture: 'bg-[repeating-linear-gradient(0deg,#fbbf24,#f59e0b_10px,#d97706_20px)]', glow: 'shadow-yellow-600/70', radius: 350, speed: 5000, delay: 120 },
-        { name: 'Shukra (Venus)', size: 'w-10 h-10', texture: 'bg-gradient-to-br from-white via-indigo-50 to-blue-200', glow: 'shadow-blue-200/70', radius: 420, speed: 1800, delay: 160 },
-        { name: 'Shani (Saturn)', size: 'w-16 h-16', texture: 'bg-gradient-to-br from-slate-700 via-indigo-950 to-black', glow: 'shadow-purple-900/70', radius: 500, speed: 12000, delay: 200, hasRings: true },
-        { name: 'Rahu', size: 'w-13 h-13', texture: 'bg-gradient-to-br from-gray-800 via-zinc-900 to-black', glow: 'shadow-gray-900/80', radius: 580, speed: 8000, delay: 240, isRetrograde: true },
-        { name: 'Ketu', size: 'w-12 h-12', texture: 'bg-gradient-to-br from-stone-600 to-stone-900', glow: 'shadow-stone-800/70', radius: 660, speed: 9500, delay: 280, isRetrograde: true }
+        { name: 'Chandra (Moon)', size: 'w-8 h-8', texture: 'bg-gradient-to-br from-slate-100 to-indigo-100', glow: 'shadow-white/70', radius: 170, speed: 1200, delay: 0 },
+        { name: 'Mangala (Mars)', size: 'w-7 h-7', texture: 'bg-gradient-to-br from-red-500 to-red-900', glow: 'shadow-red-600/70', radius: 205, speed: 2500, delay: 40 },
+        { name: 'Budha (Mercury)', size: 'w-6 h-6', texture: 'bg-gradient-to-br from-emerald-400 to-emerald-700', glow: 'shadow-emerald-500/70', radius: 240, speed: 1000, delay: 80 },
+        { name: 'Brihaspati (Jupiter)', size: 'w-14 h-14', texture: 'bg-[repeating-linear-gradient(0deg,#fbbf24,#f59e0b_10px,#d97706_20px)]', glow: 'shadow-yellow-600/70', radius: 285, speed: 5000, delay: 120 },
+        { name: 'Shukra (Venus)', size: 'w-8 h-8', texture: 'bg-gradient-to-br from-white via-indigo-50 to-blue-200', glow: 'shadow-blue-200/70', radius: 330, speed: 1800, delay: 160 },
+        { name: 'Shani (Saturn)', size: 'w-12 h-12', texture: 'bg-gradient-to-br from-slate-700 via-indigo-950 to-black', glow: 'shadow-purple-900/70', radius: 380, speed: 12000, delay: 200, hasRings: true },
+        { name: 'Rahu', size: 'w-10 h-10', texture: 'bg-gradient-to-br from-gray-800 via-zinc-900 to-black', glow: 'shadow-gray-900/80', radius: 430, speed: 8000, delay: 240, isRetrograde: true },
+        { name: 'Ketu', size: 'w-9 h-9', texture: 'bg-gradient-to-br from-stone-600 to-stone-900', glow: 'shadow-stone-800/70', radius: 480, speed: 9500, delay: 280, isRetrograde: true }
     ];
 
     useEffect(() => {
@@ -209,166 +209,171 @@ const Login = () => {
                                     }}
                                 />
 
-                                <motion.div
-                                    animate={{ rotate: planet.isRetrograde ? -360 : 360 }}
-                                    transition={{
-                                        duration: planet.speed * 1.5,
-                                        repeat: Infinity,
-                                        ease: "linear",
-                                        delay: -planet.delay
-                                    }}
-                                    className="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 z-10 flex items-center justify-center"
+                                {/* Centering Wrapper for Orbit */}
+                                <div className="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 z-10"
                                     style={{
                                         width: planet.radius * 2,
                                         height: planet.radius * 2,
                                         transformStyle: "preserve-3d"
                                     }}
                                 >
-                                    {/* Planet Positioner */}
-                                    <div
-                                        className="absolute right-0 top-1/2 -translate-y-1/2"
-                                        style={{
-                                            transform: "translateX(50%)",
-                                            transformStyle: "preserve-3d"
+                                    <motion.div
+                                        animate={{ rotate: planet.isRetrograde ? -360 : 360 }}
+                                        transition={{
+                                            duration: planet.speed * 1.5,
+                                            repeat: Infinity,
+                                            ease: "linear",
+                                            delay: -planet.delay
                                         }}
+                                        className="w-full h-full"
+                                        style={{ transformStyle: "preserve-3d" }}
                                     >
+                                        {/* Planet Positioner */}
                                         <div
-                                            className="relative"
+                                            className="absolute right-0 top-1/2 -translate-y-1/2"
                                             style={{
-                                                transform: "rotateX(-75deg) translateZ(20px)", // Stand upright and LIFT off the plane
+                                                transform: "translateX(50%)",
                                                 transformStyle: "preserve-3d"
                                             }}
                                         >
-                                            <div style={{ transformStyle: "preserve-3d" }}>
-                                                {/* Advanced HUD Planetary Scanner Popup (Only for Sun/Moon) */}
-                                                <AnimatePresence>
-                                                    {(currentPlanetIndex === idx && idx < 2) && (
-                                                        <motion.div
-                                                            initial={{ opacity: 0, scale: 0.4, y: 30 }}
-                                                            animate={{ opacity: 1, scale: 1.1, y: -80 }}
-                                                            exit={{ opacity: 0, scale: 0.4, y: -50 }}
-                                                            className="absolute left-1/2 -translate-x-1/2 z-[100] pointer-events-none"
-                                                        >
-                                                            <div className="relative group">
-                                                                <div className="absolute -top-1 -left-1 w-3 h-3 border-t-2 border-l-2 border-indigo-400 opacity-60" />
-                                                                <div className="absolute -top-1 -right-1 w-3 h-3 border-t-2 border-r-2 border-indigo-400 opacity-60" />
-                                                                <div className="absolute -bottom-1 -left-1 w-3 h-3 border-b-2 border-l-2 border-indigo-400 opacity-60" />
-                                                                <div className="absolute -bottom-1 -right-1 w-3 h-3 border-b-2 border-r-2 border-indigo-400 opacity-60" />
+                                            <div
+                                                className="relative"
+                                                style={{
+                                                    transform: "rotateX(-75deg) translateZ(20px)", // Stand upright and LIFT off the plane
+                                                    transformStyle: "preserve-3d"
+                                                }}
+                                            >
+                                                <div style={{ transformStyle: "preserve-3d" }}>
+                                                    {/* Advanced HUD Planetary Scanner Popup (Only for Sun/Moon) */}
+                                                    <AnimatePresence>
+                                                        {(currentPlanetIndex === idx && idx < 2) && (
+                                                            <motion.div
+                                                                initial={{ opacity: 0, scale: 0.4, y: 30 }}
+                                                                animate={{ opacity: 1, scale: 1.1, y: -80 }}
+                                                                exit={{ opacity: 0, scale: 0.4, y: -50 }}
+                                                                className="absolute left-1/2 -translate-x-1/2 z-[100] pointer-events-none"
+                                                            >
+                                                                <div className="relative group">
+                                                                    <div className="absolute -top-1 -left-1 w-3 h-3 border-t-2 border-l-2 border-indigo-400 opacity-60" />
+                                                                    <div className="absolute -top-1 -right-1 w-3 h-3 border-t-2 border-r-2 border-indigo-400 opacity-60" />
+                                                                    <div className="absolute -bottom-1 -left-1 w-3 h-3 border-b-2 border-l-2 border-indigo-400 opacity-60" />
+                                                                    <div className="absolute -bottom-1 -right-1 w-3 h-3 border-b-2 border-r-2 border-indigo-400 opacity-60" />
 
-                                                                <div className="bg-black/80 backdrop-blur-xl border border-white/10 p-4 rounded-xl shadow-[0_0_40px_rgba(0,0,0,0.8)] overflow-hidden min-w-[200px]">
-                                                                    <div className="relative z-10">
-                                                                        <div className="flex items-center justify-between mb-3 border-b border-white/5 pb-2">
-                                                                            <div className="flex flex-col">
-                                                                                <span className="text-[8px] font-black text-indigo-400 uppercase tracking-[0.2em]">Scanner Unit-09</span>
-                                                                                <h2 className="text-lg font-black text-white tracking-widest uppercase">{planet.name}</h2>
+                                                                    <div className="bg-black/80 backdrop-blur-xl border border-white/10 p-4 rounded-xl shadow-[0_0_40px_rgba(0,0,0,0.8)] overflow-hidden min-w-[200px]">
+                                                                        <div className="relative z-10">
+                                                                            <div className="flex items-center justify-between mb-3 border-b border-white/5 pb-2">
+                                                                                <div className="flex flex-col">
+                                                                                    <span className="text-[8px] font-black text-indigo-400 uppercase tracking-[0.2em]">Scanner Unit-09</span>
+                                                                                    <h2 className="text-lg font-black text-white tracking-widest uppercase">{planet.name}</h2>
+                                                                                </div>
+                                                                                <div className={`w-8 h-8 rounded-lg ${planet.texture} ${planet.glow} shadow-inner bg-opacity-80`} />
                                                                             </div>
-                                                                            <div className={`w-8 h-8 rounded-lg ${planet.texture} ${planet.glow} shadow-inner bg-opacity-80`} />
-                                                                        </div>
-                                                                        <div className="grid grid-cols-2 gap-3 mb-3">
-                                                                            <div className="flex flex-col">
-                                                                                <span className="text-[7px] text-gray-400 uppercase font-bold tracking-widest">Atmosphere</span>
-                                                                                <span className="text-[9px] font-mono text-indigo-300">STABLE-V3</span>
+                                                                            <div className="grid grid-cols-2 gap-3 mb-3">
+                                                                                <div className="flex flex-col">
+                                                                                    <span className="text-[7px] text-gray-400 uppercase font-bold tracking-widest">Atmosphere</span>
+                                                                                    <span className="text-[9px] font-mono text-indigo-300">STABLE-V3</span>
+                                                                                </div>
+                                                                                <div className="flex flex-col text-right">
+                                                                                    <span className="text-[7px] text-gray-400 uppercase font-bold tracking-widest">Surface Temp</span>
+                                                                                    <span className="text-[9px] font-mono text-indigo-300">482°K</span>
+                                                                                </div>
                                                                             </div>
-                                                                            <div className="flex flex-col text-right">
-                                                                                <span className="text-[7px] text-gray-400 uppercase font-bold tracking-widest">Surface Temp</span>
-                                                                                <span className="text-[9px] font-mono text-indigo-300">482°K</span>
+                                                                            <div className="h-1 w-full bg-white/5 rounded-full overflow-hidden">
+                                                                                <motion.div
+                                                                                    initial={{ width: 0 }}
+                                                                                    animate={{ width: "100%" }}
+                                                                                    transition={{ duration: 1.5, ease: "linear" }}
+                                                                                    className="h-full bg-gradient-to-r from-indigo-500 to-blue-500"
+                                                                                />
                                                                             </div>
-                                                                        </div>
-                                                                        <div className="h-1 w-full bg-white/5 rounded-full overflow-hidden">
-                                                                            <motion.div
-                                                                                initial={{ width: 0 }}
-                                                                                animate={{ width: "100%" }}
-                                                                                transition={{ duration: 1.5, ease: "linear" }}
-                                                                                className="h-full bg-gradient-to-r from-indigo-500 to-blue-500"
-                                                                            />
                                                                         </div>
                                                                     </div>
+                                                                    <div className="absolute top-full left-1/2 -translate-x-1/2 flex flex-col items-center">
+                                                                        <div className="w-[1px] h-10 bg-gradient-to-b from-indigo-500 via-indigo-500/50 to-transparent" />
+                                                                        <div className="w-2 h-2 rounded-full border border-indigo-400 animate-ping" />
+                                                                    </div>
                                                                 </div>
-                                                                <div className="absolute top-full left-1/2 -translate-x-1/2 flex flex-col items-center">
-                                                                    <div className="w-[1px] h-10 bg-gradient-to-b from-indigo-500 via-indigo-500/50 to-transparent" />
-                                                                    <div className="w-2 h-2 rounded-full border border-indigo-400 animate-ping" />
-                                                                </div>
-                                                            </div>
-                                                        </motion.div>
-                                                    )}
-                                                </AnimatePresence>
-
-                                                {/* Planet Rings (Saturn) */}
-                                                {planet.hasRings && (
-                                                    <div className="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 w-[260%] h-[40%] border-[4px] border-yellow-200/20 rounded-[100%] rotate-[20deg] shadow-[0_0_20px_rgba(253,224,71,0.2)]" />
-                                                )}
-
-                                                {/* Planet Body */}
-                                                <motion.div
-                                                    onMouseEnter={() => setHoveredPlanet(idx)}
-                                                    onMouseLeave={() => setHoveredPlanet(null)}
-                                                    animate={{
-                                                        scale: (hoveredPlanet === idx && idx < 2) ? 1.5 : (currentPlanetIndex === idx && idx < 2 ? 1.2 : 1),
-                                                        rotate: [0, -360], // Every planet spins on its own axis
-                                                        filter: ((hoveredPlanet === idx || currentPlanetIndex === idx) && idx < 2) ? "brightness(1.5) saturate(1.2)" : "brightness(1)",
-                                                        y: (hoveredPlanet === idx && idx < 2) ? [0, -20, 0] : 0
-                                                    }}
-                                                    transition={{
-                                                        rotate: { duration: idx < 2 ? 3 : 10, repeat: Infinity, ease: "linear" }, // Axial rotation
-                                                        scale: { duration: (hoveredPlanet === idx && idx < 2) ? 0.3 : 1 },
-                                                        filter: { duration: 0.5 }
-                                                    }}
-                                                    className={`${planet.size} ${planet.texture} rounded-full shadow-[0_0_30px] ${idx < 2 ? `shadow-[0_0_80px] ${planet.glow}` : 'shadow-white/20'} relative z-[100] border transition-all duration-[1000ms] ${idx < 2 ? 'border-2 border-white/60' : 'border-white/20'} cursor-pointer`}
-                                                >
-                                                    {/* Highlight Aura Pulse (Sun/Moon only) */}
-                                                    {(currentPlanetIndex === idx || hoveredPlanet === idx) && idx < 2 && (
-                                                        <motion.div
-                                                            animate={{
-                                                                opacity: [0.2, 0.5, 0.2],
-                                                                scale: [1, 1.5, 1]
-                                                            }}
-                                                            transition={{ duration: 2, repeat: Infinity }}
-                                                            className={`absolute inset-0 rounded-full blur-2xl ${planet.texture} opacity-50 z-[-1]`}
-                                                        />
-                                                    )}
-
-                                                    {/* Surface Glint (Sun/Moon only) */}
-                                                    {idx < 2 && (
-                                                        <div className="absolute inset-0 rounded-full overflow-hidden opacity-30 mix-blend-overlay pointer-events-none">
-                                                            <motion.div
-                                                                animate={{ x: ['-150%', '150%'], y: ['-150%', '150%'] }}
-                                                                transition={{ duration: 3, repeat: Infinity, ease: "linear" }}
-                                                                className="w-[60%] h-[300%] bg-white/50 rotate-[45deg]"
-                                                            />
-                                                        </div>
-                                                    )}
-
-                                                    {/* Hover Name Popup */}
-                                                    <AnimatePresence>
-                                                        {hoveredPlanet === idx && (
-                                                            <motion.div
-                                                                initial={{ opacity: 0, y: 10, scale: 0.8 }}
-                                                                animate={{ opacity: 1, y: -40, scale: 1 }}
-                                                                exit={{ opacity: 0, y: 0, scale: 0.8 }}
-                                                                className="absolute -top-12 left-1/2 -translate-x-1/2 whitespace-nowrap z-[110]"
-                                                            >
-                                                                <div className="bg-indigo-600/90 backdrop-blur-md px-3 py-1 rounded-lg border border-indigo-400/50 shadow-lg">
-                                                                    <span className="text-[10px] font-black text-white uppercase tracking-widest">{planet.name}</span>
-                                                                </div>
-                                                                <div className="w-[1px] h-4 bg-indigo-400 mx-auto" />
                                                             </motion.div>
                                                         )}
                                                     </AnimatePresence>
 
-                                                    {/* Light/Shadow Simulation */}
-                                                    <div
-                                                        className="absolute inset-0 rounded-full transition-all duration-[3000ms]"
-                                                        style={{
-                                                            background: celestialState.ratio < 0.5
-                                                                ? 'radial-gradient(circle at 30% 30%, transparent 0%, rgba(0,0,0,0.7) 100%)'
-                                                                : 'radial-gradient(circle at center, transparent 0%, rgba(0,0,0,0.2) 100%)'
+                                                    {/* Planet Rings (Saturn) */}
+                                                    {planet.hasRings && (
+                                                        <div className="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 w-[260%] h-[40%] border-[4px] border-yellow-200/20 rounded-[100%] rotate-[20deg] shadow-[0_0_20px_rgba(253,224,71,0.2)]" />
+                                                    )}
+
+                                                    {/* Planet Body */}
+                                                    <motion.div
+                                                        onMouseEnter={() => setHoveredPlanet(idx)}
+                                                        onMouseLeave={() => setHoveredPlanet(null)}
+                                                        animate={{
+                                                            scale: (hoveredPlanet === idx && idx < 2) ? 1.5 : (currentPlanetIndex === idx && idx < 2 ? 1.2 : 1),
+                                                            rotate: [0, -360], // Every planet spins on its own axis
+                                                            filter: ((hoveredPlanet === idx || currentPlanetIndex === idx) && idx < 2) ? "brightness(1.5) saturate(1.2)" : "brightness(1)",
+                                                            y: (hoveredPlanet === idx && idx < 2) ? [0, -20, 0] : 0
                                                         }}
-                                                    />
-                                                </motion.div>
+                                                        transition={{
+                                                            rotate: { duration: idx < 2 ? 3 : 10, repeat: Infinity, ease: "linear" }, // Axial rotation
+                                                            scale: { duration: (hoveredPlanet === idx && idx < 2) ? 0.3 : 1 },
+                                                            filter: { duration: 0.5 }
+                                                        }}
+                                                        className={`${planet.size} ${planet.texture} rounded-full shadow-[0_0_30px] ${idx < 2 ? `shadow-[0_0_80px] ${planet.glow}` : 'shadow-white/20'} relative z-[100] border transition-all duration-[1000ms] ${idx < 2 ? 'border-2 border-white/60' : 'border-white/20'} cursor-pointer`}
+                                                    >
+                                                        {/* Highlight Aura Pulse (Sun/Moon only) */}
+                                                        {(currentPlanetIndex === idx || hoveredPlanet === idx) && idx < 2 && (
+                                                            <motion.div
+                                                                animate={{
+                                                                    opacity: [0.2, 0.5, 0.2],
+                                                                    scale: [1, 1.5, 1]
+                                                                }}
+                                                                transition={{ duration: 2, repeat: Infinity }}
+                                                                className={`absolute inset-0 rounded-full blur-2xl ${planet.texture} opacity-50 z-[-1]`}
+                                                            />
+                                                        )}
+
+                                                        {/* Surface Glint (Sun/Moon only) */}
+                                                        {idx < 2 && (
+                                                            <div className="absolute inset-0 rounded-full overflow-hidden opacity-30 mix-blend-overlay pointer-events-none">
+                                                                <motion.div
+                                                                    animate={{ x: ['-150%', '150%'], y: ['-150%', '150%'] }}
+                                                                    transition={{ duration: 3, repeat: Infinity, ease: "linear" }}
+                                                                    className="w-[60%] h-[300%] bg-white/50 rotate-[45deg]"
+                                                                />
+                                                            </div>
+                                                        )}
+
+                                                        {/* Hover Name Popup */}
+                                                        <AnimatePresence>
+                                                            {hoveredPlanet === idx && (
+                                                                <motion.div
+                                                                    initial={{ opacity: 0, y: 10, scale: 0.8 }}
+                                                                    animate={{ opacity: 1, y: -40, scale: 1 }}
+                                                                    exit={{ opacity: 0, y: 0, scale: 0.8 }}
+                                                                    className="absolute -top-12 left-1/2 -translate-x-1/2 whitespace-nowrap z-[110]"
+                                                                >
+                                                                    <div className="bg-indigo-600/90 backdrop-blur-md px-3 py-1 rounded-lg border border-indigo-400/50 shadow-lg">
+                                                                        <span className="text-[10px] font-black text-white uppercase tracking-widest">{planet.name}</span>
+                                                                    </div>
+                                                                    <div className="w-[1px] h-4 bg-indigo-400 mx-auto" />
+                                                                </motion.div>
+                                                            )}
+                                                        </AnimatePresence>
+
+                                                        {/* Light/Shadow Simulation */}
+                                                        <div
+                                                            className="absolute inset-0 rounded-full transition-all duration-[3000ms]"
+                                                            style={{
+                                                                background: celestialState.ratio < 0.5
+                                                                    ? 'radial-gradient(circle at 30% 30%, transparent 0%, rgba(0,0,0,0.7) 100%)'
+                                                                    : 'radial-gradient(circle at center, transparent 0%, rgba(0,0,0,0.2) 100%)'
+                                                            }}
+                                                        />
+                                                    </motion.div>
+                                                </div>
                                             </div>
                                         </div>
-                                    </div>
-                                </motion.div>
+                                    </motion.div>
+                                </div>
                             </React.Fragment>
                         ))}
                     </div>
