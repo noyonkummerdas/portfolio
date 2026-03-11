@@ -58,14 +58,14 @@ const Login = () => {
     }, []);
 
     const planets = [
-        { name: 'Chandra (Moon)', size: 'w-10 h-10', texture: 'bg-gradient-to-br from-slate-100 to-indigo-100', glow: 'shadow-white/70', radius: 260, speed: 1200, delay: 0 },
-        { name: 'Mangala (Mars)', size: 'w-9 h-9', texture: 'bg-gradient-to-br from-red-500 to-red-900', glow: 'shadow-red-600/70', radius: 320, speed: 2500, delay: 40 },
-        { name: 'Budha (Mercury)', size: 'w-8 h-8', texture: 'bg-gradient-to-br from-emerald-400 to-emerald-700', glow: 'shadow-emerald-500/70', radius: 380, speed: 1000, delay: 80 },
-        { name: 'Brihaspati (Jupiter)', size: 'w-18 h-18', texture: 'bg-[repeating-linear-gradient(0deg,#fbbf24,#f59e0b_10px,#d97706_20px)]', glow: 'shadow-yellow-600/70', radius: 480, speed: 5000, delay: 120 },
-        { name: 'Shukra (Venus)', size: 'w-10 h-10', texture: 'bg-gradient-to-br from-white via-indigo-50 to-blue-200', glow: 'shadow-blue-200/70', radius: 580, speed: 1800, delay: 160 },
-        { name: 'Shani (Saturn)', size: 'w-16 h-16', texture: 'bg-gradient-to-br from-slate-700 via-indigo-950 to-black', glow: 'shadow-purple-900/70', radius: 700, speed: 12000, delay: 200, hasRings: true },
-        { name: 'Rahu', size: 'w-13 h-13', texture: 'bg-gradient-to-br from-gray-800 via-zinc-900 to-black', glow: 'shadow-gray-900/80', radius: 820, speed: 8000, delay: 240, isRetrograde: true },
-        { name: 'Ketu', size: 'w-12 h-12', texture: 'bg-gradient-to-br from-stone-600 to-stone-900', glow: 'shadow-stone-800/70', radius: 940, speed: 9500, delay: 280, isRetrograde: true }
+        { name: 'Chandra (Moon)', size: 'w-10 h-10', texture: 'bg-gradient-to-br from-slate-100 to-indigo-100', glow: 'shadow-white/70', radius: 180, speed: 1200, delay: 0 },
+        { name: 'Mangala (Mars)', size: 'w-9 h-9', texture: 'bg-gradient-to-br from-red-500 to-red-900', glow: 'shadow-red-600/70', radius: 230, speed: 2500, delay: 40 },
+        { name: 'Budha (Mercury)', size: 'w-8 h-8', texture: 'bg-gradient-to-br from-emerald-400 to-emerald-700', glow: 'shadow-emerald-500/70', radius: 280, speed: 1000, delay: 80 },
+        { name: 'Brihaspati (Jupiter)', size: 'w-18 h-18', texture: 'bg-[repeating-linear-gradient(0deg,#fbbf24,#f59e0b_10px,#d97706_20px)]', glow: 'shadow-yellow-600/70', radius: 350, speed: 5000, delay: 120 },
+        { name: 'Shukra (Venus)', size: 'w-10 h-10', texture: 'bg-gradient-to-br from-white via-indigo-50 to-blue-200', glow: 'shadow-blue-200/70', radius: 420, speed: 1800, delay: 160 },
+        { name: 'Shani (Saturn)', size: 'w-16 h-16', texture: 'bg-gradient-to-br from-slate-700 via-indigo-950 to-black', glow: 'shadow-purple-900/70', radius: 500, speed: 12000, delay: 200, hasRings: true },
+        { name: 'Rahu', size: 'w-13 h-13', texture: 'bg-gradient-to-br from-gray-800 via-zinc-900 to-black', glow: 'shadow-gray-900/80', radius: 580, speed: 8000, delay: 240, isRetrograde: true },
+        { name: 'Ketu', size: 'w-12 h-12', texture: 'bg-gradient-to-br from-stone-600 to-stone-900', glow: 'shadow-stone-800/70', radius: 660, speed: 9500, delay: 280, isRetrograde: true }
     ];
 
     useEffect(() => {
@@ -124,32 +124,6 @@ const Login = () => {
                     onMouseLeave={() => setHoveredPlanet(null)}
                     className="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 z-0 pointer-events-auto w-0 h-0 cursor-pointer"
                 >
-                    {/* Atmospheric Glow Layer 1 (Wide) */}
-                    <div
-                        className="absolute w-[1000px] h-[1000px] -translate-x-1/2 -translate-y-1/2 blur-[150px] transition-all duration-[3000ms] opacity-60"
-                        style={{
-                            background: `radial-gradient(circle, ${celestialState.ratio < 0.5
-                                ? 'rgba(253,186,11,0.2) 0%, rgba(249,115,22,0.05) 60%'
-                                : 'rgba(147,197,253,0.1) 0%, rgba(30,58,138,0.03) 70%'
-                                }, transparent 80%)`
-                        }}
-                    />
-
-                    {/* Core Corona Rays (Dynamic Animation) */}
-                    <motion.div
-                        animate={{
-                            rotate: 360,
-                            scale: [0.9, 1.1, 0.9],
-                        }}
-                        transition={{ duration: 20, repeat: Infinity, ease: "linear" }}
-                        className="absolute w-[500px] h-[500px] -translate-x-1/2 -translate-y-1/2 opacity-40 mix-blend-screen"
-                        style={{
-                            background: celestialState.ratio < 0.5
-                                ? 'repeating-conic-gradient(from 0deg, transparent 0deg, rgba(251,191,36,0.3) 10deg, transparent 20deg)'
-                                : 'repeating-conic-gradient(from 0deg, transparent 0deg, rgba(255,255,255,0.15) 15deg, transparent 30deg)'
-                        }}
-                    />
-
                     {/* Celestial Body Core */}
                     <div className="absolute flex items-center justify-center -translate-x-1/2 -translate-y-1/2">
                         <motion.div
@@ -213,20 +187,20 @@ const Login = () => {
                             <React.Fragment key={idx}>
                                 {/* Wide Orbital Path */}
                                 <div
-                                    className="absolute border border-white/20 rounded-full z-0 pointer-events-none"
+                                    className="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 border border-white/20 rounded-full z-0 pointer-events-none"
                                     style={{
                                         width: planet.radius * 2,
                                         height: planet.radius * 2,
                                         borderWidth: (currentPlanetIndex === idx || hoveredPlanet === idx) ? '2px' : '1.5px',
                                         borderColor: (currentPlanetIndex === idx || hoveredPlanet === idx)
-                                            ? (idx === 0 ? 'rgba(248,250,252,0.6)' :
-                                                idx === 1 ? 'rgba(239,68,68,0.6)' :
-                                                    idx === 2 ? 'rgba(52,211,153,0.6)' :
-                                                        idx === 3 ? 'rgba(245,158,11,0.6)' :
-                                                            idx === 4 ? 'rgba(147,197,253,0.6)' :
-                                                                idx === 5 ? 'rgba(129,140,248,0.6)' :
-                                                                    idx === 6 ? 'rgba(156,163,175,0.6)' :
-                                                                        'rgba(168,162,158,0.6)')
+                                            ? (idx === 0 ? 'rgba(248,250,252,0.8)' : // Moon (Chandra) - Silver/White
+                                                idx === 1 ? 'rgba(239,68,68,0.8)' :  // Mars (Mangala) - Red
+                                                    idx === 2 ? 'rgba(52,211,153,0.8)' : // Mercury (Budha) - Emerald
+                                                        idx === 3 ? 'rgba(245,158,11,0.8)' : // Jupiter (Brihaspati) - Gold/Orange
+                                                            idx === 4 ? 'rgba(147,197,253,0.8)' : // Venus (Shukra) - Blue/White
+                                                                idx === 5 ? 'rgba(129,140,248,0.8)' : // Saturn (Shani) - Purple/Dark
+                                                                    idx === 6 ? 'rgba(156,163,175,0.8)' : // Rahu - Gray
+                                                                        'rgba(168,162,158,0.8)') // Ketu - Stone
                                             : 'rgba(255,255,255,0.15)',
                                         boxShadow: (currentPlanetIndex === idx || hoveredPlanet === idx)
                                             ? `0 0 30px currentColor`
@@ -243,7 +217,7 @@ const Login = () => {
                                         ease: "linear",
                                         delay: -planet.delay
                                     }}
-                                    className="absolute z-10 flex items-center justify-center"
+                                    className="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 z-10 flex items-center justify-center"
                                     style={{
                                         width: planet.radius * 2,
                                         height: planet.radius * 2,
@@ -252,7 +226,7 @@ const Login = () => {
                                 >
                                     {/* Planet Positioner */}
                                     <div
-                                        className="absolute right-0"
+                                        className="absolute right-0 top-1/2 -translate-y-1/2"
                                         style={{
                                             transform: "translateX(50%)",
                                             transformStyle: "preserve-3d"
@@ -330,14 +304,14 @@ const Login = () => {
                                                     onMouseLeave={() => setHoveredPlanet(null)}
                                                     animate={{
                                                         scale: (hoveredPlanet === idx && idx < 2) ? 1.5 : (currentPlanetIndex === idx && idx < 2 ? 1.2 : 1),
-                                                        rotate: idx < 2 ? [0, -360] : 0,
+                                                        rotate: [0, -360], // Every planet spins on its own axis
                                                         filter: ((hoveredPlanet === idx || currentPlanetIndex === idx) && idx < 2) ? "brightness(1.5) saturate(1.2)" : "brightness(1)",
                                                         y: (hoveredPlanet === idx && idx < 2) ? [0, -20, 0] : 0
                                                     }}
                                                     transition={{
-                                                        duration: (hoveredPlanet === idx && idx < 2) ? 0.3 : (currentPlanetIndex === idx && idx < 2 ? 3 : 8),
-                                                        repeat: (hoveredPlanet === idx && idx < 2 || (idx < 2 && currentPlanetIndex === idx)) ? Infinity : 0,
-                                                        ease: "linear"
+                                                        rotate: { duration: idx < 2 ? 3 : 10, repeat: Infinity, ease: "linear" }, // Axial rotation
+                                                        scale: { duration: (hoveredPlanet === idx && idx < 2) ? 0.3 : 1 },
+                                                        filter: { duration: 0.5 }
                                                     }}
                                                     className={`${planet.size} ${planet.texture} rounded-full shadow-[0_0_30px] ${idx < 2 ? `shadow-[0_0_80px] ${planet.glow}` : 'shadow-white/20'} relative z-[100] border transition-all duration-[1000ms] ${idx < 2 ? 'border-2 border-white/60' : 'border-white/20'} cursor-pointer`}
                                                 >
